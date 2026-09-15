@@ -1,11 +1,19 @@
 // Service Worker — Buhanor Cap Skirring
-const CACHE_NAME = 'buhanor-v1.0.0';
+const CACHE_NAME = 'buhanor-v3.0.0';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
   './Buhanor_Isotype_Noir.png',
   './Buhanor_Isotype_Blanc.png',
+  './menage.png',
+  './reception.png',
+  './favicon.ico',
+  './favicon.svg',
+  './favicon-96x96.png',
+  './apple-touch-icon.png',
+  './web-app-manifest-192x192.png',
+  './web-app-manifest-512x512.png',
   'https://cdn.tailwindcss.com',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'
@@ -50,8 +58,8 @@ self.addEventListener('push', (event) => {
   event.waitUntil(
     self.registration.showNotification(data.title, {
       body: data.body,
-      icon: './Buhanor_Isotype_Noir.png',
-      badge: './Buhanor_Isotype_Noir.png',
+      icon: './web-app-manifest-192x192.png',
+      badge: './web-app-manifest-192x192.png',
       vibrate: [200, 100, 200],
       tag: 'buhanor-notif'
     })
