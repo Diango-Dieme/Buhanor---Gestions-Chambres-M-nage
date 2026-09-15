@@ -10,7 +10,6 @@
     <meta name="theme-color" content="#823015">
     <title>BUHANOR - Cap Skirring</title>
 
-    <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
@@ -60,129 +59,124 @@
         .safe-top    { padding-top: var(--sat); }
         .safe-bottom { padding-bottom: var(--sab); }
 
-        .active-scale:active { transform: scale(0.97); }
+        /* ==== TACTILE FEEDBACK : uniquement au toucher ==== */
+        .active-scale { transition: transform 0.15s ease; }
+        .active-scale:active { transform: scale(0.98); }
 
-        .clay-card { background: #ffffff; border-radius: 20px; box-shadow: 0 10px 25px -5px rgba(104, 36, 15, 0.08), 0 8px 10px -6px rgba(104, 36, 15, 0.05); border: 2px solid #ebd9c8; }
+        /* ==== CARDS SOBRES ==== */
+        .clay-card {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(104, 36, 15, 0.04), 0 1px 2px rgba(104, 36, 15, 0.03);
+            border: 1px solid #ebd9c8;
+        }
 
+        /* ==== MODULE CARDS (accueil) — design sobre et mature ==== */
         .module-card {
             position: relative;
             overflow: hidden;
-            border-radius: 32px;
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow:
-                0 20px 50px -12px rgba(0, 0, 0, 0.25),
-                inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+            border-radius: 28px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.2);
         }
-        .module-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                radial-gradient(circle at 20% 10%, rgba(255,255,255,0.15), transparent 50%),
-                radial-gradient(circle at 80% 90%, rgba(255,255,255,0.08), transparent 50%),
-                radial-gradient(circle at 1px 1px, rgba(255,255,255,0.06) 1px, transparent 0);
-            background-size: 100% 100%, 100% 100%, 24px 24px;
-            pointer-events: none;
+        .module-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px -14px rgba(0, 0, 0, 0.28);
         }
-        .module-card:hover { transform: translateY(-6px); box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.35), inset 0 1px 0 0 rgba(255, 255, 255, 0.2); }
-        .module-card:active { transform: translateY(-2px) scale(0.99); }
+        .module-card:active {
+            transform: translateY(-1px) scale(0.995);
+        }
 
-        .module-card-emerald { background: linear-gradient(160deg, #2d5a27 0%, #1a3717 100%); border: 2px solid #3d7835; }
-        .module-card-terracotta { background: linear-gradient(160deg, #823015 0%, #4a1708 100%); border: 2px solid #b8522e; }
+        .module-card-emerald {
+            background: linear-gradient(160deg, #2d5a27 0%, #1a3717 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .module-card-terracotta {
+            background: linear-gradient(160deg, #823015 0%, #4a1708 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
+        /* Image du module : ombre portée sobre, pas d'animation */
         .module-image {
-            animation: float-soft 4s ease-in-out infinite;
-            filter: drop-shadow(0 20px 25px rgba(0, 0, 0, 0.35)) drop-shadow(0 8px 10px rgba(0, 0, 0, 0.2));
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.3)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+            transition: transform 0.25s ease;
         }
-        .module-card:hover .module-image { transform: translateY(-8px) scale(1.05); }
-        @keyframes float-soft {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+        .module-card:hover .module-image { transform: scale(1.02); }
 
-        .module-glow {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.5;
-            animation: glow-pulse 4s ease-in-out infinite;
-        }
-        @keyframes glow-pulse {
-            0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.15); }
-        }
-
+        /* Badge statut : sobre, sans animation */
         .status-badge-xl {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            animation: badge-bounce 3s ease-in-out infinite;
-        }
-        @keyframes badge-bounce {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-2px) scale(1.03); }
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
-        .arrow-bounce { animation: arrow-bounce 2s ease-in-out infinite; }
-        @keyframes arrow-bounce {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(6px); }
-        }
+        /* Flèche : statique, sobre */
+        /* Rien à faire, plus d'animation */
 
+        /* Scrollbar discrète */
         .custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #f5ebe1; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #b8522e; border-radius: 4px; }
 
-        .loader-overlay { position: fixed; inset: 0; background: rgba(250,246,240,0.95); z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; }
+        /* Loader : simple, sans animation d'icône */
+        .loader-overlay {
+            position: fixed; inset: 0;
+            background: rgba(250, 246, 240, 0.96);
+            z-index: 100;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: 1rem;
+        }
+        .loader-spinner {
+            width: 40px; height: 40px;
+            border: 3px solid #ebd9c8;
+            border-top-color: #823015;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        .icon-broom { animation: broom-swing 2.6s ease-in-out infinite; transform-origin: 65% 85%; display: inline-block; }
-        @keyframes broom-swing { 0%,100% { transform: rotate(-12deg); } 50% { transform: rotate(14deg); } }
-        .icon-pulse { animation: icon-pulse 1.9s ease-in-out infinite; display: inline-block; }
-        @keyframes icon-pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.12); } }
-        .icon-float { animation: icon-float 3.2s ease-in-out infinite; display: inline-block; }
-        @keyframes icon-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        /* Bandeau ménagère : sobres, fonds unis */
+        .sched-bar-active { background: linear-gradient(90deg, #d1fae5 0%, #a7f3d0 100%); }
+        .sched-bar-soon { background: linear-gradient(90deg, #fef3c7 0%, #fde68a 100%); }
+        .sched-bar-default { background: linear-gradient(90deg, #fef3c7 0%, #f5ebe1 100%); }
 
-        .status-halo-red   { box-shadow: 0 0 0 4px rgba(239,68,68,0.12), 0 6px 14px rgba(239,68,68,0.22); }
-        .status-halo-amber { box-shadow: 0 0 0 4px rgba(245,158,11,0.12), 0 6px 14px rgba(245,158,11,0.22); }
-        .status-halo-green { box-shadow: 0 0 0 4px rgba(16,185,129,0.12), 0 6px 14px rgba(16,185,129,0.22); }
-        .status-halo-blue  { box-shadow: 0 0 0 4px rgba(14,116,144,0.12), 0 6px 14px rgba(14,116,144,0.22); }
-
-        .sched-bar-active { background: linear-gradient(90deg, #d1fae5 0%, #a7f3d0 25%, #d1fae5 50%, #a7f3d0 75%, #d1fae5 100%); background-size: 220% 100%; animation: sched-shimmer 4s ease-in-out infinite; }
-        .sched-bar-soon { background: linear-gradient(90deg, #fef3c7 0%, #fde68a 50%, #fef3c7 100%); background-size: 200% 100%; animation: sched-shimmer 3s ease-in-out infinite; }
-        @keyframes sched-shimmer { 0%,100% { background-position: 0% 0%; } 50% { background-position: 100% 0%; } }
-
+        /* Touch targets >= 44px */
         button, .tap-target { min-height: 44px; }
 
+        /* Halos statuts (statiques) */
+        .status-halo-red   { box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1), 0 2px 8px rgba(239, 68, 68, 0.15); }
+        .status-halo-amber { box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1), 0 2px 8px rgba(245, 158, 11, 0.15); }
+        .status-halo-green { box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1), 0 2px 8px rgba(16, 185, 129, 0.15); }
+        .status-halo-blue  { box-shadow: 0 0 0 3px rgba(14, 116, 144, 0.1), 0 2px 8px rgba(14, 116, 144, 0.15); }
+
+        /* ==== AUTH ==== */
         .auth-bg {
-            background:
-                radial-gradient(circle at 15% 20%, rgba(217,138,43,0.15), transparent 45%),
-                radial-gradient(circle at 85% 80%, rgba(45,90,39,0.12), transparent 45%),
-                linear-gradient(135deg, #FAF6F0 0%, #f5ebe1 100%);
+            background: linear-gradient(135deg, #FAF6F0 0%, #f5ebe1 100%);
             min-height: 100vh;
             min-height: 100dvh;
         }
-        .profile-tile { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .profile-tile:active { transform: scale(0.96); }
-        .profile-tile:hover .profile-avatar-ring { border-color: #d98a2b; box-shadow: 0 8px 24px rgba(217,138,43,0.35); }
+        .profile-tile { transition: transform 0.15s ease; }
+        .profile-tile:active { transform: scale(0.97); }
+        .profile-tile:hover .profile-avatar-ring { border-color: #d98a2b; }
 
-        .avatar-choice { transition: all 0.15s ease; }
-        .avatar-choice:active { transform: scale(0.95); }
-        .avatar-choice.selected { outline: 3px solid #d98a2b; outline-offset: 2px; transform: scale(1.05); }
+        .avatar-choice { transition: outline 0.15s ease, transform 0.15s ease; }
+        .avatar-choice:active { transform: scale(0.97); }
+        .avatar-choice.selected { outline: 2px solid #823015; outline-offset: 2px; }
 
-        .pin-dot { transition: all 0.2s ease; }
-        .pin-dot.filled { background: #823015; border-color: #823015; transform: scale(1.1); }
+        .pin-dot { transition: background 0.15s ease, transform 0.15s ease; }
+        .pin-dot.filled { background: #823015; border-color: #823015; transform: scale(1.08); }
 
-        .pin-key { transition: all 0.1s ease; user-select: none; }
-        .pin-key:active { background: #823015; color: white; transform: scale(0.94); }
+        .pin-key { transition: background 0.1s ease, color 0.1s ease, transform 0.1s ease; user-select: none; }
+        .pin-key:active { background: #823015; color: white; transform: scale(0.96); }
 
-        @keyframes shake { 0%,100% { transform: translateX(0); } 20%,60% { transform: translateX(-8px); } 40%,80% { transform: translateX(8px); } }
-        .shake { animation: shake 0.4s ease; }
+        @keyframes shake { 0%,100% { transform: translateX(0); } 25%,75% { transform: translateX(-6px); } 50% { transform: translateX(6px); } }
+        .shake { animation: shake 0.35s ease; }
 
-        .wizard-step { transition: opacity 0.25s ease, transform 0.25s ease; }
+        .wizard-step { transition: opacity 0.2s ease; }
         .wizard-step.hidden-step { opacity: 0; pointer-events: none; position: absolute; inset: 0; }
 
-        .role-card { transition: all 0.2s ease; }
-        .role-card:active { transform: scale(0.98); }
-        .role-card.selected { border-color: #823015; background: #fef3c7; box-shadow: 0 8px 20px rgba(130,48,21,0.15); }
+        .role-card { transition: border-color 0.15s ease, background 0.15s ease; }
+        .role-card:active { transform: scale(0.99); }
+        .role-card.selected { border-color: #823015; background: #fef3c7; }
 
         @media (max-width: 640px) {
             .modal-card {
@@ -205,7 +199,8 @@
 <div class="app-shell">
 
 <div id="loading-overlay" class="loader-overlay">
-    <img src="Buhanor_Isotype_Noir.png" alt="Buhanor" class="w-20 h-20 sm:w-24 sm:h-24 object-contain" style="animation: icon-float 2s ease-in-out infinite;">
+    <img src="Buhanor_Isotype_Noir.png" alt="Buhanor" class="w-20 h-20 sm:w-24 sm:h-24 object-contain">
+    <div class="loader-spinner"></div>
     <p class="font-diola font-black text-terracotta-900 tracking-widest text-xl sm:text-2xl">BUHANOR</p>
     <p class="text-[10px] sm:text-xs font-bold text-stone-500 uppercase tracking-widest">Connexion au serveur…</p>
 </div>
@@ -217,7 +212,7 @@
         <div class="max-w-4xl w-full space-y-5 sm:space-y-8">
             <div class="text-center space-y-2 sm:space-y-3">
                 <div class="inline-flex items-center justify-center w-16 h-16 sm:w-24 sm:h-24 mx-auto">
-                    <img src="Buhanor_Isotype_Noir.png" alt="Buhanor" class="w-full h-full object-contain drop-shadow-lg">
+                    <img src="Buhanor_Isotype_Noir.png" alt="Buhanor" class="w-full h-full object-contain">
                 </div>
                 <h1 class="text-3xl sm:text-4xl md:text-5xl font-diola font-black text-terracotta-900 tracking-widest">BUHANOR</h1>
                 <p class="text-xs sm:text-sm md:text-base font-extrabold text-stone-600 uppercase tracking-widest">Cap Skirring • Choisissez votre profil</p>
@@ -226,7 +221,7 @@
             <div id="profiles-grid" class="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 min-h-[180px]"></div>
 
             <div class="text-center pt-1">
-                <button onclick="showCreateProfileScreen()" class="active-scale inline-flex items-center gap-2 bg-white border-2 border-dashed border-ocre-500 hover:border-terracotta-700 text-terracotta-800 font-extrabold px-5 sm:px-6 py-3 rounded-2xl shadow-sm transition text-sm sm:text-base">
+                <button onclick="showCreateProfileScreen()" class="active-scale inline-flex items-center gap-2 bg-white border border-sand-300 hover:border-terracotta-600 hover:bg-sand-50 text-terracotta-800 font-extrabold px-5 sm:px-6 py-3 rounded-2xl shadow-sm transition text-sm sm:text-base">
                     <i class="fa-solid fa-user-plus"></i>
                     Créer un nouveau profil
                 </button>
@@ -241,16 +236,16 @@
 
     <section id="auth-screen-create" class="hidden flex-1 flex flex-col items-center justify-center px-3 py-4 sm:p-6 safe-top safe-bottom">
         <div class="max-w-lg w-full">
-            <button onclick="backToProfilePicker()" class="active-scale mb-3 sm:mb-4 inline-flex items-center gap-2 bg-white border border-sand-300 hover:bg-sand-100 text-stone-700 font-bold px-3 py-2 rounded-xl text-xs sm:text-sm transition">
+            <button onclick="backToProfilePicker()" class="active-scale mb-3 sm:mb-4 inline-flex items-center gap-2 bg-white border border-sand-300 hover:bg-sand-50 text-stone-700 font-bold px-3 py-2 rounded-xl text-xs sm:text-sm transition">
                 <i class="fa-solid fa-arrow-left"></i> Retour
             </button>
 
             <div class="clay-card p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6 relative">
-                <div class="flex items-center justify-between border-b-2 border-sand-200 pb-3 sm:pb-4 gap-2">
+                <div class="flex items-center justify-between border-b border-sand-200 pb-3 sm:pb-4 gap-2">
                     <h2 class="font-diola font-black text-base sm:text-xl text-terracotta-900 flex items-center gap-2">
                         <i class="fa-solid fa-user-plus text-ocre-600"></i> Nouveau profil
                     </h2>
-                    <span id="create-step-indicator" class="text-[9px] sm:text-[10px] font-black text-ocre-700 bg-amber-100 border border-amber-300 px-2 py-1 rounded-full uppercase tracking-widest whitespace-nowrap">Étape 1/4</span>
+                    <span id="create-step-indicator" class="text-[9px] sm:text-[10px] font-black text-ocre-700 bg-amber-50 border border-amber-200 px-2 py-1 rounded-full uppercase tracking-widest whitespace-nowrap">Étape 1/4</span>
                 </div>
 
                 <div class="relative">
@@ -260,18 +255,18 @@
                             <p class="text-[11px] sm:text-xs text-stone-500 font-semibold">Cette information détermine vos accès.</p>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-                            <button onclick="selectCreateRole('admin')" id="role-btn-admin" class="role-card bg-white border-2 border-sand-300 rounded-2xl p-4 text-left transition">
+                            <button onclick="selectCreateRole('admin')" id="role-btn-admin" class="role-card bg-white border border-sand-300 rounded-2xl p-4 text-left transition">
                                 <div class="w-10 h-10 rounded-xl bg-terracotta-100 text-terracotta-800 flex items-center justify-center text-lg mb-2"><i class="fa-solid fa-user-tie"></i></div>
                                 <h4 class="font-diola font-black text-terracotta-900 text-sm sm:text-base">Réception / Admin</h4>
                                 <p class="text-[10px] sm:text-[11px] text-stone-500 font-semibold mt-1">Accès complet : réservations, planning, ménage, profils.</p>
                             </button>
-                            <button onclick="selectCreateRole('menage')" id="role-btn-menage" class="role-card bg-white border-2 border-sand-300 rounded-2xl p-4 text-left transition">
+                            <button onclick="selectCreateRole('menage')" id="role-btn-menage" class="role-card bg-white border border-sand-300 rounded-2xl p-4 text-left transition">
                                 <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-lg mb-2"><i class="fa-solid fa-broom"></i></div>
                                 <h4 class="font-diola font-black text-emerald-900 text-sm sm:text-base">Ménage</h4>
                                 <p class="text-[10px] sm:text-[11px] text-stone-500 font-semibold mt-1">Accès limité : statuts chambres et consignes.</p>
                             </button>
                         </div>
-                        <button id="btn-step1-continue" onclick="goToStep2()" disabled class="w-full py-3 bg-terracotta-700 hover:bg-terracotta-800 disabled:bg-stone-300 disabled:cursor-not-allowed text-white font-black rounded-xl shadow-lg transition active-scale text-sm sm:text-base">
+                        <button id="btn-step1-continue" onclick="goToStep2()" disabled class="w-full py-3 bg-terracotta-700 hover:bg-terracotta-800 disabled:bg-stone-300 disabled:cursor-not-allowed text-white font-black rounded-xl shadow-sm transition active-scale text-sm sm:text-base">
                             Continuer <i class="fa-solid fa-arrow-right ml-2"></i>
                         </button>
                     </div>
@@ -283,14 +278,14 @@
                         </div>
                         <div>
                             <label class="block text-[10px] sm:text-xs font-black uppercase text-stone-600 mb-1.5">Code secret *</label>
-                            <input type="text" id="invite-code-input" autocomplete="off" placeholder="Ex: BUHANOR2024" class="w-full bg-sand-50 border-2 border-sand-300 rounded-xl px-4 py-3 text-base font-mono font-black uppercase tracking-widest text-center focus:outline-none focus:ring-2 focus:ring-terracotta-500">
+                            <input type="text" id="invite-code-input" autocomplete="off" placeholder="Ex: BUHANOR2024" class="w-full bg-sand-50 border border-sand-300 rounded-xl px-4 py-3 text-base font-mono font-black uppercase tracking-widest text-center focus:outline-none focus:ring-2 focus:ring-terracotta-500">
                             <p id="invite-code-error" class="hidden text-xs text-red-600 font-bold mt-2 text-center">
                                 <i class="fa-solid fa-circle-exclamation"></i> <span></span>
                             </p>
                         </div>
                         <div class="flex gap-2.5 sm:gap-3">
                             <button onclick="backToStep1()" class="flex-1 py-3 bg-sand-100 hover:bg-sand-200 text-stone-700 font-bold rounded-xl transition text-sm">Retour</button>
-                            <button id="btn-step2-validate" onclick="validateInviteCode()" class="flex-1 py-3 bg-terracotta-700 hover:bg-terracotta-800 text-white font-black rounded-xl shadow-lg transition active-scale text-sm">Vérifier</button>
+                            <button id="btn-step2-validate" onclick="validateInviteCode()" class="flex-1 py-3 bg-terracotta-700 hover:bg-terracotta-800 text-white font-black rounded-xl shadow-sm transition active-scale text-sm">Vérifier</button>
                         </div>
                     </div>
 
@@ -301,22 +296,22 @@
                         </div>
                         <div>
                             <label class="block text-[10px] sm:text-xs font-black uppercase text-stone-600 mb-1.5">Prénom *</label>
-                            <input type="text" id="prenom-input" placeholder="Ex: Awa, Moussa, Fatou…" class="w-full bg-sand-50 border-2 border-sand-300 rounded-xl px-4 py-3 text-base font-bold focus:outline-none focus:ring-2 focus:ring-terracotta-500">
+                            <input type="text" id="prenom-input" placeholder="Ex: Awa, Moussa, Fatou…" class="w-full bg-sand-50 border border-sand-300 rounded-xl px-4 py-3 text-base font-bold focus:outline-none focus:ring-2 focus:ring-terracotta-500">
                         </div>
 
                         <div class="space-y-3">
                             <label class="block text-[10px] sm:text-xs font-black uppercase text-stone-600">Votre photo *</label>
                             <div class="text-center">
                                 <input type="file" id="avatar-file-input" accept="image/*" capture="user" class="hidden" onchange="handleAvatarUpload(event)">
-                                <button type="button" onclick="document.getElementById('avatar-file-input').click()" class="active-scale inline-flex items-center gap-2 bg-gradient-to-r from-ocre-500 to-terracotta-600 hover:from-ocre-600 hover:to-terracotta-700 text-white font-extrabold px-5 py-3 rounded-2xl shadow-lg transition text-sm">
+                                <button type="button" onclick="document.getElementById('avatar-file-input').click()" class="active-scale inline-flex items-center gap-2 bg-terracotta-700 hover:bg-terracotta-800 text-white font-extrabold px-5 py-3 rounded-2xl shadow-sm transition text-sm">
                                     <i class="fa-solid fa-camera"></i>
                                     <span>Prendre / Importer</span>
                                 </button>
                                 <p class="text-[10px] sm:text-[11px] text-stone-500 font-semibold mt-2">Selfie ou image (max 5 Mo)</p>
                             </div>
 
-                            <div id="uploaded-avatar-preview" class="hidden flex items-center gap-3 bg-emerald-50 border-2 border-emerald-300 rounded-2xl p-3">
-                                <img id="uploaded-avatar-img" src="" alt="" class="w-14 h-14 rounded-2xl border-2 border-white shadow object-cover">
+                            <div id="uploaded-avatar-preview" class="hidden flex items-center gap-3 bg-emerald-50 border border-emerald-200 rounded-2xl p-3">
+                                <img id="uploaded-avatar-img" src="" alt="" class="w-14 h-14 rounded-2xl border border-white shadow-sm object-cover">
                                 <div class="flex-1 min-w-0">
                                     <p class="text-[11px] font-black text-emerald-800 uppercase tracking-widest"><i class="fa-solid fa-circle-check"></i> Photo OK</p>
                                     <p class="text-[10px] text-emerald-700 font-semibold truncate">Elle deviendra votre avatar</p>
@@ -337,7 +332,7 @@
 
                         <div class="flex gap-2.5 sm:gap-3">
                             <button onclick="backToStep2()" class="flex-1 py-3 bg-sand-100 hover:bg-sand-200 text-stone-700 font-bold rounded-xl transition text-sm">Retour</button>
-                            <button id="btn-step3-continue" onclick="goToStep4()" disabled class="flex-1 py-3 bg-terracotta-700 hover:bg-terracotta-800 disabled:bg-stone-300 disabled:cursor-not-allowed text-white font-black rounded-xl shadow-lg transition active-scale text-sm">Continuer</button>
+                            <button id="btn-step3-continue" onclick="goToStep4()" disabled class="flex-1 py-3 bg-terracotta-700 hover:bg-terracotta-800 disabled:bg-stone-300 disabled:cursor-not-allowed text-white font-black rounded-xl shadow-sm transition active-scale text-sm">Continuer</button>
                         </div>
                     </div>
 
@@ -348,7 +343,7 @@
                         </div>
 
                         <div class="flex items-center gap-3 bg-amber-50 border border-amber-200 rounded-2xl p-2.5 sm:p-3">
-                            <img id="preview-avatar" src="" alt="" class="w-11 h-11 rounded-xl bg-sand-200 border-2 border-white shadow object-cover">
+                            <img id="preview-avatar" src="" alt="" class="w-11 h-11 rounded-xl bg-sand-200 border border-white shadow-sm object-cover">
                             <div class="min-w-0">
                                 <p id="preview-prenom" class="font-diola font-black text-terracotta-900 text-sm sm:text-base truncate"></p>
                                 <p id="preview-role" class="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-stone-500"></p>
@@ -356,10 +351,10 @@
                         </div>
 
                         <div class="flex justify-center gap-3 sm:gap-4 py-2">
-                            <div class="pin-dot w-5 h-5 rounded-full border-2 border-sand-400" data-dot="0"></div>
-                            <div class="pin-dot w-5 h-5 rounded-full border-2 border-sand-400" data-dot="1"></div>
-                            <div class="pin-dot w-5 h-5 rounded-full border-2 border-sand-400" data-dot="2"></div>
-                            <div class="pin-dot w-5 h-5 rounded-full border-2 border-sand-400" data-dot="3"></div>
+                            <div class="pin-dot w-5 h-5 rounded-full border border-sand-300" data-dot="0"></div>
+                            <div class="pin-dot w-5 h-5 rounded-full border border-sand-300" data-dot="1"></div>
+                            <div class="pin-dot w-5 h-5 rounded-full border border-sand-300" data-dot="2"></div>
+                            <div class="pin-dot w-5 h-5 rounded-full border border-sand-300" data-dot="3"></div>
                         </div>
 
                         <div class="grid grid-cols-3 gap-2 sm:gap-2.5 max-w-xs mx-auto" id="pin-keypad"></div>
@@ -375,13 +370,13 @@
 
     <section id="auth-screen-pin" class="hidden flex-1 flex flex-col items-center justify-center px-3 py-4 sm:p-6 safe-top safe-bottom">
         <div class="max-w-md w-full space-y-4 sm:space-y-6">
-            <button onclick="backToProfilePicker()" class="active-scale inline-flex items-center gap-2 bg-white border border-sand-300 hover:bg-sand-100 text-stone-700 font-bold px-3 py-2 rounded-xl text-xs sm:text-sm transition">
+            <button onclick="backToProfilePicker()" class="active-scale inline-flex items-center gap-2 bg-white border border-sand-300 hover:bg-sand-50 text-stone-700 font-bold px-3 py-2 rounded-xl text-xs sm:text-sm transition">
                 <i class="fa-solid fa-arrow-left"></i> Changer de profil
             </button>
 
             <div class="clay-card p-5 sm:p-8 text-center space-y-4 sm:space-y-6">
                 <div>
-                    <img id="login-avatar" src="" alt="" class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl mx-auto bg-sand-200 border-4 border-white shadow-xl object-cover">
+                    <img id="login-avatar" src="" alt="" class="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl mx-auto bg-sand-200 border-2 border-white shadow-sm object-cover">
                     <h2 id="login-prenom" class="font-diola font-black text-xl sm:text-2xl text-terracotta-900 mt-3 sm:mt-4"></h2>
                     <p id="login-role" class="text-[10px] font-black uppercase tracking-widest text-stone-500 mt-1"></p>
                 </div>
@@ -389,10 +384,10 @@
                 <div>
                     <p class="text-[10px] sm:text-xs font-black uppercase text-stone-500 tracking-widest mb-3">Entrez votre code PIN</p>
                     <div id="login-pin-dots" class="flex justify-center gap-3 sm:gap-4">
-                        <div class="pin-dot w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-sand-400" data-dot="0"></div>
-                        <div class="pin-dot w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-sand-400" data-dot="1"></div>
-                        <div class="pin-dot w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-sand-400" data-dot="2"></div>
-                        <div class="pin-dot w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-sand-400" data-dot="3"></div>
+                        <div class="pin-dot w-5 h-5 sm:w-6 sm:h-6 rounded-full border border-sand-300" data-dot="0"></div>
+                        <div class="pin-dot w-5 h-5 sm:w-6 sm:h-6 rounded-full border border-sand-300" data-dot="1"></div>
+                        <div class="pin-dot w-5 h-5 sm:w-6 sm:h-6 rounded-full border border-sand-300" data-dot="2"></div>
+                        <div class="pin-dot w-5 h-5 sm:w-6 sm:h-6 rounded-full border border-sand-300" data-dot="3"></div>
                     </div>
                     <p id="login-error" class="hidden text-xs text-red-600 font-bold mt-3">
                         <i class="fa-solid fa-circle-exclamation"></i> <span>Code PIN incorrect</span>
@@ -418,16 +413,16 @@
 <!-- APP ROOT -->
 <div id="app-root" class="hidden flex flex-col">
 
-    <header class="bg-gradient-to-r from-terracotta-900 via-terracotta-800 to-terracotta-700 text-white shadow-lg sticky top-0 z-30 border-b-4 border-ocre-500 safe-top">
+    <header class="bg-gradient-to-r from-terracotta-900 via-terracotta-800 to-terracotta-700 text-white shadow-sm sticky top-0 z-30 border-b border-ocre-500 safe-top">
         <div class="max-w-7xl mx-auto px-3 sm:px-4 md:px-8 py-2 sm:py-3 flex justify-between items-center gap-2">
             <div class="flex items-center space-x-2 sm:space-x-3.5 cursor-pointer min-w-0" onclick="navigateTo('home')">
                 <div class="w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center flex-shrink-0">
-                    <img src="Buhanor_Isotype_Blanc.png" alt="Buhanor" class="w-full h-full object-contain drop-shadow-xl">
+                    <img src="Buhanor_Isotype_Blanc.png" alt="Buhanor" class="w-full h-full object-contain">
                 </div>
                 <div class="min-w-0">
                     <h1 class="text-lg sm:text-2xl md:text-3xl font-diola font-black tracking-widest text-amber-100 leading-none">BUHANOR</h1>
                     <p class="text-[9px] sm:text-[11px] md:text-xs text-amber-300 font-extrabold uppercase tracking-widest flex items-center gap-1 sm:gap-1.5 mt-0.5 truncate">
-                        <span id="connection-dot" class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 inline-block animate-ping flex-shrink-0"></span>
+                        <span id="connection-dot" class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 inline-block flex-shrink-0"></span>
                         CAP SKIRRING
                     </p>
                 </div>
@@ -443,22 +438,22 @@
                     <i class="fa-solid fa-house"></i>
                 </button>
 
-                <button onclick="confirmResetDemoData()" title="Recharger" class="bg-terracotta-900/80 hover:bg-terracotta-900 text-amber-200 p-2 sm:p-2.5 rounded-xl sm:rounded-2xl text-xs sm:text-sm transition border border-terracotta-600/60 shadow active-scale">
+                <button onclick="confirmResetDemoData()" title="Recharger" class="bg-terracotta-900/80 hover:bg-terracotta-900 text-amber-200 p-2 sm:p-2.5 rounded-xl sm:rounded-2xl text-xs sm:text-sm transition border border-terracotta-600/60 active-scale">
                     <i class="fa-solid fa-arrows-rotate"></i>
                 </button>
 
-                <button id="btn-notifications" onclick="toggleNotifications()" title="Notifications" class="hidden sm:flex items-center gap-1.5 bg-terracotta-900/80 hover:bg-terracotta-900 text-amber-200 px-2.5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs font-bold transition border border-terracotta-600/60 shadow active-scale">
+                <button id="btn-notifications" onclick="toggleNotifications()" title="Notifications" class="hidden sm:flex items-center gap-1.5 bg-terracotta-900/80 hover:bg-terracotta-900 text-amber-200 px-2.5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs font-bold transition border border-terracotta-600/60 active-scale">
                     <i id="notif-icon" class="fa-solid fa-bell-slash"></i>
                     <span id="notif-text" class="hidden lg:inline">Notifs</span>
                 </button>
 
-                <button id="btn-install-pwa" onclick="installPWA()" title="Installer" class="hidden bg-gradient-to-r from-ocre-500 to-terracotta-600 hover:from-ocre-600 hover:to-terracotta-700 text-white p-2 sm:px-3.5 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs font-black transition shadow-lg border border-ocre-400 items-center gap-1.5 active-scale">
+                <button id="btn-install-pwa" onclick="installPWA()" title="Installer" class="hidden bg-terracotta-600 hover:bg-terracotta-700 text-white p-2 sm:px-3.5 sm:py-2.5 rounded-xl sm:rounded-2xl text-xs font-black transition border border-ocre-400 items-center gap-1.5 active-scale">
                     <i class="fa-solid fa-download"></i>
                     <span class="hidden lg:inline">Installer</span>
                 </button>
 
                 <div class="relative">
-                    <button onclick="toggleUserMenu(event)" class="active-scale flex items-center gap-1.5 sm:gap-2.5 bg-white/10 hover:bg-white/20 border border-white/25 rounded-xl sm:rounded-2xl p-1.5 pr-2 sm:pr-2.5 transition" title="Menu">
+                    <button onclick="toggleUserMenu(event)" class="active-scale flex items-center gap-1.5 sm:gap-2.5 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl sm:rounded-2xl p-1.5 pr-2 sm:pr-2.5 transition" title="Menu">
                         <img id="header-avatar" src="" alt="" class="w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-sand-200 border border-white/40 object-cover">
                         <div class="hidden md:block text-left">
                             <p id="header-prenom" class="text-xs font-black leading-tight"></p>
@@ -467,8 +462,8 @@
                         <i class="fa-solid fa-chevron-down text-[10px] text-amber-300"></i>
                     </button>
 
-                    <div id="user-menu-dropdown" class="hidden absolute right-0 top-full mt-2 w-64 max-w-[calc(100vw-1.5rem)] bg-white rounded-2xl shadow-2xl border-2 border-sand-300 overflow-hidden z-50">
-                        <button onclick="closeUserMenu(); confirmLogout();" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-sand-100 transition text-left border-b border-sand-200">
+                    <div id="user-menu-dropdown" class="hidden absolute right-0 top-full mt-2 w-64 max-w-[calc(100vw-1.5rem)] bg-white rounded-2xl shadow-lg border border-sand-200 overflow-hidden z-50">
+                        <button onclick="closeUserMenu(); confirmLogout();" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-sand-50 transition text-left border-b border-sand-200">
                             <span class="w-8 h-8 rounded-lg bg-terracotta-100 text-terracotta-800 flex items-center justify-center"><i class="fa-solid fa-right-from-bracket"></i></span>
                             <div><p class="text-sm font-black text-terracotta-900">Changer de profil</p><p class="text-[10px] text-stone-500 font-semibold">Se déconnecter</p></div>
                         </button>
@@ -486,13 +481,13 @@
         </div>
     </header>
 
-    <div id="housekeeper-schedule-bar" class="border-b border-amber-200/80 px-3 sm:px-4 py-2 sm:py-3 shadow-inner transition-all duration-700 sched-bar-active">
+    <div id="housekeeper-schedule-bar" class="border-b border-amber-200/60 px-3 sm:px-4 py-2 sm:py-3 sched-bar-default">
         <div class="max-w-7xl mx-auto flex flex-col gap-1.5 sm:flex-row sm:items-center sm:justify-between text-xs sm:text-sm">
             <div class="flex items-center gap-2 sm:gap-3 font-extrabold text-amber-950">
-                <span id="schedule-status-icon" class="text-base sm:text-xl w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg sm:rounded-xl bg-white/70 shadow-sm border border-white/80 flex-shrink-0"></span>
+                <span id="schedule-status-icon" class="text-base sm:text-lg w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center rounded-lg sm:rounded-xl bg-white/80 shadow-sm border border-white/90 flex-shrink-0"></span>
                 <span id="schedule-status-text" class="leading-tight text-[11px] sm:text-sm">Détection de l'horaire…</span>
             </div>
-            <div class="hidden sm:flex items-center gap-2 text-[10px] md:text-xs font-extrabold text-stone-700 bg-white/85 px-3 py-1.5 rounded-full border border-amber-200 shadow-sm">
+            <div class="hidden sm:flex items-center gap-2 text-[10px] md:text-xs font-extrabold text-stone-700 bg-white/90 px-3 py-1.5 rounded-full border border-amber-200">
                 <i class="fa-regular fa-calendar-check text-terracotta-700"></i>
                 <span>Lun • Mer • Ven</span>
                 <span class="text-amber-400">•</span>
@@ -506,7 +501,7 @@
 
         <section id="view-home" class="space-y-4 sm:space-y-6 md:space-y-8 py-1 sm:py-2">
             <div class="text-center max-w-2xl mx-auto space-y-2">
-                <span class="bg-ocre-100 text-terracotta-800 text-[10px] sm:text-xs font-black uppercase tracking-widest px-3 py-1 sm:px-4 sm:py-1.5 rounded-full border border-ocre-300 inline-block shadow-sm">
+                <span class="bg-ocre-100 text-terracotta-800 text-[10px] sm:text-xs font-black uppercase tracking-widest px-3 py-1 sm:px-4 sm:py-1.5 rounded-full border border-ocre-200 inline-block">
                     <i class="fa-solid fa-location-dot text-ocre-700 mr-1"></i> BUHANOR • CAP SKIRRING
                 </span>
                 <h2 class="text-xl sm:text-2xl md:text-4xl font-diola font-black text-terracotta-900 tracking-tight">
@@ -517,7 +512,7 @@
             <div id="home-modules-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6 max-w-6xl mx-auto pt-1 sm:pt-2"></div>
 
             <div id="home-sectors-block" class="max-w-6xl mx-auto clay-card p-3 sm:p-5 md:p-7 space-y-3 sm:space-y-4">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-sand-200 pb-3 gap-2">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-sand-200 pb-3 gap-2">
                     <h4 class="font-diola font-black text-terracotta-900 text-sm sm:text-base md:text-lg flex items-center gap-2">
                         <i class="fa-solid fa-map-location-dot text-ocre-600"></i> Dispositions (7 Chambres)
                     </h4>
@@ -537,16 +532,16 @@
                     </button>
                     <div class="min-w-0 flex-1">
                         <div class="flex items-center gap-2">
-                            <span class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-base sm:text-xl flex-shrink-0">
-                                <i class="fa-solid fa-broom icon-broom"></i>
+                            <span class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-base sm:text-lg flex-shrink-0">
+                                <i class="fa-solid fa-broom"></i>
                             </span>
                             <h2 class="text-lg sm:text-2xl md:text-3xl font-diola font-black text-terracotta-900 truncate">Espace Ménage</h2>
                         </div>
                         <p class="text-[10px] sm:text-xs md:text-sm text-stone-600 font-semibold mt-1">Touchez un statut pour changer l'état.</p>
                     </div>
                 </div>
-                <div id="cleaning-status-banner" class="w-full bg-amber-50 border-2 border-amber-300 rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 flex items-center gap-3">
-                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-terracotta-600 text-white flex items-center justify-center text-base sm:text-xl flex-shrink-0">
+                <div id="cleaning-status-banner" class="w-full bg-amber-50 border border-amber-200 rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 flex items-center gap-3">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-terracotta-600 text-white flex items-center justify-center text-base sm:text-lg flex-shrink-0">
                         <i class="fa-solid fa-chart-pie"></i>
                     </div>
                     <div class="min-w-0">
@@ -556,9 +551,9 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap gap-1.5 sm:gap-2 items-center bg-white p-2 sm:p-3 rounded-xl sm:rounded-2xl border-2 border-sand-200 shadow-sm">
+            <div class="flex flex-wrap gap-1.5 sm:gap-2 items-center bg-white p-2 sm:p-3 rounded-xl sm:rounded-2xl border border-sand-200">
                 <span class="text-[10px] sm:text-xs font-black text-stone-500 uppercase px-1.5 sm:px-2 flex items-center gap-1"><i class="fa-solid fa-filter text-terracotta-600"></i> Filtrer :</span>
-                <button onclick="filterHousekeeping('all')" id="btn-filter-all" class="housekeeping-filter-btn px-2.5 sm:px-4 py-2 rounded-lg sm:rounded-xl text-[11px] sm:text-sm font-extrabold bg-terracotta-800 text-white shadow transition">Toutes</button>
+                <button onclick="filterHousekeeping('all')" id="btn-filter-all" class="housekeeping-filter-btn px-2.5 sm:px-4 py-2 rounded-lg sm:rounded-xl text-[11px] sm:text-sm font-extrabold bg-terracotta-800 text-white transition">Toutes</button>
                 <button onclick="filterHousekeeping('to_clean')" id="btn-filter-to_clean" class="housekeeping-filter-btn px-2.5 sm:px-4 py-2 rounded-lg sm:rounded-xl text-[11px] sm:text-sm font-extrabold bg-sand-100 text-stone-700 hover:bg-sand-200 transition flex items-center gap-1">
                     <i class="fa-solid fa-circle text-red-500 text-[7px]"></i> À nettoyer
                 </button>
@@ -581,7 +576,7 @@
                     </button>
                     <div class="min-w-0 flex-1">
                         <div class="flex items-center gap-2">
-                            <span class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-base sm:text-xl flex-shrink-0">
+                            <span class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-base sm:text-lg flex-shrink-0">
                                 <i class="fa-solid fa-bell-concierge"></i>
                             </span>
                             <h2 class="text-lg sm:text-2xl md:text-3xl font-diola font-black text-terracotta-900 truncate">Accueil & Planning</h2>
@@ -589,19 +584,19 @@
                         <p class="text-[10px] sm:text-xs md:text-sm text-stone-600 font-semibold mt-1">Planning 7 jours & réservations.</p>
                     </div>
                 </div>
-                <button onclick="openNewReservationModal()" class="w-full active-scale bg-gradient-to-r from-terracotta-600 to-ocre-600 hover:from-terracotta-700 hover:to-ocre-700 text-white font-extrabold px-5 py-3 rounded-xl sm:rounded-2xl shadow-lg transition flex items-center justify-center gap-2 text-sm sm:text-base">
+                <button onclick="openNewReservationModal()" class="w-full active-scale bg-terracotta-700 hover:bg-terracotta-800 text-white font-extrabold px-5 py-3 rounded-xl sm:rounded-2xl shadow-sm transition flex items-center justify-center gap-2 text-sm sm:text-base">
                     <i class="fa-solid fa-calendar-plus"></i><span>Nouvelle Réservation</span>
                 </button>
             </div>
 
-            <div class="flex border-b-2 border-sand-300 gap-1 sm:gap-2 overflow-x-auto custom-scrollbar -mx-3 sm:mx-0 px-3 sm:px-0">
-                <button onclick="switchReceptionTab('calendar')" id="tab-btn-calendar" class="reception-tab-btn px-3 sm:px-5 py-2.5 sm:py-3 font-black text-[11px] sm:text-sm border-b-4 border-terracotta-600 text-terracotta-800 flex items-center gap-1.5 whitespace-nowrap">
+            <div class="flex border-b border-sand-200 gap-1 sm:gap-2 overflow-x-auto custom-scrollbar -mx-3 sm:mx-0 px-3 sm:px-0">
+                <button onclick="switchReceptionTab('calendar')" id="tab-btn-calendar" class="reception-tab-btn px-3 sm:px-5 py-2.5 sm:py-3 font-black text-[11px] sm:text-sm border-b-2 border-terracotta-600 text-terracotta-800 flex items-center gap-1.5 whitespace-nowrap">
                     <i class="fa-solid fa-calendar-days"></i> Planning
                 </button>
-                <button onclick="switchReceptionTab('today')" id="tab-btn-today" class="reception-tab-btn px-3 sm:px-5 py-2.5 sm:py-3 font-black text-[11px] sm:text-sm border-b-4 border-transparent text-stone-500 hover:text-stone-800 flex items-center gap-1.5 whitespace-nowrap">
+                <button onclick="switchReceptionTab('today')" id="tab-btn-today" class="reception-tab-btn px-3 sm:px-5 py-2.5 sm:py-3 font-black text-[11px] sm:text-sm border-b-2 border-transparent text-stone-500 hover:text-stone-800 flex items-center gap-1.5 whitespace-nowrap">
                     <i class="fa-solid fa-clock"></i> Aujourd'hui
                 </button>
-                <button onclick="switchReceptionTab('list')" id="tab-btn-list" class="reception-tab-btn px-3 sm:px-5 py-2.5 sm:py-3 font-black text-[11px] sm:text-sm border-b-4 border-transparent text-stone-500 hover:text-stone-800 flex items-center gap-1.5 whitespace-nowrap">
+                <button onclick="switchReceptionTab('list')" id="tab-btn-list" class="reception-tab-btn px-3 sm:px-5 py-2.5 sm:py-3 font-black text-[11px] sm:text-sm border-b-2 border-transparent text-stone-500 hover:text-stone-800 flex items-center gap-1.5 whitespace-nowrap">
                     <i class="fa-solid fa-list-check"></i> Liste
                 </button>
             </div>
@@ -610,10 +605,10 @@
                 <div class="clay-card p-2.5 sm:p-4 md:p-6 space-y-3 sm:space-y-4">
                     <div class="flex flex-col gap-2 sm:gap-3">
                         <div class="flex items-center gap-1.5 sm:gap-3 flex-wrap">
-                            <button onclick="changeCalendarWeek(-7)" class="p-2 sm:p-2.5 bg-sand-100 hover:bg-sand-200 rounded-lg sm:rounded-xl font-black text-terracotta-800 active-scale border border-sand-300 text-sm"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button onclick="changeCalendarWeek(-7)" class="p-2 sm:p-2.5 bg-sand-100 hover:bg-sand-200 rounded-lg sm:rounded-xl font-black text-terracotta-800 active-scale border border-sand-300 text-sm transition"><i class="fa-solid fa-chevron-left"></i></button>
                             <span id="calendar-week-range" class="font-extrabold text-terracotta-900 text-xs sm:text-base flex-1 text-center sm:text-left">Semaine du ...</span>
-                            <button onclick="changeCalendarWeek(7)" class="p-2 sm:p-2.5 bg-sand-100 hover:bg-sand-200 rounded-lg sm:rounded-xl font-black text-terracotta-800 active-scale border border-sand-300 text-sm"><i class="fa-solid fa-chevron-right"></i></button>
-                            <button onclick="resetCalendarToToday()" class="text-[10px] sm:text-xs font-extrabold text-terracotta-800 bg-amber-100 hover:bg-amber-200 border border-amber-300 px-2 py-2 sm:px-3 rounded-lg sm:rounded-xl transition flex items-center gap-1">
+                            <button onclick="changeCalendarWeek(7)" class="p-2 sm:p-2.5 bg-sand-100 hover:bg-sand-200 rounded-lg sm:rounded-xl font-black text-terracotta-800 active-scale border border-sand-300 text-sm transition"><i class="fa-solid fa-chevron-right"></i></button>
+                            <button onclick="resetCalendarToToday()" class="text-[10px] sm:text-xs font-extrabold text-terracotta-800 bg-amber-100 hover:bg-amber-200 border border-amber-200 px-2 py-2 sm:px-3 rounded-lg sm:rounded-xl transition flex items-center gap-1">
                                 <i class="fa-solid fa-crosshairs"></i> <span class="hidden sm:inline">Aujourd'hui</span>
                             </button>
                         </div>
@@ -623,10 +618,10 @@
                             <span class="flex items-center gap-1"><span class="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-purple-600 inline-block"></span> Passage</span>
                         </div>
                     </div>
-                    <div class="overflow-x-auto custom-scrollbar border-2 border-sand-300 rounded-xl sm:rounded-2xl table-scroll">
+                    <div class="overflow-x-auto custom-scrollbar border border-sand-200 rounded-xl sm:rounded-2xl table-scroll">
                         <table class="w-full text-left border-collapse min-w-[640px]">
-                            <thead><tr id="calendar-grid-header" class="bg-sand-100 text-terracotta-900 text-[10px] sm:text-xs uppercase font-black border-b-2 border-sand-300"></tr></thead>
-                            <tbody id="calendar-grid-body" class="divide-y divide-sand-200 text-xs sm:text-sm bg-white"></tbody>
+                            <thead><tr id="calendar-grid-header" class="bg-sand-100 text-terracotta-900 text-[10px] sm:text-xs uppercase font-black border-b border-sand-200"></tr></thead>
+                            <tbody id="calendar-grid-body" class="divide-y divide-sand-100 text-xs sm:text-sm bg-white"></tbody>
                         </table>
                     </div>
                 </div>
@@ -641,7 +636,7 @@
                     <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
                         <div class="relative w-full sm:w-72">
                             <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 text-sm"></i>
-                            <input type="text" id="reservation-search-input" onkeyup="filterReservationsList()" placeholder="Rechercher un client..." class="w-full bg-sand-50 border-2 border-sand-300 rounded-xl pl-10 pr-4 py-2.5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-terracotta-500">
+                            <input type="text" id="reservation-search-input" onkeyup="filterReservationsList()" placeholder="Rechercher un client..." class="w-full bg-sand-50 border border-sand-300 rounded-xl pl-10 pr-4 py-2.5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-terracotta-500">
                         </div>
                         <span id="reservation-count-tag" class="text-xs font-bold text-stone-500 self-center">0 réservations</span>
                     </div>
@@ -654,13 +649,13 @@
 
 <!-- MODALES -->
 <div id="modal-reservation" class="hidden fixed inset-0 bg-stone-900/70 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center modal-overlay p-0 sm:p-4">
-    <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-lg w-full p-5 sm:p-8 shadow-2xl space-y-4 sm:space-y-5 border-4 border-terracotta-500 max-h-[92dvh] overflow-y-auto modal-card safe-bottom">
-        <div class="flex justify-between items-center border-b-2 border-sand-200 pb-3 sticky top-0 bg-white z-10 -mx-5 sm:-mx-8 px-5 sm:px-8">
+    <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-lg w-full p-5 sm:p-8 shadow-lg space-y-4 sm:space-y-5 border-2 border-terracotta-500 max-h-[92dvh] overflow-y-auto modal-card safe-bottom">
+        <div class="flex justify-between items-center border-b border-sand-200 pb-3 sticky top-0 bg-white z-10 -mx-5 sm:-mx-8 px-5 sm:px-8">
             <div class="flex items-center gap-3">
                 <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-100 text-terracotta-800 flex items-center justify-center text-lg sm:text-xl"><i class="fa-solid fa-calendar-plus"></i></div>
                 <h3 class="text-base sm:text-xl font-diola font-black text-terracotta-900">Nouvelle Réservation</h3>
             </div>
-            <button onclick="closeNewReservationModal()" class="w-9 h-9 bg-sand-100 hover:bg-sand-200 rounded-full flex items-center justify-center text-stone-600 font-bold active-scale"><i class="fa-solid fa-xmark"></i></button>
+            <button onclick="closeNewReservationModal()" class="w-9 h-9 bg-sand-100 hover:bg-sand-200 rounded-full flex items-center justify-center text-stone-600 font-bold active-scale transition"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <form id="form-reservation" onsubmit="handleReservationSubmit(event)" class="space-y-3 sm:space-y-4">
             <div>
@@ -668,14 +663,14 @@
                 <div class="grid grid-cols-2 gap-2 sm:gap-3">
                     <label class="cursor-pointer">
                         <input type="radio" name="resType" value="overnight" checked onchange="toggleReservationTypeUI()" class="peer sr-only">
-                        <div class="p-2.5 sm:p-3 rounded-xl border-2 border-sand-300 peer-checked:border-terracotta-600 peer-checked:bg-amber-50 text-center transition">
+                        <div class="p-2.5 sm:p-3 rounded-xl border border-sand-300 peer-checked:border-terracotta-600 peer-checked:bg-amber-50 text-center transition">
                             <span class="flex items-center justify-center gap-1.5 text-xs sm:text-sm font-black text-terracotta-900"><i class="fa-solid fa-moon"></i> Nuitée</span>
                             <span class="text-[9px] sm:text-[11px] text-stone-500">1+ jour(s)</span>
                         </div>
                     </label>
                     <label class="cursor-pointer">
                         <input type="radio" name="resType" value="day_use" onchange="toggleReservationTypeUI()" class="peer sr-only">
-                        <div class="p-2.5 sm:p-3 rounded-xl border-2 border-sand-300 peer-checked:border-purple-600 peer-checked:bg-purple-50 text-center transition">
+                        <div class="p-2.5 sm:p-3 rounded-xl border border-sand-300 peer-checked:border-purple-600 peer-checked:bg-purple-50 text-center transition">
                             <span class="flex items-center justify-center gap-1.5 text-xs sm:text-sm font-black text-purple-900"><i class="fa-solid fa-bolt"></i> Passage</span>
                             <span class="text-[9px] sm:text-[11px] text-purple-700">2h-3h</span>
                         </div>
@@ -684,40 +679,40 @@
             </div>
             <div>
                 <label class="block text-[10px] sm:text-xs font-black uppercase text-stone-600 mb-1">Nom du Client *</label>
-                <input type="text" id="res-client-name" required placeholder="Ex: M. Diatta" class="w-full bg-sand-50 border-2 border-sand-300 rounded-xl px-3 py-2.5 text-base font-semibold focus:outline-none focus:ring-2 focus:ring-terracotta-500">
+                <input type="text" id="res-client-name" required placeholder="Ex: M. Diatta" class="w-full bg-sand-50 border border-sand-300 rounded-xl px-3 py-2.5 text-base font-semibold focus:outline-none focus:ring-2 focus:ring-terracotta-500">
             </div>
             <div>
                 <label class="block text-[10px] sm:text-xs font-black uppercase text-stone-600 mb-1">Chambre *</label>
-                <select id="res-room-id" required class="w-full bg-sand-50 border-2 border-sand-300 rounded-xl px-3 py-2.5 text-sm font-bold text-stone-800 focus:outline-none focus:ring-2 focus:ring-terracotta-500"></select>
+                <select id="res-room-id" required class="w-full bg-sand-50 border border-sand-300 rounded-xl px-3 py-2.5 text-sm font-bold text-stone-800 focus:outline-none focus:ring-2 focus:ring-terracotta-500"></select>
             </div>
             <div class="grid grid-cols-2 gap-2 sm:gap-3">
                 <div>
                     <label class="block text-[10px] sm:text-xs font-black uppercase text-stone-600 mb-1">Arrivée *</label>
-                    <input type="date" id="res-start-date" required class="w-full bg-sand-50 border-2 border-sand-300 rounded-xl px-2 py-2.5 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-terracotta-500">
+                    <input type="date" id="res-start-date" required class="w-full bg-sand-50 border border-sand-300 rounded-xl px-2 py-2.5 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-terracotta-500">
                 </div>
                 <div>
                     <label id="lbl-res-end-date" class="block text-[10px] sm:text-xs font-black uppercase text-stone-600 mb-1">Départ *</label>
-                    <input type="date" id="res-end-date" required class="w-full bg-sand-50 border-2 border-sand-300 rounded-xl px-2 py-2.5 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-terracotta-500">
+                    <input type="date" id="res-end-date" required class="w-full bg-sand-50 border border-sand-300 rounded-xl px-2 py-2.5 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-terracotta-500">
                 </div>
             </div>
             <div>
                 <label class="block text-[10px] sm:text-xs font-black uppercase text-stone-600 mb-1">Téléphone (Optionnel)</label>
-                <input type="tel" id="res-phone" placeholder="+221 77..." class="w-full bg-sand-50 border-2 border-sand-300 rounded-xl px-3 py-2.5 text-base font-medium focus:outline-none focus:ring-2 focus:ring-terracotta-500">
+                <input type="tel" id="res-phone" placeholder="+221 77..." class="w-full bg-sand-50 border border-sand-300 rounded-xl px-3 py-2.5 text-base font-medium focus:outline-none focus:ring-2 focus:ring-terracotta-500">
             </div>
             <div>
                 <label class="block text-[10px] sm:text-xs font-black uppercase text-stone-600 mb-1">Notes / Instructions</label>
-                <textarea id="res-notes" rows="2" placeholder="Ex: Arrivée 14h..." class="w-full bg-sand-50 border-2 border-sand-300 rounded-xl px-3 py-2 text-base font-medium focus:outline-none focus:ring-2 focus:ring-terracotta-500"></textarea>
+                <textarea id="res-notes" rows="2" placeholder="Ex: Arrivée 14h..." class="w-full bg-sand-50 border border-sand-300 rounded-xl px-3 py-2 text-base font-medium focus:outline-none focus:ring-2 focus:ring-terracotta-500"></textarea>
             </div>
             <div class="pt-1 flex gap-2 sm:gap-3 sticky bottom-0 bg-white -mx-5 sm:-mx-8 px-5 sm:px-8 pb-1">
                 <button type="button" onclick="closeNewReservationModal()" class="flex-1 py-3 bg-sand-100 hover:bg-sand-200 text-stone-700 font-bold rounded-xl transition text-sm">Annuler</button>
-                <button type="submit" id="btn-submit-reservation" class="flex-1 py-3 bg-terracotta-700 hover:bg-terracotta-800 text-white font-black rounded-xl shadow-lg transition active-scale text-sm">Enregistrer</button>
+                <button type="submit" id="btn-submit-reservation" class="flex-1 py-3 bg-terracotta-700 hover:bg-terracotta-800 text-white font-black rounded-xl shadow-sm transition active-scale text-sm">Enregistrer</button>
             </div>
         </form>
     </div>
 </div>
 
 <div id="modal-room-notes" class="hidden fixed inset-0 bg-stone-900/70 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center modal-overlay p-0 sm:p-4">
-    <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4 border-4 border-sand-300 modal-card safe-bottom">
+    <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-lg space-y-4 border-2 border-sand-300 modal-card safe-bottom">
         <div class="flex justify-between items-center border-b border-sand-200 pb-3">
             <h3 id="notes-modal-room-title" class="text-base sm:text-lg font-diola font-black text-terracotta-900 flex items-center gap-2 truncate">
                 <i class="fa-solid fa-pen-to-square text-ocre-600"></i> Consigne
@@ -727,29 +722,29 @@
         <input type="hidden" id="notes-modal-room-id">
         <div>
             <label class="block text-[10px] sm:text-xs font-bold uppercase text-stone-500 mb-1">Message pour la ménagère</label>
-            <textarea id="notes-modal-input" rows="3" class="w-full bg-sand-50 border-2 border-sand-300 rounded-xl p-3 text-base font-medium focus:ring-2 focus:ring-terracotta-500 outline-none" placeholder="Ex: Changer drap..."></textarea>
+            <textarea id="notes-modal-input" rows="3" class="w-full bg-sand-50 border border-sand-300 rounded-xl p-3 text-base font-medium focus:ring-2 focus:ring-terracotta-500 outline-none" placeholder="Ex: Changer drap..."></textarea>
         </div>
         <div class="flex gap-2">
             <button onclick="closeRoomNotesModal()" class="flex-1 py-3 bg-sand-100 text-stone-700 font-bold rounded-xl text-sm">Annuler</button>
-            <button onclick="saveRoomNotes()" class="flex-1 py-3 bg-terracotta-800 text-white font-bold rounded-xl shadow text-sm">Enregistrer</button>
+            <button onclick="saveRoomNotes()" class="flex-1 py-3 bg-terracotta-800 text-white font-bold rounded-xl shadow-sm text-sm">Enregistrer</button>
         </div>
     </div>
 </div>
 
 <div id="modal-delete-self" class="hidden fixed inset-0 bg-stone-900/70 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center modal-overlay p-0 sm:p-4">
-    <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4 border-4 border-red-400 modal-card safe-bottom max-h-[92dvh] overflow-y-auto">
+    <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-lg space-y-4 border-2 border-red-400 modal-card safe-bottom max-h-[92dvh] overflow-y-auto">
         <div class="text-center space-y-2">
             <div class="w-14 h-14 mx-auto bg-red-100 rounded-2xl flex items-center justify-center text-2xl text-red-700"><i class="fa-solid fa-user-xmark"></i></div>
             <h3 class="font-diola font-black text-lg sm:text-xl text-red-700">Supprimer mon profil ?</h3>
             <p class="text-[11px] sm:text-xs text-stone-500 font-semibold">Cette action est <strong>définitive</strong>.</p>
         </div>
-        <div class="bg-red-50 border-2 border-red-200 rounded-2xl p-3 sm:p-4 space-y-3">
+        <div class="bg-red-50 border border-red-200 rounded-2xl p-3 sm:p-4 space-y-3">
             <p class="text-[10px] sm:text-xs font-black text-red-800 uppercase tracking-widest text-center"><i class="fa-solid fa-lock"></i> Confirmez avec votre PIN</p>
             <div id="delete-self-pin-dots" class="flex justify-center gap-3">
-                <div class="pin-dot w-5 h-5 rounded-full border-2 border-red-300" data-dot="0"></div>
-                <div class="pin-dot w-5 h-5 rounded-full border-2 border-red-300" data-dot="1"></div>
-                <div class="pin-dot w-5 h-5 rounded-full border-2 border-red-300" data-dot="2"></div>
-                <div class="pin-dot w-5 h-5 rounded-full border-2 border-red-300" data-dot="3"></div>
+                <div class="pin-dot w-5 h-5 rounded-full border border-red-300" data-dot="0"></div>
+                <div class="pin-dot w-5 h-5 rounded-full border border-red-300" data-dot="1"></div>
+                <div class="pin-dot w-5 h-5 rounded-full border border-red-300" data-dot="2"></div>
+                <div class="pin-dot w-5 h-5 rounded-full border border-red-300" data-dot="3"></div>
             </div>
             <div class="grid grid-cols-3 gap-2 max-w-[220px] mx-auto" id="delete-self-keypad"></div>
             <p id="delete-self-error" class="hidden text-xs text-red-700 font-bold text-center"><i class="fa-solid fa-circle-exclamation"></i> <span></span></p>
@@ -759,8 +754,8 @@
 </div>
 
 <div id="modal-admin-profiles" class="hidden fixed inset-0 bg-stone-900/70 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center modal-overlay p-0 sm:p-4">
-    <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-2xl w-full p-5 sm:p-8 shadow-2xl space-y-4 border-4 border-amber-400 modal-card safe-bottom max-h-[92dvh] overflow-y-auto">
-        <div class="flex justify-between items-center border-b-2 border-sand-200 pb-3">
+    <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-2xl w-full p-5 sm:p-8 shadow-lg space-y-4 border-2 border-amber-400 modal-card safe-bottom max-h-[92dvh] overflow-y-auto">
+        <div class="flex justify-between items-center border-b border-sand-200 pb-3">
             <div class="flex items-center gap-3">
                 <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-lg sm:text-xl"><i class="fa-solid fa-users-gear"></i></div>
                 <div>
@@ -779,19 +774,19 @@
 </div>
 
 <div id="modal-admin-delete-pin" class="hidden fixed inset-0 bg-stone-900/70 backdrop-blur-sm z-[60] flex items-end sm:items-center justify-center modal-overlay p-0 sm:p-4">
-    <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4 border-4 border-red-400 modal-card safe-bottom">
+    <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-lg space-y-4 border-2 border-red-400 modal-card safe-bottom">
         <div class="text-center space-y-2">
             <div class="w-14 h-14 mx-auto bg-red-100 rounded-2xl flex items-center justify-center text-2xl text-red-700"><i class="fa-solid fa-triangle-exclamation"></i></div>
             <h3 class="font-diola font-black text-base sm:text-xl text-red-700">Confirmer la suppression</h3>
             <p id="admin-delete-target-name" class="text-xs sm:text-sm text-stone-600 font-semibold"></p>
         </div>
-        <div class="bg-red-50 border-2 border-red-200 rounded-2xl p-3 sm:p-4 space-y-3">
+        <div class="bg-red-50 border border-red-200 rounded-2xl p-3 sm:p-4 space-y-3">
             <p class="text-[10px] sm:text-xs font-black text-red-800 uppercase tracking-widest text-center"><i class="fa-solid fa-lock"></i> Votre PIN</p>
             <div id="admin-delete-pin-dots" class="flex justify-center gap-3">
-                <div class="pin-dot w-5 h-5 rounded-full border-2 border-red-300" data-dot="0"></div>
-                <div class="pin-dot w-5 h-5 rounded-full border-2 border-red-300" data-dot="1"></div>
-                <div class="pin-dot w-5 h-5 rounded-full border-2 border-red-300" data-dot="2"></div>
-                <div class="pin-dot w-5 h-5 rounded-full border-2 border-red-300" data-dot="3"></div>
+                <div class="pin-dot w-5 h-5 rounded-full border border-red-300" data-dot="0"></div>
+                <div class="pin-dot w-5 h-5 rounded-full border border-red-300" data-dot="1"></div>
+                <div class="pin-dot w-5 h-5 rounded-full border border-red-300" data-dot="2"></div>
+                <div class="pin-dot w-5 h-5 rounded-full border border-red-300" data-dot="3"></div>
             </div>
             <div class="grid grid-cols-3 gap-2 max-w-[220px] mx-auto" id="admin-delete-pin-keypad"></div>
             <p id="admin-delete-pin-error" class="hidden text-xs text-red-700 font-bold text-center"><i class="fa-solid fa-circle-exclamation"></i> <span></span></p>
@@ -801,7 +796,7 @@
 </div>
 
 <div id="modal-pin-help" class="hidden fixed inset-0 bg-stone-900/70 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center modal-overlay p-0 sm:p-4">
-    <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4 border-4 border-amber-400 modal-card safe-bottom max-h-[92dvh] overflow-y-auto">
+    <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-lg space-y-4 border-2 border-amber-400 modal-card safe-bottom max-h-[92dvh] overflow-y-auto">
         <div class="text-center space-y-2">
             <div class="w-14 h-14 mx-auto bg-amber-100 rounded-2xl flex items-center justify-center text-2xl text-amber-700"><i class="fa-solid fa-key"></i></div>
             <h3 class="font-diola font-black text-lg sm:text-xl text-amber-800">PIN oublié ?</h3>
@@ -820,47 +815,47 @@
                 <p class="text-[11px] sm:text-xs">L'app vous le demandera à la prochaine connexion.</p>
             </div>
         </div>
-        <button onclick="closePinHelpModal()" class="w-full py-3 bg-terracotta-700 hover:bg-terracotta-800 text-white font-black rounded-xl shadow transition text-sm">J'ai compris</button>
+        <button onclick="closePinHelpModal()" class="w-full py-3 bg-terracotta-700 hover:bg-terracotta-800 text-white font-black rounded-xl shadow-sm transition text-sm">J'ai compris</button>
     </div>
 </div>
 
 <div id="modal-admin-reset-pin" class="hidden fixed inset-0 bg-stone-900/70 backdrop-blur-sm z-[60] flex items-end sm:items-center justify-center modal-overlay p-0 sm:p-4">
-    <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4 border-4 border-amber-400 modal-card safe-bottom max-h-[92dvh] overflow-y-auto">
+    <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-lg space-y-4 border-2 border-amber-400 modal-card safe-bottom max-h-[92dvh] overflow-y-auto">
         <div class="text-center space-y-2">
             <div class="w-14 h-14 mx-auto bg-amber-100 rounded-2xl flex items-center justify-center text-2xl text-amber-700"><i class="fa-solid fa-key"></i></div>
             <h3 class="font-diola font-black text-lg sm:text-xl text-amber-800">Réinitialiser le PIN</h3>
             <p id="admin-reset-target-name" class="text-xs sm:text-sm text-stone-600 font-semibold"></p>
         </div>
-        <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-3 sm:p-4 space-y-2">
+        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3 sm:p-4 space-y-2">
             <label class="block text-[10px] sm:text-xs font-black text-amber-900 uppercase tracking-widest">Nouveau PIN temporaire</label>
-            <input type="tel" id="admin-reset-new-pin" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="0000" class="w-full bg-white border-2 border-amber-300 rounded-xl px-4 py-3 text-xl sm:text-2xl font-mono font-black text-center tracking-[0.5em] focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <input type="tel" id="admin-reset-new-pin" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="0000" class="w-full bg-white border border-amber-300 rounded-xl px-4 py-3 text-xl sm:text-2xl font-mono font-black text-center tracking-[0.5em] focus:outline-none focus:ring-2 focus:ring-amber-500">
             <p class="text-[10px] sm:text-[11px] text-amber-700 font-semibold text-center"><i class="fa-solid fa-circle-info"></i> À changer à la prochaine connexion</p>
         </div>
-        <div class="bg-red-50 border-2 border-red-200 rounded-2xl p-3 sm:p-4 space-y-2">
+        <div class="bg-red-50 border border-red-200 rounded-2xl p-3 sm:p-4 space-y-2">
             <p class="text-[10px] sm:text-xs font-black text-red-800 uppercase tracking-widest text-center"><i class="fa-solid fa-lock"></i> Votre PIN admin</p>
-            <input type="tel" id="admin-reset-admin-pin" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="----" class="w-full bg-white border-2 border-red-300 rounded-xl px-4 py-3 text-xl sm:text-2xl font-mono font-black text-center tracking-[0.5em] focus:outline-none focus:ring-2 focus:ring-red-500">
+            <input type="tel" id="admin-reset-admin-pin" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="----" class="w-full bg-white border border-red-300 rounded-xl px-4 py-3 text-xl sm:text-2xl font-mono font-black text-center tracking-[0.5em] focus:outline-none focus:ring-2 focus:ring-red-500">
             <p id="admin-reset-error" class="hidden text-xs text-red-700 font-bold text-center"><i class="fa-solid fa-circle-exclamation"></i> <span></span></p>
         </div>
         <div class="flex gap-2 sm:gap-3">
             <button onclick="closeAdminResetPinModal()" class="flex-1 py-3 bg-sand-100 hover:bg-sand-200 text-stone-700 font-bold rounded-xl transition text-sm">Annuler</button>
-            <button id="btn-admin-reset-confirm" onclick="handleAdminResetPin()" class="flex-1 py-3 bg-amber-600 hover:bg-amber-700 text-white font-black rounded-xl shadow transition active-scale text-sm">Réinitialiser</button>
+            <button id="btn-admin-reset-confirm" onclick="handleAdminResetPin()" class="flex-1 py-3 bg-amber-600 hover:bg-amber-700 text-white font-black rounded-xl shadow-sm transition active-scale text-sm">Réinitialiser</button>
         </div>
     </div>
 </div>
 
 <div id="modal-force-change-pin" class="hidden fixed inset-0 bg-stone-900/80 backdrop-blur-sm z-[70] flex items-end sm:items-center justify-center modal-overlay p-0 sm:p-4">
-    <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4 border-4 border-ocre-500 modal-card safe-bottom">
+    <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-md w-full p-5 sm:p-6 shadow-lg space-y-4 border-2 border-ocre-500 modal-card safe-bottom">
         <div class="text-center space-y-2">
             <div class="w-14 h-14 mx-auto bg-ocre-100 rounded-2xl flex items-center justify-center text-2xl text-ocre-700"><i class="fa-solid fa-shield-halved"></i></div>
             <h3 class="font-diola font-black text-base sm:text-xl text-terracotta-900">Créez votre nouveau PIN</h3>
             <p class="text-[11px] sm:text-xs text-stone-500 font-semibold">Choisissez un code à 4 chiffres.</p>
         </div>
-        <div class="bg-sand-50 border-2 border-sand-200 rounded-2xl p-3 sm:p-4 space-y-3">
+        <div class="bg-sand-50 border border-sand-200 rounded-2xl p-3 sm:p-4 space-y-3">
             <div id="force-pin-dots" class="flex justify-center gap-3 sm:gap-4">
-                <div class="pin-dot w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-sand-400" data-dot="0"></div>
-                <div class="pin-dot w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-sand-400" data-dot="1"></div>
-                <div class="pin-dot w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-sand-400" data-dot="2"></div>
-                <div class="pin-dot w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 border-sand-400" data-dot="3"></div>
+                <div class="pin-dot w-5 h-5 sm:w-6 sm:h-6 rounded-full border border-sand-300" data-dot="0"></div>
+                <div class="pin-dot w-5 h-5 sm:w-6 sm:h-6 rounded-full border border-sand-300" data-dot="1"></div>
+                <div class="pin-dot w-5 h-5 sm:w-6 sm:h-6 rounded-full border border-sand-300" data-dot="2"></div>
+                <div class="pin-dot w-5 h-5 sm:w-6 sm:h-6 rounded-full border border-sand-300" data-dot="3"></div>
             </div>
             <div class="grid grid-cols-3 gap-2 sm:gap-3 max-w-xs mx-auto" id="force-pin-keypad"></div>
             <p id="force-pin-error" class="hidden text-xs text-red-700 font-bold text-center"><i class="fa-solid fa-circle-exclamation"></i> <span></span></p>
@@ -869,23 +864,23 @@
 </div>
 
 <div id="modal-custom-confirm" class="hidden fixed inset-0 bg-stone-900/70 backdrop-blur-sm z-50 flex items-center justify-center modal-overlay p-3 sm:p-4">
-    <div class="bg-white rounded-3xl max-w-sm w-full p-5 sm:p-6 shadow-2xl space-y-4 border-4 border-amber-500 text-center modal-card safe-bottom">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-5 sm:p-6 shadow-lg space-y-4 border-2 border-amber-400 text-center modal-card safe-bottom">
         <div class="w-12 h-12 sm:w-14 sm:h-14 bg-amber-100 rounded-2xl mx-auto flex items-center justify-center text-2xl sm:text-3xl text-amber-800"><i class="fa-solid fa-triangle-exclamation"></i></div>
         <h3 id="custom-confirm-title" class="text-lg sm:text-xl font-diola font-black text-terracotta-900">Confirmation</h3>
         <p id="custom-confirm-message" class="text-xs sm:text-sm font-semibold text-stone-600">Êtes-vous sûr ?</p>
         <div class="flex gap-2 sm:gap-3 pt-2">
             <button id="btn-confirm-cancel" class="flex-1 py-3 bg-sand-100 text-stone-700 font-bold rounded-xl text-sm">Annuler</button>
-            <button id="btn-confirm-ok" class="flex-1 py-3 bg-terracotta-700 text-white font-black rounded-xl shadow text-sm">Confirmer</button>
+            <button id="btn-confirm-ok" class="flex-1 py-3 bg-terracotta-700 text-white font-black rounded-xl shadow-sm text-sm">Confirmer</button>
         </div>
     </div>
 </div>
 
 <div id="modal-custom-alert" class="hidden fixed inset-0 bg-stone-900/70 backdrop-blur-sm z-50 flex items-center justify-center modal-overlay p-3 sm:p-4">
-    <div class="bg-white rounded-3xl max-w-sm w-full p-5 sm:p-6 shadow-2xl space-y-4 border-4 border-terracotta-500 text-center modal-card safe-bottom">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-5 sm:p-6 shadow-lg space-y-4 border-2 border-terracotta-500 text-center modal-card safe-bottom">
         <div class="w-12 h-12 sm:w-14 sm:h-14 bg-terracotta-100 rounded-2xl mx-auto flex items-center justify-center text-2xl sm:text-3xl text-terracotta-800"><i class="fa-solid fa-circle-info"></i></div>
         <h3 id="custom-alert-title" class="text-lg sm:text-xl font-diola font-black text-terracotta-900">Information</h3>
-        <p id="custom-alert-message" class="text-xs sm:text-sm font-semibold text-stone-700 whitespace-pre-line text-left bg-sand-50 p-3 rounded-xl border border-sand-300 max-h-[50vh] overflow-y-auto"></p>
-        <button onclick="closeCustomAlert()" class="w-full py-3 bg-terracotta-800 text-white font-black rounded-xl shadow text-sm">Fermer</button>
+        <p id="custom-alert-message" class="text-xs sm:text-sm font-semibold text-stone-700 whitespace-pre-line text-left bg-sand-50 p-3 rounded-xl border border-sand-200 max-h-[50vh] overflow-y-auto"></p>
+        <button onclick="closeCustomAlert()" class="w-full py-3 bg-terracotta-800 text-white font-black rounded-xl shadow-sm text-sm">Fermer</button>
     </div>
 </div>
 
@@ -923,10 +918,10 @@ const ICONS = {
 };
 
 const SECTORS = {
-    vue_mer_balcon:   { id:'vue_mer_balcon',   title:'Vue Mer avec Balcon',           description:'Bâtiment pente vers la mer.',   badgeColor:'bg-ocean-100 text-ocean-700 border-ocean-300', iconBg:'bg-ocean-100 text-ocean-700' },
-    vue_mer_terrasse: { id:'vue_mer_terrasse', title:'Vue Mer avec Grande Terrasse',  description:'Bas des escaliers.',            badgeColor:'bg-amber-100 text-amber-900 border-amber-300', iconBg:'bg-amber-100 text-amber-700' },
-    vue_escalier:     { id:'vue_escalier',     title:'Intérieur / Vue Escalier',      description:'Chambre polyvalente.',          badgeColor:'bg-purple-100 text-purple-900 border-purple-300', iconBg:'bg-purple-100 text-purple-700' },
-    vue_jardin:       { id:'vue_jardin',       title:'Vue Jardin / Haut',             description:'Bâtiment entrée principale.',   badgeColor:'bg-coconut-100 text-coconut-700 border-coconut-300', iconBg:'bg-coconut-100 text-coconut-700' }
+    vue_mer_balcon:   { id:'vue_mer_balcon',   title:'Vue Mer avec Balcon',           description:'Bâtiment pente vers la mer.',   badgeColor:'bg-ocean-100 text-ocean-700 border-ocean-200', iconBg:'bg-ocean-100 text-ocean-700' },
+    vue_mer_terrasse: { id:'vue_mer_terrasse', title:'Vue Mer avec Grande Terrasse',  description:'Bas des escaliers.',            badgeColor:'bg-amber-100 text-amber-900 border-amber-200', iconBg:'bg-amber-100 text-amber-700' },
+    vue_escalier:     { id:'vue_escalier',     title:'Intérieur / Vue Escalier',      description:'Chambre polyvalente.',          badgeColor:'bg-purple-100 text-purple-900 border-purple-200', iconBg:'bg-purple-100 text-purple-700' },
+    vue_jardin:       { id:'vue_jardin',       title:'Vue Jardin / Haut',             description:'Bâtiment entrée principale.',   badgeColor:'bg-coconut-100 text-coconut-700 border-coconut-200', iconBg:'bg-coconut-100 text-coconut-700' }
 };
 
 let appState = {
@@ -994,7 +989,7 @@ function renderProfilePicker() {
     }
     grid.innerHTML = authState.profils.map(p => `
         <button onclick="selectProfilForLogin('${p.id}')" class="profile-tile flex flex-col items-center gap-2 group">
-            <div class="profile-avatar-ring w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-3xl bg-white border-4 border-sand-300 shadow-lg overflow-hidden flex items-center justify-center transition-all">
+            <div class="profile-avatar-ring w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-3xl bg-white border-2 border-sand-300 shadow-sm overflow-hidden flex items-center justify-center transition">
                 <img src="${p.avatar}" alt="${p.prenom}" class="w-full h-full object-cover">
             </div>
             <div class="text-center">
@@ -1090,7 +1085,7 @@ async function validateInviteCode() {
 function renderAvatarChoices() {
     const grid = document.getElementById('avatar-grid');
     grid.innerHTML = AVATAR_CHOICES.map((url, i) => `
-        <button type="button" onclick="selectAvatar(${i})" data-avatar-idx="${i}" class="avatar-choice aspect-square rounded-2xl bg-white border-2 border-sand-300 overflow-hidden">
+        <button type="button" onclick="selectAvatar(${i})" data-avatar-idx="${i}" class="avatar-choice aspect-square rounded-2xl bg-white border border-sand-300 overflow-hidden">
             <img src="${url}" alt="" class="w-full h-full object-cover pointer-events-none">
         </button>
     `).join('');
@@ -1185,7 +1180,7 @@ async function handleCreatePinComplete() {
         return;
     }
     if (pin !== authState.createData.pin) {
-        document.getElementById('pin-step-title').innerText = 'Erreur !';
+        document.getElementById('pin-step-title').innerText = 'Erreur';
         document.getElementById('pin-step-subtitle').innerText = 'Les PIN ne correspondent pas.';
         authState.createData.pin = '';
         authState.pinBuffer = '';
@@ -1336,8 +1331,8 @@ function renderAdminProfilesList() {
     container.innerHTML = authState.profils.map(p => {
         const isSelf = p.id === currentId;
         return `
-            <div class="flex items-center gap-3 bg-sand-50 border-2 border-sand-200 rounded-2xl p-2.5 sm:p-3">
-                <img src="${p.avatar}" alt="${p.prenom}" class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl border-2 border-white shadow object-cover flex-shrink-0">
+            <div class="flex items-center gap-3 bg-sand-50 border border-sand-200 rounded-2xl p-2.5 sm:p-3">
+                <img src="${p.avatar}" alt="${p.prenom}" class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl border border-white shadow-sm object-cover flex-shrink-0">
                 <div class="flex-1 min-w-0">
                     <p class="font-diola font-black text-terracotta-900 text-sm sm:text-base truncate">${p.prenom}</p>
                     <p class="text-[9px] sm:text-[10px] font-black uppercase tracking-widest ${p.role === 'admin' ? 'text-terracotta-600' : 'text-emerald-600'}">
@@ -1345,15 +1340,15 @@ function renderAdminProfilesList() {
                     </p>
                 </div>
                 ${isSelf ? `
-                    <span class="text-[9px] sm:text-[10px] font-black text-stone-400 uppercase tracking-widest bg-white border border-sand-300 px-2 py-1.5 rounded-xl flex-shrink-0">
+                    <span class="text-[9px] sm:text-[10px] font-black text-stone-400 uppercase tracking-widest bg-white border border-sand-200 px-2 py-1.5 rounded-xl flex-shrink-0">
                         <i class="fa-solid fa-user-check"></i> Vous
                     </span>
                 ` : `
                     <div class="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
-                        <button onclick="openAdminResetPinModal('${p.id}')" class="text-amber-700 hover:text-white hover:bg-amber-600 bg-amber-50 p-2 sm:p-2.5 rounded-xl text-sm font-bold transition border-2 border-amber-200 hover:border-amber-600 active-scale" title="Reset PIN">
+                        <button onclick="openAdminResetPinModal('${p.id}')" class="text-amber-700 hover:text-white hover:bg-amber-600 bg-amber-50 p-2 sm:p-2.5 rounded-xl text-sm font-bold transition border border-amber-200 active-scale" title="Reset PIN">
                             <i class="fa-solid fa-key"></i>
                         </button>
-                        <button onclick="openAdminDeletePinModal('${p.id}')" class="text-red-600 hover:text-white hover:bg-red-600 bg-red-50 p-2 sm:p-2.5 rounded-xl text-sm font-bold transition border-2 border-red-200 hover:border-red-600 active-scale" title="Supprimer">
+                        <button onclick="openAdminDeletePinModal('${p.id}')" class="text-red-600 hover:text-white hover:bg-red-600 bg-red-50 p-2 sm:p-2.5 rounded-xl text-sm font-bold transition border border-red-200 active-scale" title="Supprimer">
                             <i class="fa-solid fa-trash-can"></i>
                         </button>
                     </div>
@@ -1505,8 +1500,8 @@ function buildKeypad(containerId, mode) {
     const keys = ['1','2','3','4','5','6','7','8','9','','0','del'];
     container.innerHTML = keys.map(k => {
         if (k === '') return '<div></div>';
-        if (k === 'del') return `<button type="button" onclick="handleKeypadPress('del', '${mode}')" class="pin-key py-3 bg-sand-100 border-2 border-sand-300 rounded-2xl font-black text-lg sm:text-xl text-stone-600 flex items-center justify-center"><i class="fa-solid fa-delete-left"></i></button>`;
-        return `<button type="button" onclick="handleKeypadPress('${k}', '${mode}')" class="pin-key py-3 bg-white border-2 border-sand-300 rounded-2xl font-diola font-black text-lg sm:text-xl text-terracotta-900 flex items-center justify-center shadow-sm">${k}</button>`;
+        if (k === 'del') return `<button type="button" onclick="handleKeypadPress('del', '${mode}')" class="pin-key py-3 bg-sand-100 border border-sand-200 rounded-2xl font-black text-lg sm:text-xl text-stone-600 flex items-center justify-center"><i class="fa-solid fa-delete-left"></i></button>`;
+        return `<button type="button" onclick="handleKeypadPress('${k}', '${mode}')" class="pin-key py-3 bg-white border border-sand-200 rounded-2xl font-diola font-black text-lg sm:text-xl text-terracotta-900 flex items-center justify-center shadow-sm">${k}</button>`;
     }).join('');
 }
 
@@ -1569,7 +1564,7 @@ async function enterApp() {
 }
 
 // ============================================================
-// HOME MODULES — VISUAL-FIRST 2026
+// HOME MODULES — DESIGN SOBRE, IMAGES GRANDES
 // ============================================================
 function renderHomeModules() {
     const role = appState.currentProfile ? appState.currentProfile.role : 'admin';
@@ -1577,11 +1572,10 @@ function renderHomeModules() {
     const sectorBlock = document.getElementById('home-sectors-block');
 
     const menageCard = `
-        <button onclick="navigateTo('housekeeping')" class="module-card module-card-emerald group w-full text-left flex flex-col justify-between min-h-[420px] sm:min-h-[480px] lg:min-h-[520px] p-5 sm:p-7">
+        <button onclick="navigateTo('housekeeping')" class="module-card module-card-emerald group w-full text-left flex flex-col justify-between min-h-[400px] sm:min-h-[460px] lg:min-h-[500px] p-5 sm:p-7">
             <div class="relative flex justify-between items-start gap-3">
-                <div class="module-glow" style="background: radial-gradient(circle, rgba(167, 243, 208, 0.6) 0%, transparent 70%); width: 220px; height: 220px; top: 20px; left: 50%; transform: translateX(-50%);"></div>
                 <div class="flex-1 flex justify-center items-start">
-                    <img src="menage.png" alt="Espace Ménage" class="module-image w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 object-contain">
+                    <img src="menage.png" alt="Espace Ménage" class="module-image w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 object-contain">
                 </div>
                 <span id="badge-cleaning-count" class="status-badge-xl bg-red-500 text-white font-black text-xs sm:text-base px-3 py-2 sm:px-4 sm:py-3 rounded-2xl whitespace-nowrap flex items-center gap-1.5 sm:gap-2 flex-shrink-0 relative z-10">
                     <i class="fa-solid fa-broom text-sm sm:text-lg"></i>
@@ -1592,19 +1586,18 @@ function renderHomeModules() {
                 <h3 class="text-2xl sm:text-3xl lg:text-4xl font-diola font-black text-white tracking-wide leading-tight">ESPACE MÉNAGE</h3>
                 <p class="text-emerald-100 text-sm sm:text-base font-semibold">Touchez pour changer le statut des chambres</p>
             </div>
-            <div class="mt-4 sm:mt-6 flex items-center justify-center gap-2 relative z-10 bg-white/10 backdrop-blur border-2 border-white/30 rounded-2xl py-3 sm:py-3.5 group-hover:bg-white/20 transition">
+            <div class="mt-4 sm:mt-6 flex items-center justify-center gap-2 relative z-10 bg-white/10 border border-white/20 rounded-2xl py-3 sm:py-3.5 group-hover:bg-white/15 transition">
                 <span class="font-diola font-black text-white text-sm sm:text-base tracking-wider">OUVRIR</span>
-                <i class="fa-solid fa-arrow-right text-amber-200 text-lg arrow-bounce"></i>
+                <i class="fa-solid fa-arrow-right text-amber-200 text-lg"></i>
             </div>
         </button>
     `;
 
     const receptionCard = `
-        <button onclick="navigateTo('reception')" class="module-card module-card-terracotta group w-full text-left flex flex-col justify-between min-h-[420px] sm:min-h-[480px] lg:min-h-[520px] p-5 sm:p-7">
+        <button onclick="navigateTo('reception')" class="module-card module-card-terracotta group w-full text-left flex flex-col justify-between min-h-[400px] sm:min-h-[460px] lg:min-h-[500px] p-5 sm:p-7">
             <div class="relative flex justify-between items-start gap-3">
-                <div class="module-glow" style="background: radial-gradient(circle, rgba(253, 230, 138, 0.6) 0%, transparent 70%); width: 220px; height: 220px; top: 20px; left: 50%; transform: translateX(-50%);"></div>
                 <div class="flex-1 flex justify-center items-start">
-                    <img src="reception.png" alt="Accueil & Réservations" class="module-image w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 object-contain">
+                    <img src="reception.png" alt="Accueil & Réservations" class="module-image w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 object-contain">
                 </div>
                 <span id="badge-available-count" class="status-badge-xl bg-emerald-600 text-white font-black text-xs sm:text-base px-3 py-2 sm:px-4 sm:py-3 rounded-2xl whitespace-nowrap flex items-center gap-1.5 sm:gap-2 flex-shrink-0 relative z-10">
                     <i class="fa-solid fa-door-open text-sm sm:text-lg"></i>
@@ -1615,9 +1608,9 @@ function renderHomeModules() {
                 <h3 class="text-2xl sm:text-3xl lg:text-4xl font-diola font-black text-white tracking-wide leading-tight">ACCUEIL & RÉSERVATIONS</h3>
                 <p class="text-amber-100 text-sm sm:text-base font-semibold">Touchez pour gérer les réservations</p>
             </div>
-            <div class="mt-4 sm:mt-6 flex items-center justify-center gap-2 relative z-10 bg-white/10 backdrop-blur border-2 border-white/30 rounded-2xl py-3 sm:py-3.5 group-hover:bg-white/20 transition">
+            <div class="mt-4 sm:mt-6 flex items-center justify-center gap-2 relative z-10 bg-white/10 border border-white/20 rounded-2xl py-3 sm:py-3.5 group-hover:bg-white/15 transition">
                 <span class="font-diola font-black text-white text-sm sm:text-base tracking-wider">OUVRIR</span>
-                <i class="fa-solid fa-arrow-right text-amber-200 text-lg arrow-bounce"></i>
+                <i class="fa-solid fa-arrow-right text-amber-200 text-lg"></i>
             </div>
         </button>
     `;
@@ -1654,7 +1647,7 @@ async function loadDataFromServer() {
 function setConnectionStatus(online) {
     const dot = document.getElementById('connection-dot');
     if (!dot) return;
-    dot.className = online ? 'w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 inline-block animate-ping flex-shrink-0' : 'w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500 inline-block animate-pulse flex-shrink-0';
+    dot.className = online ? 'w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 inline-block flex-shrink-0' : 'w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500 inline-block flex-shrink-0';
 }
 
 const FR_DAYS = ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
@@ -1681,18 +1674,18 @@ function updateScheduleDisplay() {
     const elText = document.getElementById('schedule-status-text');
     if (!bar) return;
     if (info.state === 'active') {
-        bar.className = 'border-b border-emerald-300/80 px-3 sm:px-4 py-2 sm:py-3 shadow-inner transition-all duration-700 sched-bar-active';
-        elIcon.innerHTML = '<i class="fa-solid fa-broom icon-broom text-emerald-700 text-base sm:text-lg"></i>';
+        bar.className = 'border-b border-emerald-200/60 px-3 sm:px-4 py-2 sm:py-3 sched-bar-active';
+        elIcon.innerHTML = '<i class="fa-solid fa-broom text-emerald-700 text-base sm:text-lg"></i>';
         elText.innerHTML = `Ménagère <strong class="text-emerald-900">en service</strong> • Fin <strong>12h30</strong>`;
     } else if (info.state === 'today_later') {
         const h = Math.floor(info.minsUntil/60), m = info.minsUntil % 60;
         const when = h > 0 ? `dans ${h}h${String(m).padStart(2,'0')}` : `dans ${m} min`;
-        bar.className = 'border-b border-amber-300/80 px-3 sm:px-4 py-2 sm:py-3 shadow-inner transition-all duration-700 sched-bar-soon';
-        elIcon.innerHTML = '<i class="fa-solid fa-hourglass-half icon-pulse text-amber-700 text-base sm:text-lg"></i>';
+        bar.className = 'border-b border-amber-200/60 px-3 sm:px-4 py-2 sm:py-3 sched-bar-soon';
+        elIcon.innerHTML = '<i class="fa-solid fa-hourglass-half text-amber-700 text-base sm:text-lg"></i>';
         elText.innerHTML = `Ménagère arrive <strong class="text-amber-900">aujourd'hui 8h30</strong> • ${when}`;
     } else {
-        bar.className = 'bg-gradient-to-r from-amber-100 via-amber-50 to-orange-100 border-b border-amber-200/80 px-3 sm:px-4 py-2 sm:py-3 shadow-inner transition-all duration-700';
-        elIcon.innerHTML = '<i class="fa-solid fa-people-group icon-float text-terracotta-700 text-base sm:text-lg"></i>';
+        bar.className = 'border-b border-amber-200/60 px-3 sm:px-4 py-2 sm:py-3 sched-bar-default';
+        elIcon.innerHTML = '<i class="fa-solid fa-people-group text-terracotta-700 text-base sm:text-lg"></i>';
         elText.innerHTML = `Nettoyage <strong class="text-terracotta-900">Équipe Buhanor</strong> • Ménagère <strong class="text-terracotta-900">${info.label} 8h30</strong>`;
     }
 }
@@ -1734,11 +1727,11 @@ function renderCurrentView() {
 
 function getStatusMeta(status) {
     switch (status) {
-        case 'to_clean':    return { label:'À nettoyer', chipBg:'bg-red-100 text-red-800 border-red-300',         solid:'bg-gradient-to-r from-red-500 to-red-600',       halo:'status-halo-red',   iconCls:'fa-broom' };
-        case 'in_progress': return { label:'En cours',   chipBg:'bg-amber-100 text-amber-900 border-amber-300',   solid:'bg-gradient-to-r from-amber-500 to-orange-500',  halo:'status-halo-amber', iconCls:'fa-spray-can-sparkles' };
-        case 'clean':       return { label:'Propre',     chipBg:'bg-emerald-100 text-emerald-800 border-emerald-300', solid:'bg-gradient-to-r from-emerald-500 to-emerald-600', halo:'status-halo-green', iconCls:'fa-wand-magic-sparkles' };
-        case 'occupied':    return { label:'Occupée',    chipBg:'bg-ocean-100 text-ocean-900 border-ocean-300',   solid:'bg-gradient-to-r from-ocean-500 to-ocean-700',   halo:'status-halo-blue',  iconCls:'fa-key' };
-        default:            return { label:'—', chipBg:'bg-stone-100 text-stone-700 border-stone-300', solid:'bg-stone-500', halo:'', iconCls:'fa-circle' };
+        case 'to_clean':    return { label:'À nettoyer', chipBg:'bg-red-100 text-red-800 border-red-200',       solid:'bg-red-500',       halo:'status-halo-red',   iconCls:'fa-broom' };
+        case 'in_progress': return { label:'En cours',   chipBg:'bg-amber-100 text-amber-900 border-amber-200', solid:'bg-amber-500',     halo:'status-halo-amber', iconCls:'fa-spray-can-sparkles' };
+        case 'clean':       return { label:'Propre',     chipBg:'bg-emerald-100 text-emerald-800 border-emerald-200', solid:'bg-emerald-600', halo:'status-halo-green', iconCls:'fa-wand-magic-sparkles' };
+        case 'occupied':    return { label:'Occupée',    chipBg:'bg-ocean-100 text-ocean-900 border-ocean-200',   solid:'bg-ocean-600',     halo:'status-halo-blue',  iconCls:'fa-key' };
+        default:            return { label:'—', chipBg:'bg-stone-100 text-stone-700 border-stone-200', solid:'bg-stone-500', halo:'', iconCls:'fa-circle' };
     }
 }
 
@@ -1765,7 +1758,7 @@ function renderHomeView() {
     container.innerHTML = Object.values(SECTORS).map(sector => {
         const sectorRooms = appState.rooms.filter(r => r.sectorId === sector.id);
         return `
-            <div class="bg-sand-50 rounded-2xl p-3 sm:p-4 border border-sand-300 space-y-2.5 sm:space-y-3">
+            <div class="bg-sand-50 rounded-2xl p-3 sm:p-4 border border-sand-200 space-y-2.5 sm:space-y-3">
                 <div class="flex items-center justify-between gap-2">
                     <span class="text-[11px] sm:text-sm font-black text-terracotta-900 flex items-center gap-2 min-w-0">
                         <span class="w-5 h-5 sm:w-6 sm:h-6 rounded-lg ${sector.iconBg} flex items-center justify-center text-[10px] sm:text-xs flex-shrink-0">${ICONS.sector[sector.id]}</span>
@@ -1777,7 +1770,7 @@ function renderHomeView() {
                     ${sectorRooms.map(room => {
                         const meta = getStatusMeta(room.status);
                         return `
-                            <div onclick="navigateTo('housekeeping')" class="bg-white p-2.5 sm:p-3.5 rounded-xl border-2 border-sand-200 hover:border-terracotta-500 active-scale transition cursor-pointer flex justify-between items-center shadow-sm gap-2">
+                            <div onclick="navigateTo('housekeeping')" class="bg-white p-2.5 sm:p-3.5 rounded-xl border border-sand-200 hover:border-terracotta-400 active-scale transition cursor-pointer flex justify-between items-center shadow-sm gap-2">
                                 <div class="min-w-0">
                                     <span class="font-extrabold text-xs sm:text-sm text-terracotta-900 block leading-tight truncate">${room.name}</span>
                                     <span class="text-[10px] sm:text-[11px] font-medium text-stone-500 truncate block">${room.sectorName}</span>
@@ -1798,7 +1791,7 @@ function filterHousekeeping(filter) {
         btn.className = "housekeeping-filter-btn px-2.5 sm:px-4 py-2 rounded-lg sm:rounded-xl text-[11px] sm:text-sm font-extrabold bg-sand-100 text-stone-700 hover:bg-sand-200 transition flex items-center gap-1";
     });
     const active = document.getElementById(`btn-filter-${filter}`);
-    if (active) active.className = "housekeeping-filter-btn px-2.5 sm:px-4 py-2 rounded-lg sm:rounded-xl text-[11px] sm:text-sm font-extrabold bg-terracotta-800 text-white shadow transition flex items-center gap-1";
+    if (active) active.className = "housekeeping-filter-btn px-2.5 sm:px-4 py-2 rounded-lg sm:rounded-xl text-[11px] sm:text-sm font-extrabold bg-terracotta-800 text-white shadow-sm transition flex items-center gap-1";
     renderHousekeepingView();
 }
 
@@ -1810,7 +1803,7 @@ function renderHousekeepingView() {
     if (appState.housekeepingFilter !== 'all') filtered = appState.rooms.filter(r => r.status === appState.housekeepingFilter);
     if (filtered.length === 0) {
         container.innerHTML = `
-            <div class="py-10 text-center bg-white rounded-3xl border-2 border-sand-300 space-y-2 px-4">
+            <div class="py-10 text-center bg-white rounded-3xl border border-sand-200 space-y-2 px-4">
                 <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-2xl"><i class="fa-solid fa-circle-check"></i></div>
                 <h4 class="text-base sm:text-lg font-diola font-black text-terracotta-900">Aucune chambre dans ce statut</h4>
                 <p class="text-xs sm:text-sm text-stone-500 font-semibold">Toutes vos chambres sont à jour.</p>
@@ -1822,7 +1815,7 @@ function renderHousekeepingView() {
         if (sectorRooms.length === 0) return '';
         return `
             <div class="space-y-3 sm:space-y-4">
-                <div class="bg-terracotta-900 text-white p-3 sm:p-4 rounded-2xl flex items-center justify-between gap-2 shadow-md border-l-4 sm:border-l-8 border-ocre-500">
+                <div class="bg-terracotta-900 text-white p-3 sm:p-4 rounded-2xl flex items-center justify-between gap-2 shadow-sm border-l-4 border-ocre-500">
                     <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
                         <span class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/15 flex items-center justify-center text-sm sm:text-lg flex-shrink-0">${ICONS.sector[sector.id]}</span>
                         <div class="min-w-0">
@@ -1835,47 +1828,47 @@ function renderHousekeepingView() {
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-5">
                     ${sectorRooms.map(room => {
                         const meta = getStatusMeta(room.status);
-                        const borderHighlight = room.status === 'to_clean' ? 'border-red-400 ring-2 ring-red-100'
-                                             : room.status === 'in_progress' ? 'border-amber-400 ring-2 ring-amber-100'
-                                             : room.status === 'clean' ? 'border-emerald-400' : 'border-ocean-400';
+                        const borderHighlight = room.status === 'to_clean' ? 'border-red-300'
+                                             : room.status === 'in_progress' ? 'border-amber-300'
+                                             : room.status === 'clean' ? 'border-emerald-300' : 'border-ocean-300';
                         return `
-                            <div class="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-200 border-2 ${borderHighlight} flex flex-col">
+                            <div class="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition border ${borderHighlight} flex flex-col">
                                 <div class="relative h-40 sm:h-48 w-full overflow-hidden bg-sand-200">
                                     <img src="${room.photo}" alt="${room.name}" onerror="this.src='https://placehold.co/600x400/ebd9c8/68240f?text=${room.name}'" class="w-full h-full object-cover">
-                                    <div class="absolute inset-0 bg-gradient-to-t from-stone-900/90 via-stone-900/30 to-transparent"></div>
+                                    <div class="absolute inset-0 bg-gradient-to-t from-stone-900/85 via-stone-900/25 to-transparent"></div>
                                     <div class="absolute top-2.5 left-2.5 sm:top-3 sm:left-3">
-                                        <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-wider bg-terracotta-900/90 text-amber-200 backdrop-blur px-2 py-1 rounded-lg border border-amber-400/40 shadow flex items-center gap-1">
+                                        <span class="text-[9px] sm:text-[10px] font-black uppercase tracking-wider bg-terracotta-900/90 text-amber-200 backdrop-blur px-2 py-1 rounded-lg border border-amber-400/30 flex items-center gap-1">
                                             ${ICONS.sector[sector.id]} <span class="hidden sm:inline">${room.sectorName}</span>
                                         </span>
                                     </div>
                                     <div class="absolute bottom-2.5 left-3 right-3 sm:bottom-3 sm:left-4 sm:right-4 flex justify-between items-end gap-2">
                                         <h4 class="text-xl sm:text-2xl font-diola font-black text-white leading-none drop-shadow truncate">${room.name}</h4>
-                                        <button onclick="event.stopPropagation(); openRoomNotesModal('${room.id}')" class="bg-white/20 hover:bg-white/40 backdrop-blur-md text-white px-2.5 py-1.5 rounded-lg sm:rounded-xl border border-white/40 text-[10px] sm:text-xs font-bold transition flex items-center gap-1 flex-shrink-0 active-scale">
+                                        <button onclick="event.stopPropagation(); openRoomNotesModal('${room.id}')" class="bg-white/20 hover:bg-white/30 backdrop-blur-md text-white px-2.5 py-1.5 rounded-lg sm:rounded-xl border border-white/30 text-[10px] sm:text-xs font-bold transition flex items-center gap-1 flex-shrink-0 active-scale">
                                             <i class="fa-solid fa-pen-to-square"></i> <span class="hidden sm:inline">Consigne</span>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="p-3 sm:p-4 space-y-2.5 sm:space-y-3 flex-1">
                                     <div class="flex justify-center">
-                                        <div class="${meta.solid} text-white font-black text-[10px] sm:text-xs md:text-sm px-3 py-1 sm:px-4 sm:py-1.5 rounded-lg sm:rounded-xl shadow ${meta.halo} flex items-center gap-1.5">
+                                        <div class="${meta.solid} text-white font-black text-[10px] sm:text-xs md:text-sm px-3 py-1 sm:px-4 sm:py-1.5 rounded-lg sm:rounded-xl shadow-sm ${meta.halo} flex items-center gap-1.5">
                                             <i class="fa-solid ${meta.iconCls}"></i><span>${meta.label.toUpperCase()}</span>
                                         </div>
                                     </div>
-                                    ${room.notes ? `<div class="bg-amber-50 border border-amber-300 rounded-xl p-2.5 sm:p-3 text-[11px] sm:text-sm text-amber-950 font-semibold flex items-start gap-2 shadow-sm"><i class="fa-solid fa-note-sticky text-ocre-600 mt-0.5 text-xs sm:text-sm flex-shrink-0"></i><span class="break-words min-w-0">${room.notes}</span></div>` : ''}
+                                    ${room.notes ? `<div class="bg-amber-50 border border-amber-200 rounded-xl p-2.5 sm:p-3 text-[11px] sm:text-sm text-amber-950 font-semibold flex items-start gap-2"><i class="fa-solid fa-note-sticky text-ocre-600 mt-0.5 text-xs sm:text-sm flex-shrink-0"></i><span class="break-words min-w-0">${room.notes}</span></div>` : ''}
                                 </div>
                                 <div class="p-3 sm:p-4 pt-0 space-y-2">
                                     <span class="block text-center text-[9px] sm:text-[10px] font-black text-stone-400 uppercase tracking-widest">Changer le statut :</span>
                                     <div class="grid grid-cols-4 gap-1 sm:gap-1.5">
-                                        <button onclick="updateRoomStatus('${room.id}', 'to_clean')" class="py-2.5 sm:py-3 px-0.5 rounded-lg sm:rounded-xl font-black text-[9px] sm:text-xs active-scale transition flex flex-col items-center gap-0.5 ${room.status === 'to_clean' ? 'bg-red-600 text-white shadow-md' : 'bg-red-50 text-red-800 border border-red-200'}">
+                                        <button onclick="updateRoomStatus('${room.id}', 'to_clean')" class="py-2.5 sm:py-3 px-0.5 rounded-lg sm:rounded-xl font-black text-[9px] sm:text-xs active-scale transition flex flex-col items-center gap-0.5 ${room.status === 'to_clean' ? 'bg-red-600 text-white shadow-sm' : 'bg-red-50 text-red-800 border border-red-200'}">
                                             <i class="fa-solid fa-broom text-sm sm:text-base"></i><span class="leading-tight">À Nettoyer</span>
                                         </button>
-                                        <button onclick="updateRoomStatus('${room.id}', 'in_progress')" class="py-2.5 sm:py-3 px-0.5 rounded-lg sm:rounded-xl font-black text-[9px] sm:text-xs active-scale transition flex flex-col items-center gap-0.5 ${room.status === 'in_progress' ? 'bg-amber-500 text-white shadow-md' : 'bg-amber-50 text-amber-900 border border-amber-200'}">
+                                        <button onclick="updateRoomStatus('${room.id}', 'in_progress')" class="py-2.5 sm:py-3 px-0.5 rounded-lg sm:rounded-xl font-black text-[9px] sm:text-xs active-scale transition flex flex-col items-center gap-0.5 ${room.status === 'in_progress' ? 'bg-amber-500 text-white shadow-sm' : 'bg-amber-50 text-amber-900 border border-amber-200'}">
                                             <i class="fa-solid fa-spray-can-sparkles text-sm sm:text-base"></i><span class="leading-tight">En cours</span>
                                         </button>
-                                        <button onclick="updateRoomStatus('${room.id}', 'clean')" class="py-2.5 sm:py-3 px-0.5 rounded-lg sm:rounded-xl font-black text-[9px] sm:text-xs active-scale transition flex flex-col items-center gap-0.5 ${room.status === 'clean' ? 'bg-emerald-600 text-white shadow-md' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'}">
+                                        <button onclick="updateRoomStatus('${room.id}', 'clean')" class="py-2.5 sm:py-3 px-0.5 rounded-lg sm:rounded-xl font-black text-[9px] sm:text-xs active-scale transition flex flex-col items-center gap-0.5 ${room.status === 'clean' ? 'bg-emerald-600 text-white shadow-sm' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'}">
                                             <i class="fa-solid fa-wand-magic-sparkles text-sm sm:text-base"></i><span class="leading-tight">Propre</span>
                                         </button>
-                                        <button onclick="updateRoomStatus('${room.id}', 'occupied')" class="py-2.5 sm:py-3 px-0.5 rounded-lg sm:rounded-xl font-black text-[9px] sm:text-xs active-scale transition flex flex-col items-center gap-0.5 ${room.status === 'occupied' ? 'bg-ocean-600 text-white shadow-md' : 'bg-ocean-50 text-ocean-900 border border-ocean-200'}">
+                                        <button onclick="updateRoomStatus('${room.id}', 'occupied')" class="py-2.5 sm:py-3 px-0.5 rounded-lg sm:rounded-xl font-black text-[9px] sm:text-xs active-scale transition flex flex-col items-center gap-0.5 ${room.status === 'occupied' ? 'bg-ocean-600 text-white shadow-sm' : 'bg-ocean-50 text-ocean-900 border border-ocean-200'}">
                                             <i class="fa-solid fa-key text-sm sm:text-base"></i><span class="leading-tight">Occupée</span>
                                         </button>
                                     </div>
@@ -1907,12 +1900,12 @@ async function updateRoomStatus(roomId, newStatus) {
 function switchReceptionTab(tabName) {
     appState.receptionTab = tabName;
     document.querySelectorAll('.reception-tab-btn').forEach(btn => {
-        btn.className = "reception-tab-btn px-3 sm:px-5 py-2.5 sm:py-3 font-black text-[11px] sm:text-sm border-b-4 border-transparent text-stone-500 hover:text-stone-800 flex items-center gap-1.5 whitespace-nowrap";
+        btn.className = "reception-tab-btn px-3 sm:px-5 py-2.5 sm:py-3 font-black text-[11px] sm:text-sm border-b-2 border-transparent text-stone-500 hover:text-stone-800 flex items-center gap-1.5 whitespace-nowrap";
     });
     document.getElementById('reception-tab-calendar').classList.add('hidden');
     document.getElementById('reception-tab-today').classList.add('hidden');
     document.getElementById('reception-tab-list').classList.add('hidden');
-    document.getElementById(`tab-btn-${tabName}`).className = "reception-tab-btn px-3 sm:px-5 py-2.5 sm:py-3 font-black text-[11px] sm:text-sm border-b-4 border-terracotta-600 text-terracotta-800 flex items-center gap-1.5 whitespace-nowrap";
+    document.getElementById(`tab-btn-${tabName}`).className = "reception-tab-btn px-3 sm:px-5 py-2.5 sm:py-3 font-black text-[11px] sm:text-sm border-b-2 border-terracotta-600 text-terracotta-800 flex items-center gap-1.5 whitespace-nowrap";
     document.getElementById(`reception-tab-${tabName}`).classList.remove('hidden');
     renderReceptionView();
 }
@@ -1937,19 +1930,19 @@ function renderCalendarGrid() {
     const opt = { day:'numeric', month:'short' };
     rangeText.innerText = `${days[0].toLocaleDateString('fr-FR', opt)} → ${days[6].toLocaleDateString('fr-FR', opt)}`;
     headerRow.innerHTML = `
-        <th class="p-2 sm:p-3 w-28 sm:w-40 bg-sand-200 text-terracotta-900 font-black sticky left-0 z-10 border-r border-sand-300 text-[10px] sm:text-xs">
+        <th class="p-2 sm:p-3 w-28 sm:w-40 bg-sand-200 text-terracotta-900 font-black sticky left-0 z-10 border-r border-sand-200 text-[10px] sm:text-xs">
             <i class="fa-solid fa-door-closed mr-1 text-stone-500"></i> Ch.
         </th>
         ${days.map(d => {
             const isToday = formatDateISO(d) === formatDateISO(new Date());
-            return `<th class="p-1.5 sm:p-3 text-center ${isToday ? 'bg-amber-200 text-terracotta-950 border-b-4 border-terracotta-600' : ''}">
+            return `<th class="p-1.5 sm:p-3 text-center ${isToday ? 'bg-amber-200 text-terracotta-950 border-b-2 border-terracotta-600' : ''}">
                 <span class="block text-[9px] sm:text-[11px] opacity-75 capitalize">${d.toLocaleDateString('fr-FR', { weekday:'short' })}.</span>
                 <span class="text-xs sm:text-base font-black">${d.getDate()}</span>
             </th>`;
         }).join('')}`;
     bodyRows.innerHTML = appState.rooms.map(room => `
         <tr class="hover:bg-sand-50 transition">
-            <td class="p-2 sm:p-3 font-extrabold text-terracotta-900 sticky left-0 z-10 border-r-2 border-sand-300 shadow-sm" style="background:white">
+            <td class="p-2 sm:p-3 font-extrabold text-terracotta-900 sticky left-0 z-10 border-r border-sand-200 shadow-sm" style="background:white">
                 <div class="flex items-center gap-1.5 sm:gap-2">
                     <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full inline-block flex-shrink-0" style="background:${room.status === 'clean' ? '#10b981' : room.status === 'to_clean' ? '#ef4444' : room.status === 'occupied' ? '#0e7490' : '#f59e0b'}"></span>
                     <div class="min-w-0">
@@ -1968,13 +1961,13 @@ function renderCalendarGrid() {
                 if (res) {
                     const badgeColor = res.type === 'day_use' ? 'bg-purple-700 text-white' : 'bg-terracotta-600 text-white';
                     return `<td class="p-0.5 sm:p-1.5 text-center">
-                        <div onclick="showReservationDetail('${res.id}')" class="${badgeColor} hover:opacity-90 active-scale text-[9px] sm:text-xs font-bold rounded-lg sm:rounded-xl p-1 sm:p-2 shadow-sm cursor-pointer truncate transition flex items-center gap-1 justify-center" title="${res.clientName}">
+                        <div onclick="showReservationDetail('${res.id}')" class="${badgeColor} hover:opacity-90 active-scale text-[9px] sm:text-xs font-bold rounded-lg sm:rounded-xl p-1 sm:p-2 cursor-pointer truncate transition flex items-center gap-1 justify-center" title="${res.clientName}">
                             ${ICONS.type[res.type]} <span class="truncate hidden sm:inline">${res.clientName}</span>
                         </div>
                     </td>`;
                 }
                 return `<td class="p-0.5 sm:p-1.5 text-center">
-                    <button onclick="openNewReservationModal('${room.id}', '${dateStr}')" class="w-full h-8 sm:h-10 border-2 border-dashed border-emerald-300 hover:border-emerald-600 active:bg-emerald-50 rounded-lg sm:rounded-xl text-emerald-700 font-black text-xs transition flex items-center justify-center"><i class="fa-solid fa-plus"></i></button>
+                    <button onclick="openNewReservationModal('${room.id}', '${dateStr}')" class="w-full h-8 sm:h-10 border border-dashed border-emerald-300 hover:border-emerald-600 active:bg-emerald-50 rounded-lg sm:rounded-xl text-emerald-700 font-black text-xs transition flex items-center justify-center"><i class="fa-solid fa-plus"></i></button>
                 </td>`;
             }).join('')}
         </tr>`).join('');
@@ -2001,7 +1994,7 @@ function renderTodayRoomsView() {
                             return todayStr >= res.startDate && todayStr < res.endDate;
                         });
                         return `
-                            <div class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border-2 border-sand-300 space-y-2.5 sm:space-y-3">
+                            <div class="bg-white rounded-2xl p-3 sm:p-4 shadow-sm border border-sand-200 space-y-2.5 sm:space-y-3">
                                 <div class="flex justify-between items-start gap-2">
                                     <div class="min-w-0">
                                         <h4 class="text-base sm:text-lg font-diola font-black text-terracotta-900 truncate">${room.name}</h4>
@@ -2010,7 +2003,7 @@ function renderTodayRoomsView() {
                                             ${meta.label}
                                         </span>
                                     </div>
-                                    <button onclick="openNewReservationModal('${room.id}')" class="bg-ocre-100 hover:bg-ocre-200 text-ocre-900 font-extrabold px-2.5 py-1.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs transition border border-ocre-300 flex items-center gap-1 flex-shrink-0 active-scale">
+                                    <button onclick="openNewReservationModal('${room.id}')" class="bg-ocre-100 hover:bg-ocre-200 text-ocre-900 font-extrabold px-2.5 py-1.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs transition border border-ocre-200 flex items-center gap-1 flex-shrink-0 active-scale">
                                         <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">Réserver</span>
                                     </button>
                                 </div>
@@ -2047,13 +2040,13 @@ function renderReservationsList() {
         const roomName = room ? room.name : res.roomId;
         const sectorName = room ? room.sectorName : '';
         return `
-            <div class="bg-white border-2 border-sand-200 rounded-2xl p-3 shadow-sm">
+            <div class="bg-white border border-sand-200 rounded-2xl p-3 shadow-sm">
                 <div class="flex justify-between items-start gap-2 mb-2">
                     <div class="min-w-0 flex-1">
                         <p class="font-black text-stone-800 text-sm truncate">${res.clientName}</p>
                         ${res.phone ? `<p class="text-[11px] text-stone-400 font-normal"><i class="fa-solid fa-phone text-[10px] mr-1"></i>${res.phone}</p>` : ''}
                     </div>
-                    <button onclick="confirmDeleteReservation('${res.id}')" class="text-red-600 bg-red-50 p-2 rounded-lg text-xs font-bold border border-red-200 active-scale flex-shrink-0">
+                    <button onclick="confirmDeleteReservation('${res.id}')" class="text-red-600 bg-red-50 p-2 rounded-lg text-xs font-bold border border-red-200 active-scale flex-shrink-0 transition">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
                 </div>
@@ -2079,14 +2072,14 @@ function renderReservationsList() {
     }).join('');
 
     const tableHtml = `
-        <div class="hidden md:block overflow-x-auto custom-scrollbar border-2 border-sand-300 rounded-2xl">
+        <div class="hidden md:block overflow-x-auto custom-scrollbar border border-sand-200 rounded-2xl">
             <table class="w-full text-left border-collapse">
                 <thead>
-                    <tr class="bg-sand-100 text-terracotta-900 text-xs uppercase font-black border-b-2 border-sand-300">
+                    <tr class="bg-sand-100 text-terracotta-900 text-xs uppercase font-black border-b border-sand-200">
                         <th class="p-3.5">Client</th><th class="p-3.5">Chambre & Secteur</th><th class="p-3.5">Type</th><th class="p-3.5">Dates</th><th class="p-3.5 text-right">Actions</th>
                     </tr>
                 </thead>
-                <tbody id="reservations-list-body" class="divide-y divide-sand-200 text-sm bg-white">
+                <tbody id="reservations-list-body" class="divide-y divide-sand-100 text-sm bg-white">
                     ${appState.reservations.map(res => {
                         const room = appState.rooms.find(r => r.id === res.roomId);
                         const roomName = room ? room.name : res.roomId;
@@ -2307,7 +2300,7 @@ function showToast(message, type = 'info') {
     let icon = '<i class="fa-solid fa-circle-info"></i>';
     if (type === 'success') { bg = 'bg-emerald-700 text-white border border-emerald-400'; icon = '<i class="fa-solid fa-circle-check"></i>'; }
     if (type === 'error') { bg = 'bg-red-700 text-white border border-red-400'; icon = '<i class="fa-solid fa-circle-exclamation"></i>'; }
-    toast.className = `${bg} px-3 sm:px-4 py-2.5 sm:py-3 rounded-2xl shadow-xl font-bold text-xs sm:text-sm flex items-center gap-2 transform transition-all duration-300 translate-y-2 opacity-0 pointer-events-auto`;
+    toast.className = `${bg} px-3 sm:px-4 py-2.5 sm:py-3 rounded-2xl shadow-lg font-bold text-xs sm:text-sm flex items-center gap-2 transform transition-all duration-300 translate-y-2 opacity-0 pointer-events-auto`;
     toast.innerHTML = `${icon} <span>${message}</span>`;
     container.appendChild(toast);
     setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
@@ -2391,8 +2384,8 @@ function checkAlertsAndNotify() {
     const currentState = `toClean:${toClean}|clean:${cleanCount}`;
     if (currentState === lastNotifiedState) return;
     lastNotifiedState = currentState;
-    if (toClean >= 3) sendLocalNotification("🧹 Chambres à nettoyer", `${toClean} chambres attendent d'être nettoyées.`, { tag: 'buhanor-clean-alert' });
-    if (cleanCount === 0) sendLocalNotification("⚠️ Plus aucune chambre libre", "Toutes les chambres sont occupées.", { tag: 'buhanor-full-alert' });
+    if (toClean >= 3) sendLocalNotification("Chambres à nettoyer", `${toClean} chambres attendent d'être nettoyées.`, { tag: 'buhanor-clean-alert' });
+    if (cleanCount === 0) sendLocalNotification("Plus aucune chambre libre", "Toutes les chambres sont occupées.", { tag: 'buhanor-full-alert' });
 }
 
 async function registerServiceWorker() {
