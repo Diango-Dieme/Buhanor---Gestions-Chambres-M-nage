@@ -1,0 +1,21 @@
+{
+  "name": "BUHANOR - Cap Skirring",
+  "short_name": "Buhanor",
+  "description": "Gestion des chambres et réservations du Lodge Buhanor",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FAF6F0",
+  "theme_color": "#823015",
+  "lang": "fr",
+  "icons": [
+    { "src": "Buhanor_Isotype_Noir.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "Buhanor_Isotype_Noir.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "Buhanor_Isotype_Noir.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Espace Ménage", "short_name": "Ménage", "url": "./index.html?view=housekeeping", "icons": [{ "src": "Buhanor_Isotype_Noir.png", "sizes": "192x192" }] },
+    { "name": "Accueil & Réservations", "short_name": "Réception", "url": "./index.html?view=reception", "icons": [{ "src": "Buhanor_Isotype_Noir.png", "sizes": "192x192" }] }
+  ]
+}
