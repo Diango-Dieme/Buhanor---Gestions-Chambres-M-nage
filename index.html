@@ -59,11 +59,9 @@
         .safe-top    { padding-top: var(--sat); }
         .safe-bottom { padding-bottom: var(--sab); }
 
-        /* ==== TACTILE FEEDBACK : uniquement au toucher ==== */
         .active-scale { transition: transform 0.15s ease; }
         .active-scale:active { transform: scale(0.98); }
 
-        /* ==== CARDS SOBRES ==== */
         .clay-card {
             background: #ffffff;
             border-radius: 20px;
@@ -71,7 +69,6 @@
             border: 1px solid #ebd9c8;
         }
 
-        /* ==== MODULE CARDS (accueil) — design sobre et mature ==== */
         .module-card {
             position: relative;
             overflow: hidden;
@@ -96,27 +93,20 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* Image du module : ombre portée sobre, pas d'animation */
         .module-image {
             filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.3)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
             transition: transform 0.25s ease;
         }
         .module-card:hover .module-image { transform: scale(1.02); }
 
-        /* Badge statut : sobre, sans animation */
         .status-badge-xl {
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
-        /* Flèche : statique, sobre */
-        /* Rien à faire, plus d'animation */
-
-        /* Scrollbar discrète */
         .custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #f5ebe1; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #b8522e; border-radius: 4px; }
 
-        /* Loader : simple, sans animation d'icône */
         .loader-overlay {
             position: fixed; inset: 0;
             background: rgba(250, 246, 240, 0.96);
@@ -134,21 +124,17 @@
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Bandeau ménagère : sobres, fonds unis */
         .sched-bar-active { background: linear-gradient(90deg, #d1fae5 0%, #a7f3d0 100%); }
         .sched-bar-soon { background: linear-gradient(90deg, #fef3c7 0%, #fde68a 100%); }
         .sched-bar-default { background: linear-gradient(90deg, #fef3c7 0%, #f5ebe1 100%); }
 
-        /* Touch targets >= 44px */
         button, .tap-target { min-height: 44px; }
 
-        /* Halos statuts (statiques) */
         .status-halo-red   { box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1), 0 2px 8px rgba(239, 68, 68, 0.15); }
         .status-halo-amber { box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1), 0 2px 8px rgba(245, 158, 11, 0.15); }
         .status-halo-green { box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1), 0 2px 8px rgba(16, 185, 129, 0.15); }
         .status-halo-blue  { box-shadow: 0 0 0 3px rgba(14, 116, 144, 0.1), 0 2px 8px rgba(14, 116, 144, 0.15); }
 
-        /* ==== AUTH ==== */
         .auth-bg {
             background: linear-gradient(135deg, #FAF6F0 0%, #f5ebe1 100%);
             min-height: 100vh;
@@ -302,12 +288,12 @@
                         <div class="space-y-3">
                             <label class="block text-[10px] sm:text-xs font-black uppercase text-stone-600">Votre photo *</label>
                             <div class="text-center">
-                                <input type="file" id="avatar-file-input" accept="image/*" capture="user" class="hidden" onchange="handleAvatarUpload(event)">
+                                <input type="file" id="avatar-file-input" accept="image/*" class="hidden" onchange="handleAvatarUpload(event)">
                                 <button type="button" onclick="document.getElementById('avatar-file-input').click()" class="active-scale inline-flex items-center gap-2 bg-terracotta-700 hover:bg-terracotta-800 text-white font-extrabold px-5 py-3 rounded-2xl shadow-sm transition text-sm">
                                     <i class="fa-solid fa-camera"></i>
                                     <span>Prendre / Importer</span>
                                 </button>
-                                <p class="text-[10px] sm:text-[11px] text-stone-500 font-semibold mt-2">Selfie ou image (max 5 Mo)</p>
+                                <p class="text-[10px] sm:text-[11px] text-stone-500 font-semibold mt-2">Selfie ou image de la galerie (max 5 Mo)</p>
                             </div>
 
                             <div id="uploaded-avatar-preview" class="hidden flex items-center gap-3 bg-emerald-50 border border-emerald-200 rounded-2xl p-3">
@@ -896,19 +882,30 @@ const SUPABASE_URL      = 'https://sqfvoyggpueqqpfutcjr.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_UkKE9Kj1tIv3aum4d38Uqw_jyuoz3M3';
 const supabaseClient    = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+// === AVATARS DIVERSIFIÉS DU SÉNÉGAL ===
 const AVATAR_CHOICES = [
-    'https://api.dicebear.com/7.x/adventurer/svg?seed=Fatou&skinColor=8d5524&hair=long01&hairColor=090806&backgroundColor=ffd5dc',
-    'https://api.dicebear.com/7.x/adventurer/svg?seed=Awa&skinColor=614335&hair=long03&hairColor=2c1b18&backgroundColor=b6e3f4',
-    'https://api.dicebear.com/7.x/adventurer/svg?seed=Mariama&skinColor=c68642&hair=long06&hairColor=090806&backgroundColor=ffdfbf',
-    'https://api.dicebear.com/7.x/adventurer/svg?seed=Ndeye&skinColor=8d5524&hair=long09&hairColor=4a312c&backgroundColor=e0d1ff',
-    'https://api.dicebear.com/7.x/adventurer/svg?seed=Aminata&skinColor=614335&hair=long14&hairColor=090806&backgroundColor=d1f4d9',
-    'https://api.dicebear.com/7.x/adventurer/svg?seed=Khadija&skinColor=c68642&hair=long20&hairColor=2c1b18&backgroundColor=c0e8ff',
-    'https://api.dicebear.com/7.x/adventurer/svg?seed=Moussa&skinColor=8d5524&hair=short01&hairColor=090806&backgroundColor=ffd5dc',
-    'https://api.dicebear.com/7.x/adventurer/svg?seed=Ousmane&skinColor=614335&hair=short03&hairColor=2c1b18&backgroundColor=b6e3f4',
-    'https://api.dicebear.com/7.x/adventurer/svg?seed=Ibrahima&skinColor=c68642&hair=short07&hairColor=090806&backgroundColor=ffdfbf',
-    'https://api.dicebear.com/7.x/adventurer/svg?seed=Cheikh&skinColor=8d5524&hair=short10&hairColor=4a312c&backgroundColor=d1f4d9',
-    'https://api.dicebear.com/7.x/adventurer/svg?seed=Samba&skinColor=614335&hair=short14&hairColor=090806&backgroundColor=c0e8ff',
-    'https://api.dicebear.com/7.x/adventurer/svg?seed=Pape&skinColor=c68642&hair=short19&hairColor=2c1b18&backgroundColor=e0d1ff'
+    // === FEMMES SÉNÉGALAISES — peaux foncées et médium ===
+    'https://api.dicebear.com/7.x/adventurer/svg?seed=Awa&skinColor=614335&hair=long03&hairColor=090806&backgroundColor=ffd5dc',
+    'https://api.dicebear.com/7.x/adventurer/svg?seed=Fatou&skinColor=8d5524&hair=long09&hairColor=2c1b18&backgroundColor=b6e3f4',
+    'https://api.dicebear.com/7.x/adventurer/svg?seed=Ndeye&skinColor=614335&hair=long14&hairColor=090806&backgroundColor=ffdfbf',
+    'https://api.dicebear.com/7.x/adventurer/svg?seed=Mariama&skinColor=8d5524&hair=long19&hairColor=4a312c&backgroundColor=d1f4d9',
+    // === FEMMES — peaux claires / métisses ===
+    'https://api.dicebear.com/7.x/adventurer/svg?seed=Aminata&skinColor=c68642&hair=long06&hairColor=724133&backgroundColor=e0d1ff',
+    'https://api.dicebear.com/7.x/adventurer/svg?seed=Khady&skinColor=e0ac69&hair=long11&hairColor=2c1b18&backgroundColor=ffd5dc',
+    // === FEMMES BLANCHES / TOUBAB ===
+    'https://api.dicebear.com/7.x/adventurer/svg?seed=Sophie&skinColor=f1c27d&hair=long16&hairColor=b58143&backgroundColor=c0e8ff',
+    'https://api.dicebear.com/7.x/adventurer/svg?seed=Marie&skinColor=ffdbac&hair=long22&hairColor=d6b370&backgroundColor=ffdfbf',
+    // === HOMMES SÉNÉGALAIS — peaux foncées ===
+    'https://api.dicebear.com/7.x/adventurer/svg?seed=Moussa&skinColor=614335&hair=short03&hairColor=090806&backgroundColor=ffd5dc',
+    'https://api.dicebear.com/7.x/adventurer/svg?seed=Samba&skinColor=8d5524&hair=short07&hairColor=2c1b18&backgroundColor=b6e3f4',
+    'https://api.dicebear.com/7.x/adventurer/svg?seed=Ibrahima&skinColor=614335&hair=short12&hairColor=090806&backgroundColor=ffdfbf',
+    'https://api.dicebear.com/7.x/adventurer/svg?seed=Modou&skinColor=8d5524&hair=short17&hairColor=4a312c&backgroundColor=d1f4d9',
+    // === HOMMES RASTA / FREE LOCKS ===
+    'https://api.dicebear.com/7.x/adventurer/svg?seed=Cheikh&skinColor=614335&hair=dreads01&hairColor=090806&backgroundColor=e0d1ff',
+    'https://api.dicebear.com/7.x/adventurer/svg?seed=Ousmane&skinColor=8d5524&hair=dreads02&hairColor=2c1b18&backgroundColor=ffd5dc',
+    // === HOMMES BLANCS / TOUBAB ===
+    'https://api.dicebear.com/7.x/adventurer/svg?seed=Jean&skinColor=f1c27d&hair=short02&hairColor=b58143&backgroundColor=c0e8ff',
+    'https://api.dicebear.com/7.x/adventurer/svg?seed=Thomas&skinColor=ffdbac&hair=short05&hairColor=d6b370&backgroundColor=ffdfbf'
 ];
 
 const ICONS = {
