@@ -75,7 +75,6 @@
         .sched-bar-soon { background: linear-gradient(90deg, #fef3c7 0%, #fde68a 100%); }
         .sched-bar-default { background: linear-gradient(90deg, rgba(254,243,199,0.9) 0%, rgba(245,235,225,0.9) 100%); }
 
-        /* ============ HOUSEKEEPING CARD ============ */
         .hk-card {
             position: relative; overflow: hidden; border-radius: 24px; background: #ffffff;
             box-shadow: 0 12px 32px -12px rgba(15,23,42,0.22), 0 4px 12px rgba(15,23,42,0.06);
@@ -90,12 +89,23 @@
             position: absolute; top: 12px; right: 12px; z-index: 2;
             display: flex; align-items: center; gap: 6px;
             height: 40px; padding: 0 14px; border-radius: 999px;
-            color: #fff; font-size: 14px; font-weight: 900;
+            color: #fff; font-size: 13px; font-weight: 900;
             border: 1.5px solid rgba(255,255,255,0.6);
             box-shadow: 0 6px 16px rgba(0,0,0,0.3);
             text-transform: uppercase; letter-spacing: 0.03em;
         }
-        .hk-status-pill i { font-size: 16px; }
+        .hk-status-pill i { font-size: 15px; }
+        .hk-occupied-chip {
+            position: absolute; top: 12px; left: 12px; z-index: 2;
+            display: flex; align-items: center; gap: 5px;
+            height: 32px; padding: 0 12px; border-radius: 999px;
+            background: rgba(2,132,199,0.95);
+            color: #fff; font-size: 10px; font-weight: 900;
+            border: 1.5px solid rgba(255,255,255,0.55);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            text-transform: uppercase; letter-spacing: 0.05em;
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        }
         .hk-name { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 14px 16px; }
         .hk-name .n { font-family: "Bricolage Grotesque", sans-serif; font-weight: 900; font-size: 22px; color: #fff; line-height: 1.05; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
         .hk-name .s { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 0.06em; text-shadow: 0 1px 6px rgba(0,0,0,0.4); }
@@ -114,7 +124,8 @@
         .hk-main-btn.b-in_progress { background: #d97706; color: #fff; }
         .hk-main-btn.b-clean_pending { background: #7c3aed; color: #fff; }
         .hk-main-btn.b-clean       { background: #0D5C3A; color: #fff; }
-        .hk-main-btn.b-occupied    { background: #0284C7; color: #fff; cursor: default; }
+        .hk-main-btn.b-occupied    { background: #0284C7; color: #fff; }
+        .hk-main-btn.b-midstay     { background: #0ea5e9; color: #fff; }
 
         .hk-admin-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 8px; border-top: 1px solid rgba(15,23,42,0.06); }
         .hk-admin-btn {
@@ -125,17 +136,13 @@
         }
         .hk-admin-btn i { font-size: 18px; }
         .hk-admin-btn:active { transform: scale(0.92); }
-        .hk-admin-btn.a-validate { background: linear-gradient(180deg, #10b981 0%, #059669 100%); color: #fff; grid-column: span 3; height: 60px; flex-direction: row; gap: 10px; font-size: 14px; font-family: "Bricolage Grotesque", sans-serif; }
-        .hk-admin-btn.a-validate i { font-size: 22px; }
         .hk-admin-btn.a-to_clean    { background: #fee2e2; color: #991b1b; }
         .hk-admin-btn.a-in_progress { background: #fef3c7; color: #92400e; }
         .hk-admin-btn.a-clean       { background: #d1fae5; color: #065f46; }
-        .hk-admin-btn.a-occupied    { background: #dbeafe; color: #1e40af; }
 
         .hk-note-btn { width: 100%; padding: 10px; font-size: 11px; font-weight: 700; color: #64748b; background: transparent; border: none; border-top: 1px solid rgba(15,23,42,0.06); display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: all 0.15s; }
         .hk-note-btn:active { background: rgba(15,23,42,0.04); color: #0D5C3A; }
 
-        /* ============ PLANNING 7×7 — Optimisé mobile ============ */
         .planning-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 18px; border: 1px solid rgba(203,213,225,0.55); background: rgba(255,255,255,0.35); }
         .planning-table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 520px; }
         .planning-table th, .planning-table td { padding: 2px; text-align: center; }
@@ -149,40 +156,18 @@
         .day-header .dd { font-family: "Bricolage Grotesque", sans-serif; font-weight: 900; font-size: 15px; line-height: 1; }
         .day-header.today .wd, .day-header.today .dd { color: #fff; }
 
-        .planning-cell {
-            width: 100%; height: 42px; border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 900; font-size: 16px; border: none; cursor: pointer;
-            transition: transform 0.15s;
-            -webkit-tap-highlight-color: transparent;
-        }
+        .planning-cell { width: 100%; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 16px; border: none; cursor: pointer; transition: transform 0.15s; -webkit-tap-highlight-color: transparent; }
         .planning-cell:active { transform: scale(0.9); }
         .planning-cell.free { background: rgba(13,92,58,0.07); color: #0D5C3A; border: 1.5px dashed rgba(13,92,58,0.25); }
         .planning-cell.overnight { background: linear-gradient(160deg, #0f6d44 0%, #0D5C3A 100%); color: #fff; }
         .planning-cell.day_use { background: linear-gradient(160deg, #8b5cf6 0%, #6d28d9 100%); color: #fff; }
         .planning-cell.today-cell { outline: 2.5px solid rgba(13,92,58,0.4); outline-offset: -2.5px; }
 
-        .room-label-planning {
-            display: flex; flex-direction: column; justify-content: center;
-            padding: 5px 7px; border-radius: 10px;
-            background: rgba(15,23,42,0.9);
-            text-align: left; min-height: 42px;
-        }
-        .room-label-planning .nm {
-            font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800;
-            font-size: 11px; color: #fff; line-height: 1.1;
-            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-        }
-        .room-label-planning .st {
-            font-size: 8px; font-weight: 800; text-transform: uppercase;
-            letter-spacing: 0.04em; margin-top: 1px;
-        }
+        .room-label-planning { display: flex; flex-direction: column; justify-content: center; padding: 5px 7px; border-radius: 10px; background: rgba(15,23,42,0.9); text-align: left; min-height: 42px; }
+        .room-label-planning .nm { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800; font-size: 11px; color: #fff; line-height: 1.1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .room-label-planning .st { font-size: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 1px; }
 
-        /* Bandeau service */
-        .service-banner {
-            border-radius: 22px; padding: 16px;
-            display: flex; flex-direction: column; gap: 12px;
-        }
+        .service-banner { border-radius: 22px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
         .service-banner.running { background: linear-gradient(160deg, #d97706 0%, #b45309 100%); color: #fff; box-shadow: 0 10px 30px -8px rgba(217,119,6,0.6); }
         .service-banner.idle    { background: linear-gradient(160deg, #0D5C3A 0%, #073823 100%); color: #fff; box-shadow: 0 10px 30px -8px rgba(13,92,58,0.5); }
         .service-banner.done    { background: linear-gradient(160deg, #7c3aed 0%, #6d28d9 100%); color: #fff; box-shadow: 0 10px 30px -8px rgba(124,58,237,0.5); }
@@ -273,12 +258,12 @@
                             <button onclick="selectCreateRole('admin')" id="role-btn-admin" class="role-card bg-white/70 border border-white/80 rounded-2xl p-4 text-left transition">
                                 <div class="w-10 h-10 rounded-xl bg-palm-50 text-palm-500 flex items-center justify-center text-lg mb-2"><i class="fa-solid fa-user-tie"></i></div>
                                 <h4 class="font-diola font-black text-palm-500 text-sm sm:text-base">Réception / Admin</h4>
-                                <p class="text-xs text-slate-500 font-semibold mt-1">Accès complet : réservations, planning, ménage, profils.</p>
+                                <p class="text-xs text-slate-500 font-semibold mt-1">Accès complet.</p>
                             </button>
                             <button onclick="selectCreateRole('menage')" id="role-btn-menage" class="role-card bg-white/70 border border-white/80 rounded-2xl p-4 text-left transition">
                                 <div class="w-10 h-10 rounded-xl bg-lagoon-50 text-lagoon-500 flex items-center justify-center text-lg mb-2"><i class="fa-solid fa-broom"></i></div>
                                 <h4 class="font-diola font-black text-lagoon-500 text-sm sm:text-base">Ménage</h4>
-                                <p class="text-xs text-slate-500 font-semibold mt-1">Accès limité : statuts chambres et consignes.</p>
+                                <p class="text-xs text-slate-500 font-semibold mt-1">Statuts chambres et consignes.</p>
                             </button>
                         </div>
                         <button id="btn-step1-continue" onclick="goToStep2()" disabled class="w-full py-3.5 btn-liquid disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-black rounded-2xl text-sm sm:text-base">
@@ -440,6 +425,18 @@
                             <p id="menu-prenom-mobile" class="font-diola font-black text-palm-500 text-sm"></p>
                             <p id="menu-role-mobile" class="text-xs uppercase tracking-widest text-slate-500 font-bold"></p>
                         </div>
+                        <button onclick="closeUserMenu(); navigateTo('home');" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/50 text-left border-b border-slate-200/60">
+                            <span class="w-9 h-9 rounded-xl bg-palm-50 text-palm-500 flex items-center justify-center"><i class="fa-solid fa-house"></i></span>
+                            <div><p class="text-sm font-black text-slate-800">Accueil</p><p class="text-xs text-slate-500 font-semibold">Vue d'ensemble</p></div>
+                        </button>
+                        <button onclick="closeUserMenu(); navigateTo('housekeeping');" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/50 text-left border-b border-slate-200/60">
+                            <span class="w-9 h-9 rounded-xl bg-palm-50 text-palm-500 flex items-center justify-center"><i class="fa-solid fa-broom"></i></span>
+                            <div><p class="text-sm font-black text-slate-800">Espace Ménage</p><p class="text-xs text-slate-500 font-semibold">Statuts des chambres</p></div>
+                        </button>
+                        <button id="btn-menu-reception" onclick="closeUserMenu(); navigateTo('reception');" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/50 text-left border-b border-slate-200/60">
+                            <span class="w-9 h-9 rounded-xl bg-lagoon-50 text-lagoon-500 flex items-center justify-center"><i class="fa-solid fa-bell-concierge"></i></span>
+                            <div><p class="text-sm font-black text-slate-800">Accueil & Planning</p><p class="text-xs text-slate-500 font-semibold">Réservations</p></div>
+                        </button>
                         <button onclick="closeUserMenu(); toggleNotifications();" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/50 text-left border-b border-slate-200/60">
                             <span class="w-9 h-9 rounded-xl bg-lagoon-50 text-lagoon-500 flex items-center justify-center"><i id="notif-icon-menu" class="fa-solid fa-bell-slash"></i></span>
                             <div><p class="text-sm font-black text-slate-800">Notifications</p><p id="notif-text-menu" class="text-xs text-slate-500 font-semibold">Activer les alertes</p></div>
@@ -529,10 +526,8 @@
                 </div>
             </div>
 
-            <!-- BANDEAU SERVICE -->
             <div id="service-banner-container"></div>
 
-            <!-- Filtres -->
             <div class="grid grid-cols-5 gap-1.5 sm:gap-2">
                 <button onclick="filterHousekeeping('all')" id="btn-filter-all" class="housekeeping-filter-btn flex flex-col items-center justify-center gap-1 py-2.5 rounded-2xl bg-white/70 border-2 border-white shadow-sm active:scale-95 transition">
                     <i class="fa-solid fa-layer-group text-xl text-slate-700"></i>
@@ -639,8 +634,6 @@
             </div>
         </section>
     </main>
-
-    <!-- ==================== BOTTOM NAV SUPPRIMÉE ==================== -->
 </div>
 
 <!-- ==================== MODALES ==================== -->
@@ -788,15 +781,9 @@
             <h3 class="font-diola font-black text-lg text-palm-500">PIN oublié ?</h3>
         </div>
         <div class="space-y-3 text-sm text-slate-700">
-            <div class="bg-white/60 border border-white/80 rounded-2xl p-4">
-                <p class="font-black text-palm-500 flex items-center gap-2 text-sm"><i class="fa-solid fa-1"></i> Contactez l'administrateur</p>
-            </div>
-            <div class="bg-white/60 border border-white/80 rounded-2xl p-4">
-                <p class="font-black text-palm-500 flex items-center gap-2 text-sm"><i class="fa-solid fa-2"></i> Il vous donnera un PIN temporaire</p>
-            </div>
-            <div class="bg-white/60 border border-white/80 rounded-2xl p-4">
-                <p class="font-black text-palm-500 flex items-center gap-2 text-sm"><i class="fa-solid fa-3"></i> Créez votre nouveau PIN</p>
-            </div>
+            <div class="bg-white/60 border border-white/80 rounded-2xl p-4"><p class="font-black text-palm-500 flex items-center gap-2 text-sm"><i class="fa-solid fa-1"></i> Contactez l'administrateur</p></div>
+            <div class="bg-white/60 border border-white/80 rounded-2xl p-4"><p class="font-black text-palm-500 flex items-center gap-2 text-sm"><i class="fa-solid fa-2"></i> Il vous donnera un PIN temporaire</p></div>
+            <div class="bg-white/60 border border-white/80 rounded-2xl p-4"><p class="font-black text-palm-500 flex items-center gap-2 text-sm"><i class="fa-solid fa-3"></i> Créez votre nouveau PIN</p></div>
         </div>
         <button onclick="closePinHelpModal()" class="w-full py-3 btn-liquid text-white font-black rounded-2xl text-sm touch-44">J'ai compris</button>
     </div>
@@ -877,9 +864,6 @@ const SUPABASE_URL      = 'https://sqfvoyggpueqqpfutcjr.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_UkKE9Kj1tIv3aum4d38Uqw_jyuoz3M3';
 const supabaseClient    = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// ─────────────────────────────────────────────────────────────
-//  PHOTOS LOCALES DES CHAMBRES
-// ─────────────────────────────────────────────────────────────
 const LOCAL_ROOM_PHOTOS = {
     badiat:   './Badiat.jpg',
     enampor:  './Enampor.jpg',
@@ -900,18 +884,11 @@ const SECTOR_PALETTE = {
 function generateRoomPlaceholder(roomName, sectorId) {
     const p = SECTOR_PALETTE[sectorId] || { c1:'#475569', c2:'#94a3b8', accent:'#e2e8f0' };
     const label = (roomName || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    const svg =
-`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" preserveAspectRatio="xMidYMid slice">
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" preserveAspectRatio="xMidYMid slice">
   <defs>
-    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="${p.c2}"/><stop offset="100%" stop-color="${p.c1}"/>
-    </linearGradient>
-    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.28"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0.05"/>
-    </linearGradient>
-    <radialGradient id="bokeh" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${p.c2}"/><stop offset="100%" stop-color="${p.c1}"/></linearGradient>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.28"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0.05"/></linearGradient>
+    <radialGradient id="bokeh" cx="0.5" cy="0.5" r="0.5"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
     <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
   </defs>
   <rect width="600" height="480" fill="url(#sky)"/>
@@ -929,8 +906,7 @@ function generateRoomPlaceholder(roomName, sectorId) {
     <rect x="300" y="0" width="60" height="90" rx="14" fill="#ffffff" opacity="0.5"/>
   </g>
   <rect x="0" y="280" width="600" height="200" fill="url(#wall)"/>
-  <text x="300" y="360" font-family="Bricolage Grotesque, sans-serif" font-size="52" font-weight="900"
-        fill="#ffffff" opacity="0.92" text-anchor="middle">${label}</text>
+  <text x="300" y="360" font-family="Bricolage Grotesque, sans-serif" font-size="52" font-weight="900" fill="#ffffff" opacity="0.92" text-anchor="middle">${label}</text>
 </svg>`;
     return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
 }
@@ -972,13 +948,12 @@ const ICONS = {
 };
 
 const SECTORS = {
-    vue_mer_balcon:   { id:'vue_mer_balcon',   title:'Vue Mer avec Balcon',          description:'Bâtiment pente vers la mer.',  badgeColor:'bg-lagoon-50 text-lagoon-700 border-lagoon-200', iconBg:'bg-lagoon-50 text-lagoon-500' },
-    vue_mer_terrasse: { id:'vue_mer_terrasse', title:'Vue Mer Grande Terrasse',      description:'Bas des escaliers.',           badgeColor:'bg-amber-50 text-amber-700 border-amber-200',  iconBg:'bg-amber-50 text-amber-700' },
-    vue_escalier:     { id:'vue_escalier',     title:'Intérieur / Vue Escalier',     description:'Chambre polyvalente.',         badgeColor:'bg-purple-50 text-purple-700 border-purple-200', iconBg:'bg-purple-50 text-purple-700' },
-    vue_jardin:       { id:'vue_jardin',       title:'Vue Jardin / Haut',            description:'Bâtiment entrée principale.',  badgeColor:'bg-palm-50 text-palm-500 border-palm-100',      iconBg:'bg-palm-50 text-palm-500' }
+    vue_mer_balcon:   { id:'vue_mer_balcon',   title:'Vue Mer avec Balcon',      description:'Bâtiment pente vers la mer.',  badgeColor:'bg-lagoon-50 text-lagoon-700 border-lagoon-200', iconBg:'bg-lagoon-50 text-lagoon-500' },
+    vue_mer_terrasse: { id:'vue_mer_terrasse', title:'Vue Mer Grande Terrasse',  description:'Bas des escaliers.',           badgeColor:'bg-amber-50 text-amber-700 border-amber-200',  iconBg:'bg-amber-50 text-amber-700' },
+    vue_escalier:     { id:'vue_escalier',     title:'Intérieur / Vue Escalier', description:'Chambre polyvalente.',         badgeColor:'bg-purple-50 text-purple-700 border-purple-200', iconBg:'bg-purple-50 text-purple-700' },
+    vue_jardin:       { id:'vue_jardin',       title:'Vue Jardin / Haut',        description:'Bâtiment entrée principale.',  badgeColor:'bg-palm-50 text-palm-500 border-palm-100',      iconBg:'bg-palm-50 text-palm-500' }
 };
 
-// États
 const STATUS_META = {
     to_clean:      { label:'À nettoyer', short:'À nettoyer', bg:'#dc2626', icon:'fa-broom',                chip:'bg-red-50 text-red-700 border-red-200',          dot:'#dc2626' },
     in_progress:   { label:'En cours',   short:'En cours',   bg:'#d97706', icon:'fa-spray-can-sparkles',   chip:'bg-amber-50 text-amber-800 border-amber-200',    dot:'#d97706' },
@@ -1012,6 +987,25 @@ function formatDateISO(date) {
 }
 function mapRoomFromDB(r) { return { id:r.id, name:r.name, sectorId:r.sector_id, sectorName:r.sector_name, photo:r.photo, status:r.status, notes:r.notes||'' }; }
 function mapReservationFromDB(r) { return { id:r.id, roomId:r.room_id, clientName:r.client_name, phone:r.phone||'', startDate:r.start_date, endDate:r.end_date, type:r.type, notes:r.notes||'' }; }
+
+// ─── Occupation d'une chambre aujourd'hui ───
+function isRoomOccupiedToday(room) {
+    const todayStr = formatDateISO(new Date());
+    return appState.reservations.some(r => {
+        if (r.roomId !== room.id) return false;
+        if (r.type === 'day_use') return r.startDate === todayStr;
+        return todayStr >= r.startDate && todayStr < r.endDate;
+    });
+}
+
+function getActiveReservationForRoom(room) {
+    const todayStr = formatDateISO(new Date());
+    return appState.reservations.find(r => {
+        if (r.roomId !== room.id) return false;
+        if (r.type === 'day_use') return r.startDate === todayStr;
+        return todayStr >= r.startDate && todayStr < r.endDate;
+    });
+}
 
 function renderPhoneLinks(phone) {
     if (!phone) return '';
@@ -1595,13 +1589,17 @@ async function enterApp() {
     document.getElementById('menu-role-mobile').innerText = p.role === 'admin' ? 'Admin / Réception' : 'Ménage';
     document.getElementById('welcome-prenom').innerText = p.prenom;
     const btnManage = document.getElementById('btn-manage-profiles');
+    const btnMenuReception = document.getElementById('btn-menu-reception');
     if (p.role === 'admin') {
         btnManage.classList.remove('hidden');
+        btnMenuReception.classList.remove('hidden');
     } else {
         btnManage.classList.add('hidden');
+        btnMenuReception.classList.add('hidden');
     }
     deleteSelfBuffer = ''; adminDeleteBuffer = '';
     await loadDataFromServer();
+    await syncOccupations();  // ← synchronise occupancy ↔ reservations
     renderHomeModules();
     const targetView = sessionStorage.getItem('buhanor_target_view');
     if (targetView && (targetView === 'housekeeping' || targetView === 'reception')) {
@@ -1685,6 +1683,21 @@ async function loadDataFromServer() {
     }
 }
 
+// Synchronise l'occupation des chambres avec les réservations
+async function syncOccupations() {
+    try {
+        const token = appState.sessionToken;
+        if (!token) return;
+        const { data } = await supabaseClient.rpc('sync_room_occupation', { p_token: token });
+        if (data > 0) {
+            // Recharger les données après sync
+            await loadDataFromServer();
+        }
+    } catch (err) {
+        console.warn('Sync occupation :', err);
+    }
+}
+
 function setConnectionStatus(online) {
     const dot = document.getElementById('connection-dot');
     if (!dot) return;
@@ -1723,7 +1736,7 @@ function updateScheduleDisplay() {
         const when = h > 0 ? `dans ${h}h${String(m).padStart(2,'0')}` : `dans ${m} min`;
         bar.className = 'border-b border-white/60 px-4 sm:px-6 py-2.5 sched-bar-soon safe-top';
         elIcon.innerHTML = '<i class="fa-solid fa-hourglass-half text-amber-700"></i>';
-        elText.innerHTML = `Ménagère arrive <strong class="text-amber-900">aujourd'hui 8h30</strong> • ${when}`;
+        elText.innerHTML = `Ménagère arrive <strong class="text-amber-900">aujourd\'hui 8h30</strong> • ${when}`;
     } else {
         bar.className = 'border-b border-white/60 px-4 sm:px-6 py-2.5 sched-bar-default safe-top';
         elIcon.innerHTML = '<i class="fa-solid fa-people-group text-palm-500"></i>';
@@ -1733,7 +1746,12 @@ function updateScheduleDisplay() {
 
 function confirmResetDemoData() {
     showCustomConfirm("Recharger les données ?", "Recharger chambres et réservations depuis le serveur ?",
-        async function() { await loadDataFromServer(); renderCurrentView(); showToast("Données rechargées !", "success"); });
+        async function() {
+            await loadDataFromServer();
+            await syncOccupations();
+            renderCurrentView();
+            showToast("Données rechargées !", "success");
+        });
 }
 
 function navigateTo(viewName) {
@@ -1773,6 +1791,7 @@ function updateHeaderCounters() {
     const inProgress = appState.rooms.filter(r => r.status === 'in_progress').length;
     const pending = appState.rooms.filter(r => r.status === 'clean_pending').length;
     const clean = appState.rooms.filter(r => r.status === 'clean').length;
+    const occupied = appState.rooms.filter(r => r.status === 'occupied').length;
     const badgeCleaning = document.getElementById('badge-cleaning-count');
     const badgeAvailable = document.getElementById('badge-available-count');
     if (badgeCleaning) {
@@ -1802,14 +1821,18 @@ function renderHomeView() {
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 ${sectorRooms.map(room => {
                     const meta = getStatusMeta(room.status);
+                    const occupiedToday = isRoomOccupiedToday(room);
                     return `<div onclick="navigateTo('housekeeping')" class="bg-white/70 p-3 rounded-xl border border-white/80 active-scale transition cursor-pointer flex justify-between items-center shadow-sm gap-2 touch-44">
                         <div class="min-w-0">
                             <span class="font-extrabold text-sm text-palm-500 block leading-tight truncate">${room.name}</span>
                             <span class="text-xs font-medium text-slate-500 truncate block">${room.sectorName}</span>
                         </div>
-                        <span class="text-xs font-black px-2.5 py-1 rounded-lg border flex items-center gap-1.5 flex-shrink-0 ${meta.chip}">
-                            <i class="fa-solid ${meta.icon}"></i><span class="hidden sm:inline">${meta.label}</span>
-                        </span>
+                        <div class="flex items-center gap-1.5 flex-shrink-0">
+                            ${occupiedToday && room.status !== 'occupied' ? `<span class="text-[9px] font-black text-lagoon-700 bg-lagoon-50 border border-lagoon-200 px-1.5 py-0.5 rounded-md"><i class="fa-solid fa-user"></i> OCC</span>` : ''}
+                            <span class="text-xs font-black px-2.5 py-1 rounded-lg border flex items-center gap-1.5 ${meta.chip}">
+                                <i class="fa-solid ${meta.icon}"></i><span class="hidden sm:inline">${meta.label}</span>
+                            </span>
+                        </div>
                     </div>`;
                 }).join('')}
             </div>
@@ -1845,9 +1868,6 @@ function filterHousekeeping(filter) {
     renderHousekeepingView();
 }
 
-// ============================================================
-// BANDEAU SERVICE
-// ============================================================
 function renderServiceBanner() {
     const container = document.getElementById('service-banner-container');
     if (!container) return;
@@ -1856,94 +1876,83 @@ function renderServiceBanner() {
     const inProgress = appState.rooms.filter(r => r.status === 'in_progress').length;
     const pending = appState.rooms.filter(r => r.status === 'clean_pending').length;
 
-    // Admin : bandeau de validation
     if (role === 'admin') {
         if (pending > 0) {
-            container.innerHTML = `
-                <div class="service-banner admin">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl flex-shrink-0"><i class="fa-solid fa-clipboard-check"></i></div>
-                        <div class="flex-1 min-w-0">
-                            <p class="font-diola font-black text-base sm:text-lg leading-tight">${pending} chambre${pending > 1 ? 's' : ''} à vérifier</p>
-                            <p class="text-xs text-white/80 font-semibold">La ménagère a signalé avoir terminé</p>
-                        </div>
+            container.innerHTML = `<div class="service-banner admin">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl flex-shrink-0"><i class="fa-solid fa-clipboard-check"></i></div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-diola font-black text-base sm:text-lg leading-tight">${pending} chambre${pending > 1 ? 's' : ''} à vérifier</p>
+                        <p class="text-xs text-white/80 font-semibold">La ménagère a signalé avoir terminé</p>
                     </div>
-                    <button onclick="validateAllPending()" class="w-full bg-white text-purple-700 font-diola font-black py-3.5 rounded-2xl active-scale flex items-center justify-center gap-2 text-sm sm:text-base">
-                        <i class="fa-solid fa-check-double"></i> TOUT VALIDER
-                    </button>
-                </div>`;
+                </div>
+                <button onclick="validateAllPending()" class="w-full bg-white text-purple-700 font-diola font-black py-3.5 rounded-2xl active-scale flex items-center justify-center gap-2 text-sm sm:text-base">
+                    <i class="fa-solid fa-check-double"></i> TOUT VALIDER
+                </button>
+            </div>`;
         } else if (toClean > 0 || inProgress > 0) {
-            container.innerHTML = `
-                <div class="service-banner running">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl flex-shrink-0"><i class="fa-solid fa-broom"></i></div>
-                        <div class="flex-1 min-w-0">
-                            <p class="font-diola font-black text-base sm:text-lg leading-tight">Nettoyage en cours</p>
-                            <p class="text-xs text-white/80 font-semibold">${toClean} à faire • ${inProgress} en cours</p>
-                        </div>
+            container.innerHTML = `<div class="service-banner running">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl flex-shrink-0"><i class="fa-solid fa-broom"></i></div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-diola font-black text-base sm:text-lg leading-tight">Nettoyage en cours</p>
+                        <p class="text-xs text-white/80 font-semibold">${toClean} à faire • ${inProgress} en cours</p>
                     </div>
-                    <button onclick="startService()" class="w-full bg-white text-amber-700 font-diola font-black py-3.5 rounded-2xl active-scale flex items-center justify-center gap-2 text-sm">
-                        <i class="fa-solid fa-play"></i> Je nettoie aussi
-                    </button>
-                </div>`;
+                </div>
+                <button onclick="startService()" class="w-full bg-white text-amber-700 font-diola font-black py-3.5 rounded-2xl active-scale flex items-center justify-center gap-2 text-sm">
+                    <i class="fa-solid fa-play"></i> Je nettoie aussi
+                </button>
+            </div>`;
         } else {
-            container.innerHTML = `
-                <div class="service-banner idle">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl flex-shrink-0"><i class="fa-solid fa-circle-check"></i></div>
-                        <div class="flex-1 min-w-0">
-                            <p class="font-diola font-black text-base sm:text-lg leading-tight">Tout est validé</p>
-                            <p class="text-xs text-white/80 font-semibold">Aucune chambre en attente</p>
-                        </div>
+            container.innerHTML = `<div class="service-banner idle">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl flex-shrink-0"><i class="fa-solid fa-circle-check"></i></div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-diola font-black text-base sm:text-lg leading-tight">Tout est validé</p>
+                        <p class="text-xs text-white/80 font-semibold">Aucune chambre en attente</p>
                     </div>
-                </div>`;
+                </div>
+            </div>`;
         }
         return;
     }
 
-    // Ménagère
     if (toClean > 0 && inProgress === 0 && pending === 0) {
-        // Service pas encore démarré
-        container.innerHTML = `
-            <div class="service-banner idle">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl flex-shrink-0"><i class="fa-solid fa-broom"></i></div>
-                    <div class="flex-1 min-w-0">
-                        <p class="font-diola font-black text-base sm:text-lg leading-tight">Prête à commencer ?</p>
-                        <p class="text-xs text-white/80 font-semibold">${toClean} chambre${toClean > 1 ? 's' : ''} à nettoyer</p>
-                    </div>
+        container.innerHTML = `<div class="service-banner idle">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl flex-shrink-0"><i class="fa-solid fa-broom"></i></div>
+                <div class="flex-1 min-w-0">
+                    <p class="font-diola font-black text-base sm:text-lg leading-tight">Prête à commencer ?</p>
+                    <p class="text-xs text-white/80 font-semibold">${toClean} chambre${toClean > 1 ? 's' : ''} à nettoyer</p>
                 </div>
-                <button onclick="startService()" class="w-full bg-white text-palm-500 font-diola font-black py-4 rounded-2xl active-scale flex items-center justify-center gap-2 text-base">
-                    <i class="fa-solid fa-play"></i> DÉMARRER MON SERVICE
-                </button>
-            </div>`;
+            </div>
+            <button onclick="startService()" class="w-full bg-white text-palm-500 font-diola font-black py-4 rounded-2xl active-scale flex items-center justify-center gap-2 text-base">
+                <i class="fa-solid fa-play"></i> DÉMARRER MON SERVICE
+            </button>
+        </div>`;
     } else if (inProgress > 0 || pending > 0) {
-        // Service en cours
-        container.innerHTML = `
-            <div class="service-banner running">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl flex-shrink-0"><i class="fa-solid fa-spray-can-sparkles"></i></div>
-                    <div class="flex-1 min-w-0">
-                        <p class="font-diola font-black text-base sm:text-lg leading-tight">Service en cours</p>
-                        <p class="text-xs text-white/80 font-semibold">${inProgress} en cours • ${pending} terminée${pending > 1 ? 's' : ''}</p>
-                    </div>
+        container.innerHTML = `<div class="service-banner running">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl flex-shrink-0"><i class="fa-solid fa-spray-can-sparkles"></i></div>
+                <div class="flex-1 min-w-0">
+                    <p class="font-diola font-black text-base sm:text-lg leading-tight">Service en cours</p>
+                    <p class="text-xs text-white/80 font-semibold">${inProgress} en cours • ${pending} terminée${pending > 1 ? 's' : ''}</p>
                 </div>
-                <button onclick="endService()" class="w-full bg-white text-amber-700 font-diola font-black py-4 rounded-2xl active-scale flex items-center justify-center gap-2 text-base">
-                    <i class="fa-solid fa-flag-checkered"></i> FIN DE SERVICE
-                </button>
-            </div>`;
+            </div>
+            <button onclick="endService()" class="w-full bg-white text-amber-700 font-diola font-black py-4 rounded-2xl active-scale flex items-center justify-center gap-2 text-base">
+                <i class="fa-solid fa-flag-checkered"></i> FIN DE SERVICE
+            </button>
+        </div>`;
     } else {
-        // Tout est validé ou terminé
-        container.innerHTML = `
-            <div class="service-banner done">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl flex-shrink-0"><i class="fa-solid fa-circle-check"></i></div>
-                    <div class="flex-1 min-w-0">
-                        <p class="font-diola font-black text-base sm:text-lg leading-tight">Service terminé ✓</p>
-                        <p class="text-xs text-white/80 font-semibold">En attente de validation admin</p>
-                    </div>
+        container.innerHTML = `<div class="service-banner done">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-2xl flex-shrink-0"><i class="fa-solid fa-circle-check"></i></div>
+                <div class="flex-1 min-w-0">
+                    <p class="font-diola font-black text-base sm:text-lg leading-tight">Service terminé ✓</p>
+                    <p class="text-xs text-white/80 font-semibold">En attente de validation admin</p>
                 </div>
-            </div>`;
+            </div>
+        </div>`;
     }
 }
 
@@ -1954,7 +1963,6 @@ async function startService() {
         showCustomConfirm("Démarrer le service ?", `${toClean} chambre${toClean > 1 ? 's' : ''} passeront en "En cours de nettoyage".`, () => resolve(true), () => resolve(false));
     });
     if (!confirmed) return;
-
     try {
         const { data, error } = await supabaseClient.rpc('start_cleaning_service', { p_token: appState.sessionToken });
         if (error) throw error;
@@ -1970,20 +1978,13 @@ async function startService() {
 async function endService() {
     const pending = appState.rooms.filter(r => r.status === 'clean_pending').length;
     const inProgress = appState.rooms.filter(r => r.status === 'in_progress').length;
-    if (inProgress > 0) {
-        showToast(`${inProgress} chambre(s) encore en cours`, 'error');
-        return;
-    }
+    if (inProgress > 0) { showToast(`${inProgress} chambre(s) encore en cours`, 'error'); return; }
     const confirmed = await new Promise(resolve => {
         showCustomConfirm("Terminer le service ?", `${pending} chambre${pending > 1 ? 's' : ''} envoyée${pending > 1 ? 's' : ''} à l'admin pour validation.`, () => resolve(true), () => resolve(false));
     });
     if (!confirmed) return;
-
     showToast('Service terminé ! Admin notifié ✓', 'success');
-    // Notification locale
-    if (Notification.permission === 'granted') {
-        sendLocalNotification("Service terminé", `${pending} chambre(s) à valider`);
-    }
+    if (Notification.permission === 'granted') sendLocalNotification("Service terminé", `${pending} chambre(s) à valider`);
     renderServiceBanner();
 }
 
@@ -1991,10 +1992,9 @@ async function validateAllPending() {
     const pendingRooms = appState.rooms.filter(r => r.status === 'clean_pending');
     if (pendingRooms.length === 0) return;
     const confirmed = await new Promise(resolve => {
-        showCustomConfirm("Valider les chambres ?", `${pendingRooms.length} chambre(s) deviendront "Propre et validé".`, () => resolve(true), () => resolve(false));
+        showCustomConfirm("Valider les chambres ?", `${pendingRooms.length} chambre(s) deviendront "Propre" ou "Occupée".`, () => resolve(true), () => resolve(false));
     });
     if (!confirmed) return;
-
     try {
         const ids = pendingRooms.map(r => r.id);
         const { data, error } = await supabaseClient.rpc('validate_cleaning', { p_token: appState.sessionToken, p_room_ids: ids });
@@ -2002,10 +2002,7 @@ async function validateAllPending() {
         await loadDataFromServer();
         renderHousekeepingView();
         showToast(`${data} chambre(s) validée(s) ✓`, 'success');
-    } catch (err) {
-        console.error(err);
-        showToast('Erreur validation', 'error');
-    }
+    } catch (err) { console.error(err); showToast('Erreur validation', 'error'); }
 }
 
 async function validateSingleRoom(roomId) {
@@ -2015,10 +2012,25 @@ async function validateSingleRoom(roomId) {
         await loadDataFromServer();
         renderHousekeepingView();
         showToast('Chambre validée ✓', 'success');
-    } catch (err) {
-        console.error(err);
-        showToast('Erreur', 'error');
-    }
+    } catch (err) { console.error(err); showToast('Erreur', 'error'); }
+}
+
+// ─── Ajouter une chambre occupée à la file de nettoyage (mid-stay) ───
+async function requestMidStayCleaning(roomId) {
+    const room = appState.rooms.find(r => r.id === roomId);
+    if (!room) return;
+    const activeRes = getActiveReservationForRoom(room);
+    if (!activeRes) { showToast('Aucun client dans cette chambre', 'error'); return; }
+    const confirmed = await new Promise(resolve => {
+        showCustomConfirm(
+            "Nettoyage en cours de séjour ?",
+            `${room.name} est occupée par ${activeRes.clientName}. La chambre passera en "À nettoyer" pendant que le client est présent.`,
+            () => resolve(true), () => resolve(false)
+        );
+    });
+    if (!confirmed) return;
+    await updateRoomStatus(roomId, 'to_clean');
+    showToast(`${room.name} ajoutée au nettoyage`, 'success');
 }
 
 // ============================================================
@@ -2069,16 +2081,17 @@ function renderHousekeepingView() {
 function renderHousekeepingCard(room, role) {
     const meta = getStatusMeta(room.status);
     const photoSrc = getRoomPhoto(room);
+    const occupied = isRoomOccupiedToday(room);
+    const activeRes = getActiveReservationForRoom(room);
 
-    // Bouton principal selon rôle et statut
     let mainBtn = '';
     if (role === 'menage') {
         const actions = {
-            to_clean:      { label:'COMMENCER', cls:'b-to_clean',    icon:'fa-play',                next:'in_progress' },
-            in_progress:   { label:"J'AI TERMINÉ", cls:'b-in_progress', icon:'fa-circle-check',   next:'clean_pending' },
-            clean_pending: { label:'ATTENTE ADMIN', cls:'b-clean_pending', icon:'fa-hourglass-half', next:null },
-            clean:         { label:'PROPRE ✓', cls:'b-clean',       icon:'fa-wand-magic-sparkles', next:null },
-            occupied:      { label:'OCCUPÉE', cls:'b-occupied',     icon:'fa-key',                 next:null }
+            to_clean:      { label:'COMMENCER',     cls:'b-to_clean',     icon:'fa-play',                next:'in_progress' },
+            in_progress:   { label:"J'AI TERMINÉ",  cls:'b-in_progress',  icon:'fa-circle-check',        next:'clean_pending' },
+            clean_pending: { label:'ATTENTE ADMIN', cls:'b-clean_pending',icon:'fa-hourglass-half',      next:null },
+            clean:         { label:'PROPRE ✓',      cls:'b-clean',        icon:'fa-wand-magic-sparkles', next:null },
+            occupied:      { label:'OCCUPÉE',       cls:'b-occupied',     icon:'fa-key',                 next:null }
         };
         const a = actions[room.status] || actions.to_clean;
         if (a.next) {
@@ -2091,7 +2104,6 @@ function renderHousekeepingCard(room, role) {
             </button>`;
         }
     } else {
-        // Admin : bouton VALIDER si clean_pending, sinon bouton principal "Marquer terminé"
         if (room.status === 'clean_pending') {
             mainBtn = `<button onclick="validateSingleRoom('${room.id}')" class="hk-main-btn" style="background: linear-gradient(180deg, #10b981 0%, #059669 100%); color:#fff;">
                 <i class="fa-solid fa-check-double"></i><span>VALIDER LA CHAMBRE</span>
@@ -2099,7 +2111,14 @@ function renderHousekeepingCard(room, role) {
         } else if (room.status === 'clean') {
             mainBtn = `<button class="hk-main-btn b-clean" disabled><i class="fa-solid fa-wand-magic-sparkles"></i><span>PROPRE ✓</span></button>`;
         } else if (room.status === 'occupied') {
-            mainBtn = `<button class="hk-main-btn b-occupied" disabled><i class="fa-solid fa-key"></i><span>OCCUPÉE</span></button>`;
+            // Si occupée mais client présent → bouton "Nettoyage séjour"
+            if (occupied && activeRes) {
+                mainBtn = `<button onclick="requestMidStayCleaning('${room.id}')" class="hk-main-btn b-midstay">
+                    <i class="fa-solid fa-spray-can-sparkles"></i><span>NETTOYAGE SÉJOUR</span>
+                </button>`;
+            } else {
+                mainBtn = `<button class="hk-main-btn b-occupied" disabled><i class="fa-solid fa-key"></i><span>OCCUPÉE</span></button>`;
+            }
         } else if (room.status === 'to_clean') {
             mainBtn = `<button onclick="updateRoomStatus('${room.id}', 'in_progress')" class="hk-main-btn b-to_clean"><i class="fa-solid fa-play"></i><span>COMMENCER</span></button>`;
         } else if (room.status === 'in_progress') {
@@ -2107,7 +2126,9 @@ function renderHousekeepingCard(room, role) {
         }
     }
 
-    // Admin : actions supplémentaires (mise à jour manuelle)
+    // Affichage de la pastille "Occupée" quand la chambre a un client MAIS est en cours de nettoyage
+    const showOccupiedChip = occupied && room.status !== 'occupied';
+
     let adminActions = '';
     if (role === 'admin') {
         adminActions = `<div class="hk-admin-actions">
@@ -2126,6 +2147,7 @@ function renderHousekeepingCard(room, role) {
     return `<div class="hk-card">
         <div class="hk-photo">
             <img src="${photoSrc}" data-room-id="${room.id}" onerror="handleRoomImgError(this)" alt="${room.name}" loading="lazy">
+            ${showOccupiedChip ? `<div class="hk-occupied-chip"><i class="fa-solid fa-user"></i> OCCUPÉE</div>` : ''}
             <div class="hk-status-pill" style="background:${meta.bg};">
                 <i class="fa-solid ${meta.icon}"></i>
                 <span>${meta.short}</span>
@@ -2183,9 +2205,6 @@ function renderReceptionView() {
 function changeCalendarWeek(offset) { appState.calendarStartDate.setDate(appState.calendarStartDate.getDate() + offset); renderCalendarGrid(); }
 function resetCalendarToToday() { appState.calendarStartDate = new Date(); renderCalendarGrid(); }
 
-// ============================================================
-// PLANNING 7 JOURS × 7 CHAMBRES — Optimisé mobile
-// ============================================================
 function renderCalendarGrid() {
     const headerRow = document.getElementById('calendar-grid-header');
     const bodyRows = document.getElementById('calendar-grid-body');
@@ -2233,16 +2252,13 @@ function renderCalendarGrid() {
                     const typeCls = res.type === 'day_use' ? 'day_use' : 'overnight';
                     const ico = res.type === 'day_use' ? 'fa-bolt' : 'fa-moon';
                     return `<td style="padding:2px 1px;">
-                        <button class="planning-cell ${typeCls} ${isToday ? 'today-cell' : ''}"
-                                onclick="showReservationDetail('${res.id}')"
-                                title="${res.clientName}">
+                        <button class="planning-cell ${typeCls} ${isToday ? 'today-cell' : ''}" onclick="showReservationDetail('${res.id}')" title="${res.clientName}">
                             <i class="fa-solid ${ico}"></i>
                         </button>
                     </td>`;
                 }
                 return `<td style="padding:2px 1px;">
-                    <button class="planning-cell free ${isToday ? 'today-cell' : ''}"
-                            onclick="openNewReservationModal('${room.id}', '${dateStr}')">
+                    <button class="planning-cell free ${isToday ? 'today-cell' : ''}" onclick="openNewReservationModal('${room.id}', '${dateStr}')">
                         <i class="fa-solid fa-plus"></i>
                     </button>
                 </td>`;
@@ -2254,7 +2270,6 @@ function renderCalendarGrid() {
 function renderTodayRoomsView() {
     const container = document.getElementById('today-rooms-groups');
     if (!container) return;
-    const todayStr = formatDateISO(new Date());
     container.innerHTML = Object.values(SECTORS).map(sector => {
         const sectorRooms = appState.rooms.filter(r => r.sectorId === sector.id);
         return `<div class="space-y-3">
@@ -2265,11 +2280,7 @@ function renderTodayRoomsView() {
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 ${sectorRooms.map(room => {
                     const meta = getStatusMeta(room.status);
-                    const currentRes = appState.reservations.find(res => {
-                        if (res.roomId !== room.id) return false;
-                        if (res.type === 'day_use') return res.startDate === todayStr;
-                        return todayStr >= res.startDate && todayStr < res.endDate;
-                    });
+                    const currentRes = getActiveReservationForRoom(room);
                     return `<div class="liquid-glass rounded-[22px] p-4 space-y-3">
                         <div class="flex justify-between items-start gap-2">
                             <div class="min-w-0">
@@ -2367,15 +2378,6 @@ function filterReservationsList() {
     });
 }
 
-function getReservationDays(res) {
-    if (res.type === 'day_use') return [res.startDate];
-    const days = [];
-    const cur = new Date(res.startDate + 'T00:00:00');
-    const end = new Date(res.endDate + 'T00:00:00');
-    while (cur < end) { days.push(formatDateISO(cur)); cur.setDate(cur.getDate() + 1); }
-    return days;
-}
-
 function openNewReservationModal(defaultRoomId = null, defaultStartDate = null) {
     const modal = document.getElementById('modal-reservation');
     const roomSelect = document.getElementById('res-room-id');
@@ -2434,39 +2436,20 @@ async function handleReservationSubmit(event) {
         return;
     }
     appState.reservations.push(mapReservationFromDB(data));
-    await syncRoomStatusFromReservations(roomId);
+    await loadDataFromServer();
+    await syncOccupations();
     closeNewReservationModal();
     renderReceptionView();
     showToast(`Réservé : ${clientName}`, "success");
 }
 
-async function syncRoomStatusFromReservations(roomId) {
-    const room = appState.rooms.find(r => r.id === roomId);
-    if (!room) return;
-    const todayStr = formatDateISO(new Date());
-    const activeRes = appState.reservations.find(res => {
-        if (res.roomId !== roomId) return false;
-        return getReservationDays(res).includes(todayStr);
-    });
-    let target = null;
-    if (activeRes && room.status !== 'occupied') target = 'occupied';
-    else if (!activeRes && room.status === 'occupied') target = 'to_clean';
-    if (target && target !== room.status) {
-        room.status = target;
-        try {
-            await supabaseClient.rpc('update_room_status', { p_token: appState.sessionToken, p_room_id: roomId, p_new_status: target });
-        } catch(e) {}
-    }
-}
-
 function confirmDeleteReservation(id) {
     showCustomConfirm("Supprimer la réservation ?", "Retirer cette réservation ?", async function() {
-        const res = appState.reservations.find(r => r.id === id);
-        const affectedRoomId = res ? res.roomId : null;
         const { error } = await supabaseClient.rpc('delete_reservation', { p_token: appState.sessionToken, p_reservation_id: id });
         if (error) { showToast("Erreur", "error"); return; }
         appState.reservations = appState.reservations.filter(r => r.id !== id);
-        if (affectedRoomId) await syncRoomStatusFromReservations(affectedRoomId);
+        await loadDataFromServer();
+        await syncOccupations();
         renderReceptionView();
         showToast("Réservation supprimée", "info");
     });
@@ -2546,7 +2529,7 @@ window.addEventListener('appinstalled', () => {
 });
 
 async function installPWA() {
-    if (!deferredPrompt) { showCustomAlert("Installer Buhanor", "iPhone/iPad :\n1. Safari → Partager\n2. Sur l'écran d'accueil\n\nAndroid :\nMenu Chrome → Installer l'application"); return; }
+    if (!deferredPrompt) { showCustomAlert("Installer Buhanor", "iPhone/iPad :\n1. Safari → Partager\n2. Sur l'écran d'accueil\n\nAndroid :\nMenu Chrome → Installer"); return; }
     deferredPrompt.prompt();
     const choice = await deferredPrompt.userChoice;
     if (choice.outcome === 'accepted') showToast('Installée !', 'success');
@@ -2617,7 +2600,6 @@ function subscribeToRealtime() {
             const prevPending = appState.rooms.filter(r => r.status === 'clean_pending').length;
             await loadDataFromServer();
             const newPending = appState.rooms.filter(r => r.status === 'clean_pending').length;
-            // Notifier l'admin si de nouvelles chambres sont en attente
             const role = appState.currentProfile.role;
             if (role === 'admin' && newPending > prevPending && Notification.permission === 'granted') {
                 sendLocalNotification("Chambres à valider", `${newPending} chambre(s) attendent votre validation.`, { tag: 'buhanor-validate' });
@@ -2626,7 +2608,9 @@ function subscribeToRealtime() {
         })
         .on('postgres_changes', { event:'*', schema:'public', table:'reservations' }, async () => {
             if (!appState.currentProfile) return;
-            await loadDataFromServer(); renderCurrentView();
+            await loadDataFromServer();
+            await syncOccupations();
+            renderCurrentView();
         })
         .subscribe();
 }
@@ -2640,6 +2624,10 @@ window.onload = async function() {
     setInterval(updateClock, 10000);
     subscribeToRealtime();
     setInterval(checkAlertsAndNotify, 60000);
+    // Sync occupation toutes les 5 min (au cas où l'app reste ouverte)
+    setInterval(async () => {
+        if (appState.currentProfile) { await syncOccupations(); renderCurrentView(); }
+    }, 5 * 60 * 1000);
     await loadProfils();
 
     if (loadSession()) {
