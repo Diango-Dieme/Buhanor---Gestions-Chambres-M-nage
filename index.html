@@ -163,6 +163,10 @@
         .planning-cell.day_use { background: linear-gradient(160deg, #8b5cf6 0%, #6d28d9 100%); color: #fff; }
         .planning-cell.today-cell { outline: 2.5px solid rgba(13,92,58,0.4); outline-offset: -2.5px; }
 
+        /* Checkout : jour de départ (nuitée = vert clair, passage = violet clair) */
+        .planning-cell.overnight.checkout { background: linear-gradient(160deg, #a7f3d0 0%, #6ee7b7 100%); color: #065f46; box-shadow: 0 5px 14px -4px rgba(13,92,58,0.35); }
+        .planning-cell.day_use.checkout   { background: linear-gradient(160deg, #ddd6fe 0%, #c4b5fd 100%); color: #5b21b6; box-shadow: 0 5px 14px -4px rgba(109,40,217,0.35); }
+
         .room-label-planning { display: flex; flex-direction: column; justify-content: center; padding: 5px 7px; border-radius: 10px; background: rgba(15,23,42,0.9); text-align: left; min-height: 42px; }
         .room-label-planning .nm { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800; font-size: 11px; color: #fff; line-height: 1.1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .room-label-planning .st { font-size: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 1px; }
@@ -601,9 +605,10 @@
                         <span id="calendar-week-range" class="font-diola font-black text-palm-500 text-sm sm:text-base"></span>
                     </div>
 
-                    <div class="flex items-center justify-center gap-2.5 text-[10px] font-black uppercase">
+                    <div class="flex items-center justify-center gap-2.5 text-[10px] font-black uppercase flex-wrap">
                         <span class="flex items-center gap-1 text-lagoon-500"><i class="fa-solid fa-circle text-[7px]"></i> Libre</span>
                         <span class="flex items-center gap-1 text-palm-500"><i class="fa-solid fa-moon"></i> Nuitée</span>
+                        <span class="flex items-center gap-1 text-emerald-700"><i class="fa-solid fa-right-from-bracket"></i> Départ</span>
                         <span class="flex items-center gap-1 text-purple-700"><i class="fa-solid fa-bolt"></i> Passage</span>
                     </div>
 
@@ -988,7 +993,6 @@ function formatDateISO(date) {
 function mapRoomFromDB(r) { return { id:r.id, name:r.name, sectorId:r.sector_id, sectorName:r.sector_name, photo:r.photo, status:r.status, notes:r.notes||'' }; }
 function mapReservationFromDB(r) { return { id:r.id, roomId:r.room_id, clientName:r.client_name, phone:r.phone||'', startDate:r.start_date, endDate:r.end_date, type:r.type, notes:r.notes||'' }; }
 
-// ─── Occupation d'une chambre aujourd'hui ───
 function isRoomOccupiedToday(room) {
     const todayStr = formatDateISO(new Date());
     return appState.reservations.some(r => {
@@ -1599,7 +1603,7 @@ async function enterApp() {
     }
     deleteSelfBuffer = ''; adminDeleteBuffer = '';
     await loadDataFromServer();
-    await syncOccupations();  // ← synchronise occupancy ↔ reservations
+    await syncOccupations();
     renderHomeModules();
     const targetView = sessionStorage.getItem('buhanor_target_view');
     if (targetView && (targetView === 'housekeeping' || targetView === 'reception')) {
@@ -1683,14 +1687,12 @@ async function loadDataFromServer() {
     }
 }
 
-// Synchronise l'occupation des chambres avec les réservations
 async function syncOccupations() {
     try {
         const token = appState.sessionToken;
         if (!token) return;
         const { data } = await supabaseClient.rpc('sync_room_occupation', { p_token: token });
         if (data > 0) {
-            // Recharger les données après sync
             await loadDataFromServer();
         }
     } catch (err) {
@@ -1791,7 +1793,6 @@ function updateHeaderCounters() {
     const inProgress = appState.rooms.filter(r => r.status === 'in_progress').length;
     const pending = appState.rooms.filter(r => r.status === 'clean_pending').length;
     const clean = appState.rooms.filter(r => r.status === 'clean').length;
-    const occupied = appState.rooms.filter(r => r.status === 'occupied').length;
     const badgeCleaning = document.getElementById('badge-cleaning-count');
     const badgeAvailable = document.getElementById('badge-available-count');
     if (badgeCleaning) {
@@ -2015,7 +2016,6 @@ async function validateSingleRoom(roomId) {
     } catch (err) { console.error(err); showToast('Erreur', 'error'); }
 }
 
-// ─── Ajouter une chambre occupée à la file de nettoyage (mid-stay) ───
 async function requestMidStayCleaning(roomId) {
     const room = appState.rooms.find(r => r.id === roomId);
     if (!room) return;
@@ -2033,9 +2033,6 @@ async function requestMidStayCleaning(roomId) {
     showToast(`${room.name} ajoutée au nettoyage`, 'success');
 }
 
-// ============================================================
-// HOUSEKEEPING
-// ============================================================
 function renderHousekeepingView() {
     updateHeaderCounters();
     renderServiceBanner();
@@ -2111,7 +2108,6 @@ function renderHousekeepingCard(room, role) {
         } else if (room.status === 'clean') {
             mainBtn = `<button class="hk-main-btn b-clean" disabled><i class="fa-solid fa-wand-magic-sparkles"></i><span>PROPRE ✓</span></button>`;
         } else if (room.status === 'occupied') {
-            // Si occupée mais client présent → bouton "Nettoyage séjour"
             if (occupied && activeRes) {
                 mainBtn = `<button onclick="requestMidStayCleaning('${room.id}')" class="hk-main-btn b-midstay">
                     <i class="fa-solid fa-spray-can-sparkles"></i><span>NETTOYAGE SÉJOUR</span>
@@ -2126,7 +2122,6 @@ function renderHousekeepingCard(room, role) {
         }
     }
 
-    // Affichage de la pastille "Occupée" quand la chambre a un client MAIS est en cours de nettoyage
     const showOccupiedChip = occupied && room.status !== 'occupied';
 
     let adminActions = '';
@@ -2243,22 +2238,43 @@ function renderCalendarGrid() {
             ${days.map(d => {
                 const dateStr = formatDateISO(d);
                 const isToday = dateStr === todayStr;
-                const res = appState.reservations.find(r => {
-                    if (r.roomId !== room.id) return false;
-                    if (r.type === 'day_use') return r.startDate === dateStr;
-                    return dateStr >= r.startDate && dateStr < r.endDate;
-                });
-                if (res) {
+
+                // Chercher une réservation qui couvre ce jour :
+                //  - nuitée : start <= jour < end  → nuit
+                //  - nuitée : jour === end         → jour de départ (checkout)
+                //  - passage : jour === start
+                let resInfo = null;
+                for (const r of appState.reservations) {
+                    if (r.roomId !== room.id) continue;
+                    if (r.type === 'day_use') {
+                        if (r.startDate === dateStr) { resInfo = { res: r, isCheckout: false }; break; }
+                    } else {
+                        if (dateStr >= r.startDate && dateStr < r.endDate) { resInfo = { res: r, isCheckout: false }; break; }
+                        if (dateStr === r.endDate) { resInfo = { res: r, isCheckout: true }; break; }
+                    }
+                }
+
+                if (resInfo) {
+                    const { res, isCheckout } = resInfo;
                     const typeCls = res.type === 'day_use' ? 'day_use' : 'overnight';
-                    const ico = res.type === 'day_use' ? 'fa-bolt' : 'fa-moon';
+                    const cls = isCheckout ? `${typeCls} checkout` : typeCls;
+                    const ico = isCheckout
+                        ? 'fa-right-from-bracket'
+                        : (res.type === 'day_use' ? 'fa-bolt' : 'fa-moon');
+                    const title = isCheckout
+                        ? `${res.clientName} — Départ (chambre libre après)`
+                        : `${res.clientName} — ${res.type === 'day_use' ? 'Passage' : 'Nuitée'}`;
                     return `<td style="padding:2px 1px;">
-                        <button class="planning-cell ${typeCls} ${isToday ? 'today-cell' : ''}" onclick="showReservationDetail('${res.id}')" title="${res.clientName}">
+                        <button class="planning-cell ${cls} ${isToday ? 'today-cell' : ''}"
+                                onclick="showReservationDetail('${res.id}')"
+                                title="${title}">
                             <i class="fa-solid ${ico}"></i>
                         </button>
                     </td>`;
                 }
                 return `<td style="padding:2px 1px;">
-                    <button class="planning-cell free ${isToday ? 'today-cell' : ''}" onclick="openNewReservationModal('${room.id}', '${dateStr}')">
+                    <button class="planning-cell free ${isToday ? 'today-cell' : ''}"
+                            onclick="openNewReservationModal('${room.id}', '${dateStr}')">
                         <i class="fa-solid fa-plus"></i>
                     </button>
                 </td>`;
@@ -2270,6 +2286,7 @@ function renderCalendarGrid() {
 function renderTodayRoomsView() {
     const container = document.getElementById('today-rooms-groups');
     if (!container) return;
+    const todayStr = formatDateISO(new Date());
     container.innerHTML = Object.values(SECTORS).map(sector => {
         const sectorRooms = appState.rooms.filter(r => r.sectorId === sector.id);
         return `<div class="space-y-3">
@@ -2281,6 +2298,9 @@ function renderTodayRoomsView() {
                 ${sectorRooms.map(room => {
                     const meta = getStatusMeta(room.status);
                     const currentRes = getActiveReservationForRoom(room);
+                    const isCheckoutToday = appState.reservations.some(r =>
+                        r.roomId === room.id && r.type === 'overnight' && r.endDate === todayStr
+                    );
                     return `<div class="liquid-glass rounded-[22px] p-4 space-y-3">
                         <div class="flex justify-between items-start gap-2">
                             <div class="min-w-0">
@@ -2293,10 +2313,13 @@ function renderTodayRoomsView() {
                         </div>
                         <div class="bg-white/60 rounded-xl p-3 border border-white/80">
                             ${currentRes ? `
-                                <span class="${currentRes.type === 'day_use' ? 'bg-purple-100 text-purple-900' : 'bg-palm-50 text-palm-500'} text-xs font-black uppercase px-2 py-0.5 rounded-lg inline-flex items-center gap-1">
-                                    ${ICONS.type[currentRes.type]} ${currentRes.type === 'day_use' ? 'Passage' : 'Nuitée'}
-                                </span>
-                                <p class="font-extrabold text-slate-800 text-sm mt-1 truncate">${currentRes.clientName}</p>
+                                <div class="flex items-center gap-1.5 flex-wrap mb-1">
+                                    <span class="${currentRes.type === 'day_use' ? 'bg-purple-100 text-purple-900' : 'bg-palm-50 text-palm-500'} text-xs font-black uppercase px-2 py-0.5 rounded-lg inline-flex items-center gap-1">
+                                        ${ICONS.type[currentRes.type]} ${currentRes.type === 'day_use' ? 'Passage' : 'Nuitée'}
+                                    </span>
+                                    ${isCheckoutToday ? `<span class="bg-emerald-100 text-emerald-800 text-xs font-black uppercase px-2 py-0.5 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-right-from-bracket"></i> DÉPART AUJ.</span>` : ''}
+                                </div>
+                                <p class="font-extrabold text-slate-800 text-sm truncate">${currentRes.clientName}</p>
                                 <p class="text-xs text-slate-500">${currentRes.startDate}${currentRes.startDate !== currentRes.endDate ? ' → ' + currentRes.endDate : ''}</p>
                                 ${currentRes.phone ? `<div class="mt-1">${renderPhoneLinks(currentRes.phone)}</div>` : ''}
                             ` : `<div class="text-center py-1"><span class="bg-palm-50 text-palm-500 text-xs font-black px-2.5 py-1 rounded-lg inline-flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Libre</span></div>`}
@@ -2624,7 +2647,6 @@ window.onload = async function() {
     setInterval(updateClock, 10000);
     subscribeToRealtime();
     setInterval(checkAlertsAndNotify, 60000);
-    // Sync occupation toutes les 5 min (au cas où l'app reste ouverte)
     setInterval(async () => {
         if (appState.currentProfile) { await syncOccupations(); renderCurrentView(); }
     }, 5 * 60 * 1000);
