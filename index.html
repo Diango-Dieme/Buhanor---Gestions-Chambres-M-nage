@@ -64,22 +64,19 @@
         .has-bottom-nav { padding-bottom: calc(96px + var(--sab)); }
         @media (min-width: 768px) { .has-bottom-nav { padding-bottom: 2rem; } }
 
-        /* ============ EFFET LIQUID GLASS iOS 17 ============ */
         .liquid-glass {
             background: rgba(255, 255, 255, 0.65);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.7);
-            box-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.05),
-                        inset 0 1px 1px 0 rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.05), inset 0 1px 1px 0 rgba(255, 255, 255, 0.9);
         }
         .liquid-glass-strong {
             background: rgba(255, 255, 255, 0.78);
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.85);
-            box-shadow: 0 10px 40px 0 rgba(15, 23, 42, 0.06),
-                        inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
+            box-shadow: 0 10px 40px 0 rgba(15, 23, 42, 0.06), inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
         }
         .liquid-glass-header {
             background: rgba(255, 255, 255, 0.72);
@@ -93,23 +90,19 @@
             backdrop-filter: blur(20px) saturate(150%);
             -webkit-backdrop-filter: blur(20px) saturate(150%);
             border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 20px 50px -12px rgba(13, 92, 58, 0.4),
-                        inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 50px -12px rgba(13, 92, 58, 0.4), inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
         }
         .liquid-glass-lagoon {
             background: linear-gradient(160deg, rgba(2, 132, 199, 0.95) 0%, rgba(1, 56, 87, 0.98) 100%);
             backdrop-filter: blur(20px) saturate(150%);
             -webkit-backdrop-filter: blur(20px) saturate(150%);
             border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 20px 50px -12px rgba(2, 132, 199, 0.4),
-                        inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 50px -12px rgba(2, 132, 199, 0.4), inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
         }
 
-        /* ============ BOUTON PRINCIPAL LIQUID ============ */
         .btn-liquid {
             background: linear-gradient(180deg, #0f6d44 0%, #0D5C3A 100%);
-            box-shadow: 0 4px 14px 0 rgba(13, 92, 58, 0.35),
-                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 14px 0 rgba(13, 92, 58, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .btn-liquid:hover { background: linear-gradient(180deg, #0D5C3A 0%, #0a4a2e 100%); box-shadow: 0 8px 20px 0 rgba(13, 92, 58, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25); }
@@ -123,14 +116,12 @@
         .btn-liquid-blue:hover { background: linear-gradient(180deg, #0284C7 0%, #026aa0 100%); }
         .btn-liquid-blue:active { transform: scale(0.96); }
 
-        /* ============ BOTTOM NAV PILL (iOS 17) ============ */
         .bottom-nav-pill {
             background: rgba(255, 255, 255, 0.72);
             backdrop-filter: blur(24px) saturate(180%);
             -webkit-backdrop-filter: blur(24px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08),
-                        inset 0 1px 1px 0 rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08), inset 0 1px 1px 0 rgba(255, 255, 255, 0.9);
         }
         .bottom-nav-item {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -138,21 +129,18 @@
             color: #64748b; transition: all 0.2s ease; min-width: 56px; min-height: 48px;
         }
         .bottom-nav-item.active { color: #0D5C3A; background: rgba(13, 92, 58, 0.08); }
-        .bottom-nav-item i { font-size: 18px; }
+        .bottom-nav-item i { font-size: 20px; }
         .bottom-nav-item span { font-size: 10px; font-weight: 700; letter-spacing: 0.02em; }
 
-        /* ============ TACTILE ============ */
         .active-scale { transition: transform 0.15s ease; }
         .active-scale:active { transform: scale(0.98); }
         @media (max-width: 767px) { .touch-44 { min-width: 44px; min-height: 44px; } }
         button, .tap-target { min-height: 44px; }
 
-        /* ============ LOADER ============ */
         .loader-overlay { position: fixed; inset: 0; background: rgba(251,249,245,0.96); z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; backdrop-filter: blur(8px); }
         .loader-spinner { width: 40px; height: 40px; border: 3px solid rgba(13, 92, 58, 0.15); border-top-color: #0D5C3A; border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ============ STATUTS ============ */
         .sched-bar-active { background: linear-gradient(90deg, #d1fae5 0%, #a7f3d0 100%); }
         .sched-bar-soon { background: linear-gradient(90deg, #fef3c7 0%, #fde68a 100%); }
         .sched-bar-default { background: linear-gradient(90deg, rgba(254,243,199,0.9) 0%, rgba(245,235,225,0.9) 100%); }
@@ -162,7 +150,146 @@
         .status-halo-green { box-shadow: 0 0 0 3px rgba(13,92,58,0.1), 0 2px 8px rgba(13,92,58,0.15); }
         .status-halo-blue  { box-shadow: 0 0 0 3px rgba(2,132,199,0.1), 0 2px 8px rgba(2,132,199,0.15); }
 
-        /* ============ CARDS ============ */
+        /* ============ HOUSEKEEPING CARD — Photo-first ============ */
+        .hk-card {
+            position: relative; overflow: hidden; border-radius: 24px;
+            background: #ffffff;
+            box-shadow: 0 12px 32px -12px rgba(15,23,42,0.22), 0 4px 12px rgba(15,23,42,0.06);
+            border: 1px solid rgba(15,23,42,0.06);
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s;
+        }
+        .hk-card:active { transform: scale(0.985); }
+
+        .hk-photo { position: relative; aspect-ratio: 5 / 4; background: #ebd9c8; overflow: hidden; }
+        .hk-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .hk-photo::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.05) 42%, transparent 65%);
+            pointer-events: none;
+        }
+        .hk-num-badge {
+            position: absolute; top: 12px; left: 12px; z-index: 2;
+            width: 56px; height: 56px; border-radius: 18px;
+            background: rgba(15,23,42,0.68);
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            border: 1.5px solid rgba(255,255,255,0.55);
+            color: #fff; font-family: "Bricolage Grotesque", sans-serif;
+            font-weight: 900; font-size: 28px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+        }
+        .hk-status-pill {
+            position: absolute; top: 12px; right: 12px; z-index: 2;
+            display: flex; align-items: center; gap: 6px;
+            height: 40px; padding: 0 14px 0 12px; border-radius: 999px;
+            color: #fff; font-size: 22px;
+            border: 1.5px solid rgba(255,255,255,0.6);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+        .hk-status-pill .dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: #ffffff; box-shadow: 0 0 0 3px rgba(255,255,255,0.35);
+        }
+        .hk-name {
+            position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+            padding: 14px 16px;
+        }
+        .hk-name .n {
+            font-family: "Bricolage Grotesque", sans-serif; font-weight: 900;
+            font-size: 22px; color: #fff; line-height: 1.05;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+        .hk-name .s {
+            font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.85);
+            text-transform: uppercase; letter-spacing: 0.06em;
+            text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+        }
+
+        .hk-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 10px; }
+        .hk-btn {
+            height: 74px; border-radius: 20px; border: none; cursor: pointer;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-weight: 900; font-size: 9px; letter-spacing: 0.03em;
+            transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+            -webkit-tap-highlight-color: transparent;
+            position: relative; overflow: hidden;
+        }
+        .hk-btn i { font-size: 24px; line-height: 1; }
+        .hk-btn:active { transform: scale(0.9); }
+        .hk-btn span { opacity: 0.9; }
+
+        .hk-btn.c-to_clean   { background: #fee2e2; color: #b91c1c; }
+        .hk-btn.c-to_clean.active   { background: #dc2626; color: #fff; box-shadow: 0 8px 20px -8px rgba(220,38,38,0.7); }
+        .hk-btn.c-in_progress{ background: #fef3c7; color: #b45309; }
+        .hk-btn.c-in_progress.active{ background: #d97706; color: #fff; box-shadow: 0 8px 20px -8px rgba(217,119,6,0.7); }
+        .hk-btn.c-clean      { background: #d1fae5; color: #047857; }
+        .hk-btn.c-clean.active      { background: #0D5C3A; color: #fff; box-shadow: 0 8px 20px -8px rgba(13,92,58,0.7); }
+        .hk-btn.c-occupied   { background: #dbeafe; color: #1d4ed8; }
+        .hk-btn.c-occupied.active   { background: #0284C7; color: #fff; box-shadow: 0 8px 20px -8px rgba(2,132,199,0.7); }
+
+        .hk-note-btn {
+            width: 100%; padding: 10px; font-size: 11px; font-weight: 700;
+            color: #64748b; background: transparent; border: none;
+            border-top: 1px solid rgba(15,23,42,0.06);
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            cursor: pointer; transition: all 0.15s;
+        }
+        .hk-note-btn:active { background: rgba(15,23,42,0.04); color: #0D5C3A; }
+
+        /* ============ PLANNING 7×7 ============ */
+        .planning-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 20px; border: 1px solid rgba(203,213,225,0.55); background: rgba(255,255,255,0.35); }
+        .planning-table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 660px; }
+        .planning-table th, .planning-table td { padding: 3px; text-align: center; }
+        .planning-table thead th { background: rgba(255,255,255,0.9); position: sticky; top: 0; z-index: 5; }
+        .planning-table .room-col { position: sticky; left: 0; z-index: 6; background: rgba(255,255,255,0.98); }
+        .planning-table thead .room-col { z-index: 8; }
+
+        .day-header {
+            border-radius: 12px; padding: 6px 2px 5px;
+            background: rgba(255,255,255,0.75); color: #0D5C3A;
+        }
+        .day-header.today { background: linear-gradient(160deg, #0f6d44 0%, #0D5C3A 100%); color: #fff; box-shadow: 0 6px 16px -6px rgba(13,92,58,0.6); }
+        .day-header .wd { font-size: 10px; font-weight: 800; text-transform: uppercase; opacity: 0.85; letter-spacing: 0.05em; }
+        .day-header .dd { font-family: "Bricolage Grotesque", sans-serif; font-weight: 900; font-size: 20px; line-height: 1; }
+        .day-header.today .wd, .day-header.today .dd { color: #fff; }
+
+        .planning-cell {
+            width: 100%; height: 54px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 20px; border: none; cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .planning-cell:active { transform: scale(0.9); }
+        .planning-cell.free { background: rgba(13,92,58,0.06); color: #0D5C3A; border: 2px dashed rgba(13,92,58,0.25); }
+        .planning-cell.free:hover { background: rgba(13,92,58,0.12); border-color: #0D5C3A; }
+        .planning-cell.overnight { background: linear-gradient(160deg, #0f6d44 0%, #0D5C3A 100%); color: #fff; box-shadow: 0 5px 14px -4px rgba(13,92,58,0.6); }
+        .planning-cell.day_use { background: linear-gradient(160deg, #8b5cf6 0%, #6d28d9 100%); color: #fff; box-shadow: 0 5px 14px -4px rgba(109,40,217,0.6); }
+        .planning-cell.today-cell { outline: 3px solid rgba(13,92,58,0.35); outline-offset: -3px; }
+
+        .room-badge-planning {
+            display: flex; align-items: center; gap: 8px;
+            padding: 6px 10px; border-radius: 12px;
+            background: rgba(15,23,42,0.9);
+            border: 1px solid rgba(255,255,255,0.14);
+            min-height: 46px; text-align: left;
+        }
+        .room-badge-planning .n {
+            font-family: "Bricolage Grotesque", sans-serif; font-weight: 900;
+            font-size: 15px; line-height: 1; color: #fff;
+            width: 26px; height: 26px; border-radius: 8px;
+            background: rgba(255,255,255,0.16);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .room-badge-planning .nm {
+            font-family: "Plus Jakarta Sans", sans-serif; font-weight: 800;
+            font-size: 12px; color: #fff; line-height: 1.15;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+            flex: 1; min-width: 0;
+        }
+
         .room-card-wrapper { transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .room-card-wrapper:hover { transform: scale(1.01); }
         .room-card-inner {
@@ -172,16 +299,10 @@
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.8);
             box-shadow: 0 8px 30px rgba(0,0,0,0.04);
-            transition: all 0.3s ease;
-        }
-        .room-card-inner:hover {
-            background: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
         }
         .room-card-image { transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .room-card-wrapper:hover .room-card-image { transform: scale(1.05); }
 
-        /* ============ AUTH ============ */
         .auth-bg { background: linear-gradient(135deg, #FBF9F5 0%, #f5ebe1 100%); min-height: 100vh; min-height: 100dvh; }
         .profile-tile { transition: transform 0.15s ease; }
         .profile-tile:active { transform: scale(0.97); }
@@ -190,7 +311,6 @@
         .avatar-choice:active { transform: scale(0.97); }
         .avatar-choice.selected { outline: 2px solid #0D5C3A; outline-offset: 2px; }
 
-        /* ============ PIN ============ */
         .pin-dot { transition: background 0.15s ease, transform 0.15s ease; }
         .pin-dot.filled { background: #0D5C3A; border-color: #0D5C3A; transform: scale(1.08); }
         .pin-key { transition: background 0.1s ease, color 0.1s ease, transform 0.1s ease; user-select: none; }
@@ -206,7 +326,6 @@
         .role-card:active { transform: scale(0.99); }
         .role-card.selected { border-color: #0D5C3A; background: #e6f2ec; }
 
-        /* ============ MODALES ============ */
         @media (max-width: 640px) {
             .modal-card { border-radius: 28px 28px 0 0 !important; width: 100% !important; max-width: 100% !important; max-height: 92dvh !important; margin-top: auto !important; border-bottom: none !important; }
             .modal-overlay { align-items: flex-end !important; padding: 0 !important; }
@@ -214,7 +333,7 @@
 
         input, textarea, select { font-size: 16px !important; }
         .table-scroll { -webkit-overflow-scrolling: touch; }
-        .custom-scrollbar::-webkit-scrollbar { height: 4px; width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar { height: 5px; width: 5px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #f5ebe1; border-radius: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #0D5C3A; border-radius: 4px; }
 
@@ -223,7 +342,6 @@
 
         .status-badge-xl { box-shadow: 0 4px 14px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.2); }
 
-        /* Module cards */
         .module-card {
             position: relative; overflow: hidden; border-radius: 28px;
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
@@ -457,7 +575,6 @@
 <!-- ==================== APP ROOT ==================== -->
 <div id="app-root" class="hidden flex flex-col">
 
-    <!-- Header Liquid Glass -->
     <header class="liquid-glass-header sticky top-0 z-30 safe-top">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-3 flex justify-between items-center gap-2">
             <div class="flex items-center space-x-3 cursor-pointer min-w-0" onclick="navigateTo('home')">
@@ -478,10 +595,6 @@
                     <span id="current-date-display" class="text-xs font-black uppercase tracking-widest text-slate-500">--</span>
                     <span id="current-time-display" class="text-sm lg:text-lg font-extrabold text-slate-800 leading-none">--:--</span>
                 </div>
-
-                <a href="tel:+221775423897" aria-label="Appeler le lodge" class="md:hidden min-h-[44px] px-3 py-2 liquid-glass rounded-2xl text-palm-500 text-xs font-bold flex items-center gap-1.5 active-scale">
-                    <i class="fa-solid fa-phone" aria-hidden="true"></i>
-                </a>
 
                 <button onclick="navigateTo('home')" id="btn-header-home" aria-label="Accueil" class="hidden md:flex liquid-glass active-scale text-palm-500 p-2.5 rounded-2xl transition touch-44 items-center justify-center">
                     <i class="fa-solid fa-house" aria-hidden="true"></i>
@@ -567,7 +680,6 @@
         </div>
     </header>
 
-    <!-- Bandeau ménagère -->
     <div id="housekeeper-schedule-bar" class="border-b border-white/60 px-4 sm:px-6 py-2.5 sched-bar-default safe-top">
         <div class="max-w-7xl mx-auto flex flex-col gap-1.5 sm:flex-row sm:items-center sm:justify-between text-sm">
             <div class="flex items-center gap-2 sm:gap-3 font-extrabold text-amber-950">
@@ -626,7 +738,7 @@
                             </span>
                             <h2 class="text-xl sm:text-2xl md:text-3xl font-diola font-black text-palm-500 truncate">Espace Ménage</h2>
                         </div>
-                        <p class="text-xs md:text-sm text-slate-600 font-semibold mt-1">Touchez un statut pour changer l'état.</p>
+                        <p class="text-xs md:text-sm text-slate-600 font-semibold mt-1">Touchez l'icône pour changer le statut.</p>
                     </div>
                 </div>
                 <div id="cleaning-status-banner" class="w-full bg-white/60 border border-white/80 rounded-2xl p-3.5 flex items-center gap-3">
@@ -640,17 +752,22 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap gap-2 items-center liquid-glass rounded-2xl p-3">
-                <span class="text-xs font-black text-slate-500 uppercase px-2 flex items-center gap-1"><i class="fa-solid fa-filter text-palm-500" aria-hidden="true"></i> Filtrer :</span>
-                <button onclick="filterHousekeeping('all')" id="btn-filter-all" class="housekeeping-filter-btn px-4 py-2 rounded-xl text-sm font-extrabold bg-palm-500 text-white transition">Toutes</button>
-                <button onclick="filterHousekeeping('to_clean')" id="btn-filter-to_clean" class="housekeeping-filter-btn px-4 py-2 rounded-xl text-sm font-extrabold bg-white/60 text-slate-700 hover:bg-white/80 transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-circle text-red-500 text-[8px]" aria-hidden="true"></i> À nettoyer
+            <div class="grid grid-cols-4 gap-2 sm:gap-3">
+                <button onclick="filterHousekeeping('all')" id="btn-filter-all" class="housekeeping-filter-btn flex flex-col items-center justify-center gap-1 py-3 rounded-2xl bg-white/70 border-2 border-white shadow-sm active:scale-95 transition">
+                    <i class="fa-solid fa-layer-group text-2xl text-slate-700" aria-hidden="true"></i>
+                    <span class="text-[10px] font-black text-slate-700 uppercase">Tout</span>
                 </button>
-                <button onclick="filterHousekeeping('in_progress')" id="btn-filter-in_progress" class="housekeeping-filter-btn px-4 py-2 rounded-xl text-sm font-extrabold bg-white/60 text-slate-700 hover:bg-white/80 transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-circle text-amber-500 text-[8px]" aria-hidden="true"></i> En cours
+                <button onclick="filterHousekeeping('to_clean')" id="btn-filter-to_clean" class="housekeeping-filter-btn flex flex-col items-center justify-center gap-1 py-3 rounded-2xl bg-red-50 border-2 border-red-200 shadow-sm active:scale-95 transition">
+                    <i class="fa-solid fa-broom text-2xl text-red-700" aria-hidden="true"></i>
+                    <span class="text-[10px] font-black text-red-800 uppercase">À nettoyer</span>
                 </button>
-                <button onclick="filterHousekeeping('clean')" id="btn-filter-clean" class="housekeeping-filter-btn px-4 py-2 rounded-xl text-sm font-extrabold bg-white/60 text-slate-700 hover:bg-white/80 transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-circle text-lagoon-500 text-[8px]" aria-hidden="true"></i> Propres
+                <button onclick="filterHousekeeping('in_progress')" id="btn-filter-in_progress" class="housekeeping-filter-btn flex flex-col items-center justify-center gap-1 py-3 rounded-2xl bg-amber-50 border-2 border-amber-200 shadow-sm active:scale-95 transition">
+                    <i class="fa-solid fa-spray-can-sparkles text-2xl text-amber-700" aria-hidden="true"></i>
+                    <span class="text-[10px] font-black text-amber-900 uppercase">En cours</span>
+                </button>
+                <button onclick="filterHousekeeping('clean')" id="btn-filter-clean" class="housekeeping-filter-btn flex flex-col items-center justify-center gap-1 py-3 rounded-2xl bg-palm-50 border-2 border-palm-200 shadow-sm active:scale-95 transition">
+                    <i class="fa-solid fa-wand-magic-sparkles text-2xl text-palm-500" aria-hidden="true"></i>
+                    <span class="text-[10px] font-black text-palm-600 uppercase">Propre</span>
                 </button>
             </div>
 
@@ -671,7 +788,7 @@
                             </span>
                             <h2 class="text-xl sm:text-2xl md:text-3xl font-diola font-black text-palm-500 truncate">Accueil & Planning</h2>
                         </div>
-                        <p class="text-xs md:text-sm text-slate-600 font-semibold mt-1">Planning & réservations.</p>
+                        <p class="text-xs md:text-sm text-slate-600 font-semibold mt-1">Grille 7 jours × 7 chambres.</p>
                     </div>
                 </div>
                 <button onclick="openNewReservationModal()" aria-label="Nouvelle réservation" class="w-full active-scale btn-liquid text-white font-extrabold px-5 py-3.5 rounded-2xl transition flex items-center justify-center gap-2 text-sm sm:text-base">
@@ -692,53 +809,30 @@
             </div>
 
             <div id="reception-tab-calendar" class="space-y-4">
-                <div class="liquid-glass-strong rounded-[28px] p-4 md:p-6 space-y-4">
-
-                    <div class="md:hidden space-y-3">
-                        <div class="flex items-center gap-2 justify-between">
-                            <button onclick="changeMobileDay(-1)" aria-label="Jour précédent" class="w-12 h-12 liquid-glass active-scale rounded-2xl font-black text-palm-500 flex items-center justify-center touch-44">
-                                <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
-                            </button>
-                            <div class="flex-1 text-center">
-                                <div id="mobile-day-label" class="font-diola font-black text-palm-500 text-base leading-tight">—</div>
-                                <div id="mobile-day-date" class="text-xs text-slate-500 font-semibold uppercase tracking-widest">—</div>
-                            </div>
-                            <button onclick="changeMobileDay(1)" aria-label="Jour suivant" class="w-12 h-12 liquid-glass active-scale rounded-2xl font-black text-palm-500 flex items-center justify-center touch-44">
-                                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                <div class="liquid-glass-strong rounded-[28px] p-4 md:p-5 space-y-4">
+                    <div class="flex items-center justify-between gap-2 flex-wrap">
+                        <div class="flex items-center gap-2">
+                            <button onclick="changeCalendarWeek(-7)" aria-label="Semaine précédente" class="w-12 h-12 liquid-glass rounded-2xl font-black text-palm-500 active-scale transition flex items-center justify-center touch-44"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+                            <button onclick="changeCalendarWeek(7)" aria-label="Semaine suivante" class="w-12 h-12 liquid-glass rounded-2xl font-black text-palm-500 active-scale transition flex items-center justify-center touch-44"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+                            <button onclick="resetCalendarToToday()" aria-label="Aujourd'hui" class="h-12 liquid-glass px-3 rounded-2xl transition flex items-center gap-1.5 touch-44">
+                                <i class="fa-solid fa-crosshairs text-palm-500" aria-hidden="true"></i>
+                                <span class="text-xs font-black text-palm-500 uppercase">Auj.</span>
                             </button>
                         </div>
-
-                        <div class="text-center">
-                            <button onclick="resetMobileDayToToday()" class="text-xs font-extrabold text-palm-500 liquid-glass px-3 py-2 rounded-xl transition inline-flex items-center gap-1.5 touch-44">
-                                <i class="fa-solid fa-crosshairs" aria-hidden="true"></i> Aujourd'hui
-                            </button>
-                        </div>
-
-                        <div id="mobile-calendar-list" class="space-y-2"></div>
+                        <span id="calendar-week-range" class="font-diola font-black text-palm-500 text-base sm:text-lg"></span>
                     </div>
 
-                    <div class="hidden md:block space-y-3">
-                        <div class="flex items-center justify-between gap-3">
-                            <div class="flex items-center gap-3 flex-wrap">
-                                <button onclick="changeCalendarWeek(-7)" aria-label="Semaine précédente" class="p-2.5 liquid-glass rounded-xl font-black text-palm-500 active-scale transition"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
-                                <span id="calendar-week-range" class="font-extrabold text-palm-500 text-base">Semaine du ...</span>
-                                <button onclick="changeCalendarWeek(7)" aria-label="Semaine suivante" class="p-2.5 liquid-glass rounded-xl font-black text-palm-500 active-scale transition"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
-                                <button onclick="resetCalendarToToday()" class="text-xs font-extrabold text-palm-500 liquid-glass px-3 py-2 rounded-xl transition flex items-center gap-1">
-                                    <i class="fa-solid fa-crosshairs" aria-hidden="true"></i> Aujourd'hui
-                                </button>
-                            </div>
-                            <div class="flex items-center gap-3 text-xs font-bold">
-                                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-lagoon-500 inline-block"></span> Libre</span>
-                                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span> Nuitée</span>
-                                <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-purple-600 inline-block"></span> Passage</span>
-                            </div>
-                        </div>
-                        <div class="overflow-x-auto custom-scrollbar border border-slate-200/60 rounded-2xl table-scroll">
-                            <table class="w-full text-left border-collapse min-w-[640px]">
-                                <thead><tr id="calendar-grid-header" class="bg-white/60 text-palm-500 text-xs uppercase font-black border-b border-slate-200/60"></tr></thead>
-                                <tbody id="calendar-grid-body" class="divide-y divide-slate-100 text-sm bg-white/40"></tbody>
-                            </table>
-                        </div>
+                    <div class="flex items-center justify-center gap-3 text-[11px] font-black uppercase">
+                        <span class="flex items-center gap-1 text-lagoon-500"><i class="fa-solid fa-circle text-[8px]"></i> Libre</span>
+                        <span class="flex items-center gap-1 text-palm-500"><i class="fa-solid fa-moon"></i> Nuitée</span>
+                        <span class="flex items-center gap-1 text-purple-700"><i class="fa-solid fa-bolt"></i> Passage</span>
+                    </div>
+
+                    <div class="planning-scroll custom-scrollbar">
+                        <table class="planning-table">
+                            <thead><tr id="calendar-grid-header"></tr></thead>
+                            <tbody id="calendar-grid-body"></tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -762,7 +856,6 @@
         </section>
     </main>
 
-    <!-- ==================== BOTTOM NAV PILL (iOS 17) ==================== -->
     <nav id="bottom-nav" class="hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-md md:hidden safe-bottom">
         <div class="flex items-center justify-around bottom-nav-pill rounded-full p-2">
             <button onclick="navigateTo('home')" id="bnav-home" aria-label="Accueil" class="bottom-nav-item">
@@ -1032,6 +1125,107 @@ const SUPABASE_URL      = 'https://sqfvoyggpueqqpfutcjr.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_UkKE9Kj1tIv3aum4d38Uqw_jyuoz3M3';
 const supabaseClient    = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+// Numéros visuels des chambres
+const ROOM_NUMBERS = { badiat: 1, enampor: 2, seleki: 3, etama: 4, essil: 5, brin: 6, chambre7: 7 };
+function getRoomNumber(roomId) { return ROOM_NUMBERS[roomId] || '?'; }
+
+// ─────────────────────────────────────────────────────────────
+//  PHOTOS LOCALES DES CHAMBRES
+//  Place tes 7 fichiers .jpg à la racine du projet (mêmes noms exacts)
+//  Priorité : fichier local → URL Supabase → SVG stylisé
+// ─────────────────────────────────────────────────────────────
+const LOCAL_ROOM_PHOTOS = {
+    badiat:   './Badiat.jpg',
+    enampor:  './Enampor.jpg',
+    seleki:   './Seleki.jpg',
+    etama:    './Etama.jpg',
+    essil:    './Essil.jpg',
+    brin:     './Brin.jpg',
+    chambre7: './chambre7.jpg'
+};
+
+// Palette par secteur (pour les placeholders SVG)
+const SECTOR_PALETTE = {
+    vue_mer_balcon:   { c1:'#0369a1', c2:'#0ea5e9', accent:'#bae6fd' },
+    vue_mer_terrasse: { c1:'#b45309', c2:'#f59e0b', accent:'#fde68a' },
+    vue_escalier:     { c1:'#5b21b6', c2:'#a78bfa', accent:'#ddd6fe' },
+    vue_jardin:       { c1:'#065f46', c2:'#10b981', accent:'#a7f3d0' }
+};
+
+// SVG inline qui simule une "photo" de chambre stylisée
+// — AUCUNE requête réseau, fonctionne hors-ligne, jamais d'image cassée.
+function generateRoomPlaceholder(roomName, sectorId, number) {
+    const p = SECTOR_PALETTE[sectorId] || { c1:'#475569', c2:'#94a3b8', accent:'#e2e8f0' };
+    const num = number || '?';
+    const label = (roomName || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+    const svg =
+`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${p.c2}"/>
+      <stop offset="100%" stop-color="${p.c1}"/>
+    </linearGradient>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05"/>
+    </linearGradient>
+    <radialGradient id="bokeh" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+
+  <rect width="600" height="480" fill="url(#sky)"/>
+
+  <g filter="url(#soft)" opacity="0.8">
+    <circle cx="120" cy="80" r="90" fill="url(#bokeh)"/>
+    <circle cx="480" cy="120" r="120" fill="url(#bokeh)"/>
+    <circle cx="560" cy="400" r="100" fill="url(#bokeh)"/>
+    <circle cx="80" cy="420" r="110" fill="url(#bokeh)"/>
+  </g>
+
+  <rect x="380" y="90" width="150" height="180" rx="12" fill="#ffffff" opacity="0.22"/>
+  <line x1="455" y1="90" x2="455" y2="270" stroke="#ffffff" stroke-width="4" opacity="0.35"/>
+  <line x1="380" y1="180" x2="530" y2="180" stroke="#ffffff" stroke-width="4" opacity="0.35"/>
+
+  <g transform="translate(60 240)">
+    <rect x="0" y="60" width="360" height="140" rx="18" fill="${p.accent}" opacity="0.35"/>
+    <rect x="0" y="60" width="360" height="30" rx="15" fill="#ffffff" opacity="0.55"/>
+    <rect x="0" y="0" width="60" height="90" rx="14" fill="#ffffff" opacity="0.5"/>
+    <rect x="300" y="0" width="60" height="90" rx="14" fill="#ffffff" opacity="0.5"/>
+  </g>
+
+  <rect x="0" y="280" width="600" height="200" fill="url(#wall)"/>
+
+  <text x="560" y="200" font-family="Bricolage Grotesque, sans-serif" font-size="230" font-weight="900"
+        fill="#ffffff" opacity="0.14" text-anchor="end">${num}</text>
+</svg>`;
+
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+
+// Renvoie la 1ʳᵉ source dispo : local > Supabase > SVG placeholder
+function getRoomPhoto(room) {
+    return LOCAL_ROOM_PHOTOS[room.id]
+        || room.photo
+        || generateRoomPlaceholder(room.name, room.sectorId, getRoomNumber(room.id));
+}
+
+// Bascule automatiquement vers le placeholder SVG si l'image échoue
+function handleRoomImgError(img) {
+    if (img.dataset.fallbackApplied === '1') return;
+    img.dataset.fallbackApplied = '1';
+    const roomId = img.dataset.roomId;
+    const room = (appState.rooms || []).find(r => r.id === roomId);
+    if (room) {
+        img.src = generateRoomPlaceholder(room.name, room.sectorId, getRoomNumber(room.id));
+    } else {
+        img.src = generateRoomPlaceholder('Chambre', 'vue_jardin', '?');
+    }
+}
+
 const AVATAR_CHOICES = [
     'https://api.dicebear.com/7.x/adventurer/svg?seed=Awa&skinColor=614335&hair=long03&hairColor=090806&backgroundColor=ffd5dc',
     'https://api.dicebear.com/7.x/adventurer/svg?seed=Fatou&skinColor=8d5524&hair=long09&hairColor=2c1b18&backgroundColor=b6e3f4',
@@ -1069,7 +1263,6 @@ let appState = {
     currentView: 'home', receptionTab: 'calendar',
     housekeepingFilter: 'all',
     calendarStartDate: new Date(),
-    mobileCalendarDate: new Date(),
     currentProfile: null,
     sessionToken: null
 };
@@ -1980,11 +2173,15 @@ function renderHomeView() {
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     ${sectorRooms.map(room => {
                         const meta = getStatusMeta(room.status);
+                        const num = getRoomNumber(room.id);
                         return `
                             <div onclick="navigateTo('housekeeping')" class="bg-white/70 p-3 rounded-xl border border-white/80 hover:border-palm-200 active-scale transition cursor-pointer flex justify-between items-center shadow-sm gap-2 touch-44">
-                                <div class="min-w-0">
-                                    <span class="font-extrabold text-sm text-palm-500 block leading-tight truncate">${room.name}</span>
-                                    <span class="text-xs font-medium text-slate-500 truncate block">${room.sectorName}</span>
+                                <div class="flex items-center gap-2 min-w-0">
+                                    <div class="w-10 h-10 rounded-xl bg-slate-900/90 text-white flex items-center justify-center font-diola font-black text-lg flex-shrink-0">${num}</div>
+                                    <div class="min-w-0">
+                                        <span class="font-extrabold text-sm text-palm-500 block leading-tight truncate">${room.name}</span>
+                                        <span class="text-xs font-medium text-slate-500 truncate block">${room.sectorName}</span>
+                                    </div>
                                 </div>
                                 <span class="text-xs font-black px-2.5 py-1 rounded-lg border flex items-center gap-1.5 flex-shrink-0 ${meta.chipBg}">
                                     <i class="fa-solid ${meta.iconCls}" aria-hidden="true"></i><span class="hidden sm:inline">${meta.label}</span>
@@ -1998,16 +2195,33 @@ function renderHomeView() {
 
 function filterHousekeeping(filter) {
     appState.housekeepingFilter = filter;
-    document.querySelectorAll('.housekeeping-filter-btn').forEach(btn => {
-        btn.className = "housekeeping-filter-btn px-4 py-2 rounded-xl text-sm font-extrabold bg-white/60 text-slate-700 hover:bg-white/80 transition flex items-center gap-1.5";
+    const base = "housekeeping-filter-btn flex flex-col items-center justify-center gap-1 py-3 rounded-2xl shadow-sm active:scale-95 transition";
+    const cfg = {
+        all:         'bg-white/70 border-2 border-white',
+        to_clean:    'bg-red-50 border-2 border-red-200',
+        in_progress: 'bg-amber-50 border-2 border-amber-200',
+        clean:       'bg-palm-50 border-2 border-palm-200'
+    };
+    const cfgActive = {
+        all:         'bg-slate-900 border-2 border-slate-900',
+        to_clean:    'bg-red-600 border-2 border-red-600',
+        in_progress: 'bg-amber-600 border-2 border-amber-600',
+        clean:       'bg-palm-500 border-2 border-palm-500'
+    };
+    ['all','to_clean','in_progress','clean'].forEach(f => {
+        const btn = document.getElementById(`btn-filter-${f}`);
+        if (!btn) return;
+        btn.className = `${base} ${f === filter ? cfgActive[f] : cfg[f]}`;
+        const icon = btn.querySelector('i');
+        const label = btn.querySelector('span');
+        if (icon) icon.style.color = f === filter ? '#ffffff' : '';
+        if (label) label.style.color = f === filter ? '#ffffff' : '';
     });
-    const active = document.getElementById(`btn-filter-${filter}`);
-    if (active) active.className = "housekeeping-filter-btn px-4 py-2 rounded-xl text-sm font-extrabold bg-palm-500 text-white shadow-sm transition flex items-center gap-1.5";
     renderHousekeepingView();
 }
 
 // ============================================================
-// HOUSEKEEPING — Grille responsive + Liquid Glass Cards
+// HOUSEKEEPING — Photo-first, iOS 17 élégant, pour non-lecteurs
 // ============================================================
 function renderHousekeepingView() {
     updateHeaderCounters();
@@ -2028,93 +2242,69 @@ function renderHousekeepingView() {
         const sectorRooms = filtered.filter(r => r.sectorId === sector.id);
         if (sectorRooms.length === 0) return '';
         return `
-            <div class="space-y-5">
-                <!-- En-tête de secteur -->
+            <div class="space-y-4">
                 <div class="liquid-glass-dark text-white p-4 rounded-[24px] flex items-center justify-between gap-3 shadow-sm">
                     <div class="flex items-center gap-3 min-w-0">
-                        <span class="w-10 h-10 rounded-2xl bg-white/15 flex items-center justify-center text-lg flex-shrink-0">${ICONS.sector[sector.id]}</span>
+                        <span class="w-11 h-11 rounded-2xl bg-white/15 flex items-center justify-center text-xl flex-shrink-0">${ICONS.sector[sector.id]}</span>
                         <div class="min-w-0">
                             <h3 class="font-diola font-black text-base md:text-lg text-white truncate">${sector.title}</h3>
                             <p class="text-xs text-emerald-100/90 font-medium hidden sm:block">${sector.description}</p>
                         </div>
                     </div>
-                    <span class="text-xs font-black bg-white/20 px-2.5 py-1 rounded-full text-white flex-shrink-0">${sectorRooms.length}</span>
+                    <span class="text-xs font-black bg-white/20 px-3 py-1.5 rounded-full text-white flex-shrink-0">${sectorRooms.length}</span>
                 </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+                    ${sectorRooms.map(room => renderHousekeepingCard(room)).join('')}
+                </div>
+            </div>`;
+    }).join('');
+}
 
-                <!-- GRILLE : 1 col mobile / 2 tablette / 3 desktop -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-7">
-                    ${sectorRooms.map(room => {
-                        const meta = getStatusMeta(room.status);
-                        return `
-                            <div class="room-card-wrapper">
-                                <div class="room-card-inner">
-                                    <!-- Image ratio 4/3 -->
-                                    <div class="relative aspect-[4/3] w-[calc(100%-8px)] m-1 overflow-hidden rounded-[20px] bg-slate-100">
-                                        <img src="${room.photo}" alt="Chambre ${room.name}" loading="lazy"
-                                             onerror="this.src='https://placehold.co/600x450/ebd9c8/0D5C3A?text=${room.name}'"
-                                             class="room-card-image w-full h-full object-cover">
+function renderHousekeepingCard(room) {
+    const meta = getStatusMeta(room.status);
+    const num = getRoomNumber(room.id);
+    const photoSrc = getRoomPhoto(room);
 
-                                        <!-- Badge secteur (haut gauche) -->
-                                        <div class="absolute top-3 left-3 flex items-center gap-1.5 rounded-full bg-black/25 backdrop-blur-md px-3 py-1.5 border border-white/20 text-white text-xs font-bold">
-                                            ${ICONS.sector[sector.id]}
-                                            <span class="hidden sm:inline">${room.sectorName}</span>
-                                        </div>
+    const statuses = [
+        { id:'to_clean',   icon:'fa-broom',                cls:'c-to_clean',   lbl:'À nettoyer' },
+        { id:'in_progress',icon:'fa-spray-can-sparkles',   cls:'c-in_progress',lbl:'En cours' },
+        { id:'clean',      icon:'fa-wand-magic-sparkles',  cls:'c-clean',      lbl:'Propre' },
+        { id:'occupied',   icon:'fa-key',                  cls:'c-occupied',   lbl:'Occupée' }
+    ];
 
-                                        <!-- Badge statut (haut droite) -->
-                                        <div class="absolute top-3 right-3 flex items-center gap-1.5 rounded-full ${meta.solid} px-3 py-1.5 border border-white/30 text-white text-xs font-black shadow-sm">
-                                            <i class="fa-solid ${meta.iconCls}" aria-hidden="true"></i>
-                                            <span class="hidden sm:inline">${meta.label.toUpperCase()}</span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Contenu -->
-                                    <div class="p-4 sm:p-5">
-                                        <h3 class="text-xl font-diola font-black text-slate-900 tracking-tight">${room.name}</h3>
-                                        <p class="text-xs text-slate-500 font-medium mt-0.5">${room.sectorName}</p>
-
-                                        <!-- Notes courtes -->
-                                        ${room.notes ? `
-                                            <p class="text-xs text-slate-600 mt-3 line-clamp-2 leading-relaxed">
-                                                <i class="fa-solid fa-note-sticky text-lagoon-500 mr-1" aria-hidden="true"></i>${room.notes}
-                                            </p>
-                                        ` : ''}
-
-                                        <!-- Séparateur + boutons statut -->
-                                        <div class="mt-4 pt-3 border-t border-slate-200/60 space-y-2">
-                                            <span class="block text-[10px] text-slate-400 font-black tracking-wider uppercase">Changer le statut</span>
-                                            <div class="grid grid-cols-4 gap-1.5">
-                                                <button onclick="updateRoomStatus('${room.id}', 'to_clean')" aria-label="À nettoyer" class="min-h-[44px] py-2.5 px-1 rounded-2xl font-black text-xs active-scale transition flex flex-col items-center justify-center gap-0.5 ${room.status === 'to_clean' ? 'bg-red-600 text-white shadow-sm' : 'bg-red-50/80 text-red-800 border border-red-200/60 hover:bg-red-100'}">
-                                                    <i class="fa-solid fa-broom text-base" aria-hidden="true"></i>
-                                                    <span class="leading-tight text-[10px]">À nettoyer</span>
-                                                </button>
-                                                <button onclick="updateRoomStatus('${room.id}', 'in_progress')" aria-label="En cours" class="min-h-[44px] py-2.5 px-1 rounded-2xl font-black text-xs active-scale transition flex flex-col items-center justify-center gap-0.5 ${room.status === 'in_progress' ? 'bg-amber-500 text-white shadow-sm' : 'bg-amber-50/80 text-amber-900 border border-amber-200/60 hover:bg-amber-100'}">
-                                                    <i class="fa-solid fa-spray-can-sparkles text-base" aria-hidden="true"></i>
-                                                    <span class="leading-tight text-[10px]">En cours</span>
-                                                </button>
-                                                <button onclick="updateRoomStatus('${room.id}', 'clean')" aria-label="Propre" class="min-h-[44px] py-2.5 px-1 rounded-2xl font-black text-xs active-scale transition flex flex-col items-center justify-center gap-0.5 ${room.status === 'clean' ? 'bg-palm-500 text-white shadow-sm' : 'bg-palm-50 text-palm-500 border border-palm-100 hover:bg-palm-100'}">
-                                                    <i class="fa-solid fa-wand-magic-sparkles text-base" aria-hidden="true"></i>
-                                                    <span class="leading-tight text-[10px]">Propre</span>
-                                                </button>
-                                                <button onclick="updateRoomStatus('${room.id}', 'occupied')" aria-label="Occupée" class="min-h-[44px] py-2.5 px-1 rounded-2xl font-black text-xs active-scale transition flex flex-col items-center justify-center gap-0.5 ${room.status === 'occupied' ? 'bg-lagoon-500 text-white shadow-sm' : 'bg-lagoon-50 text-lagoon-700 border border-lagoon-200/60 hover:bg-lagoon-100'}">
-                                                    <i class="fa-solid fa-key text-base" aria-hidden="true"></i>
-                                                    <span class="leading-tight text-[10px]">Occupée</span>
-                                                </button>
-                                            </div>
-
-                                            <button onclick="openRoomNotesModal('${room.id}')" aria-label="Modifier la consigne" class="w-full min-h-[44px] mt-1 px-3 py-2.5 bg-slate-100/70 hover:bg-slate-200/70 active:scale-95 text-slate-700 font-bold text-xs rounded-2xl transition-all flex items-center justify-center gap-2">
-                                                <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
-                                                Modifier la consigne
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                    }).join('')}
+    return `
+        <div class="hk-card">
+            <div class="hk-photo">
+                <img src="${photoSrc}"
+                     data-room-id="${room.id}"
+                     onerror="handleRoomImgError(this)"
+                     alt="Chambre ${num}"
+                     loading="lazy">
+                <div class="hk-num-badge">${num}</div>
+                <div class="hk-status-pill ${meta.solid}">
+                    <i class="fa-solid ${meta.iconCls}" aria-hidden="true"></i>
+                    <span class="dot"></span>
+                </div>
+                <div class="hk-name">
+                    <div class="n">${room.name}</div>
+                    <div class="s">${room.sectorName}</div>
                 </div>
             </div>
-        `;
-    }).join('');
+            <div class="hk-actions">
+                ${statuses.map(s => `
+                    <button class="hk-btn ${s.cls} ${room.status === s.id ? 'active' : ''}"
+                            onclick="updateRoomStatus('${room.id}', '${s.id}')"
+                            aria-label="${s.lbl}">
+                        <i class="fa-solid ${s.icon}" aria-hidden="true"></i>
+                        <span>${s.lbl}</span>
+                    </button>
+                `).join('')}
+            </div>
+            <button onclick="openRoomNotesModal('${room.id}')" class="hk-note-btn">
+                <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Consigne
+            </button>
+        </div>
+    `;
 }
 
 async function updateRoomStatus(roomId, newStatus) {
@@ -2150,10 +2340,7 @@ function switchReceptionTab(tabName) {
 }
 
 function renderReceptionView() {
-    if (appState.receptionTab === 'calendar') {
-        renderCalendarGrid();
-        renderMobileCalendar();
-    }
+    if (appState.receptionTab === 'calendar') renderCalendarGrid();
     else if (appState.receptionTab === 'today') renderTodayRoomsView();
     else if (appState.receptionTab === 'list') renderReservationsList();
 }
@@ -2161,126 +2348,80 @@ function renderReceptionView() {
 function changeCalendarWeek(offset) { appState.calendarStartDate.setDate(appState.calendarStartDate.getDate() + offset); renderCalendarGrid(); }
 function resetCalendarToToday() { appState.calendarStartDate = new Date(); renderCalendarGrid(); }
 
-function changeMobileDay(offset) {
-    appState.mobileCalendarDate.setDate(appState.mobileCalendarDate.getDate() + offset);
-    renderMobileCalendar();
-}
-function resetMobileDayToToday() {
-    appState.mobileCalendarDate = new Date();
-    renderMobileCalendar();
-}
-
-function renderMobileCalendar() {
-    const labelEl = document.getElementById('mobile-day-label');
-    const dateEl = document.getElementById('mobile-day-date');
-    const listEl = document.getElementById('mobile-calendar-list');
-    if (!labelEl || !listEl) return;
-
-    const d = appState.mobileCalendarDate;
-    const today = new Date();
-    const dateStr = formatDateISO(d);
-    const isToday = dateStr === formatDateISO(today);
-
-    const joursFR = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
-    const moisFR = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-
-    labelEl.textContent = isToday ? "Aujourd'hui" : joursFR[d.getDay()];
-    dateEl.textContent = `${d.getDate()} ${moisFR[d.getMonth()]} ${d.getFullYear()}`;
-
-    listEl.innerHTML = appState.rooms.map(room => {
-        const res = appState.reservations.find(r => {
-            if (r.roomId !== room.id) return false;
-            if (r.type === 'day_use') return r.startDate === dateStr;
-            return dateStr >= r.startDate && dateStr < r.endDate;
-        });
-
-        const statusDotColor = room.status === 'clean' ? 'bg-palm-500' : room.status === 'to_clean' ? 'bg-red-500' : room.status === 'occupied' ? 'bg-lagoon-500' : 'bg-amber-500';
-
-        return `
-            <div class="bg-white/70 border border-white/80 rounded-2xl p-3 shadow-sm flex items-center gap-3">
-                <div class="flex flex-col items-center gap-1 flex-shrink-0 w-14">
-                    <span class="w-3 h-3 rounded-full ${statusDotColor}"></span>
-                    <span class="text-xs font-black text-palm-500 text-center leading-tight truncate w-full">${room.name}</span>
-                </div>
-                <div class="flex-1 min-w-0">
-                    ${res ? `
-                        <div class="flex items-start gap-2">
-                            <span class="${res.type === 'day_use' ? 'bg-purple-100 text-purple-900' : 'bg-palm-50 text-palm-500'} text-xs font-black uppercase px-2 py-1 rounded-lg inline-flex items-center gap-1 flex-shrink-0">
-                                ${ICONS.type[res.type]} ${res.type === 'day_use' ? 'Passage' : 'Nuitée'}
-                            </span>
-                            <div class="min-w-0">
-                                <p class="font-extrabold text-slate-800 text-sm truncate">${res.clientName}</p>
-                                ${res.phone ? `<div class="mt-0.5">${renderPhoneLinks(res.phone)}</div>` : ''}
-                            </div>
-                        </div>
-                    ` : `
-                        <div class="flex items-center justify-between gap-2">
-                            <span class="bg-palm-50 text-palm-500 text-xs font-black px-2.5 py-1 rounded-lg inline-flex items-center gap-1">
-                                <i class="fa-solid fa-circle-check" aria-hidden="true"></i> Libre
-                            </span>
-                            <button onclick="openNewReservationModal('${room.id}', '${dateStr}')" aria-label="Réserver" class="bg-white/80 hover:bg-white text-palm-500 font-extrabold px-3 py-2 rounded-xl text-xs transition border border-white/90 flex items-center gap-1 active-scale touch-44">
-                                <i class="fa-solid fa-plus" aria-hidden="true"></i> Réserver
-                            </button>
-                        </div>
-                    `}
-                </div>
-            </div>
-        `;
-    }).join('');
-}
-
+// ============================================================
+// PLANNING 7 JOURS × 7 CHAMBRES (avec nom des chambres)
+// ============================================================
 function renderCalendarGrid() {
     const headerRow = document.getElementById('calendar-grid-header');
     const bodyRows = document.getElementById('calendar-grid-body');
     const rangeText = document.getElementById('calendar-week-range');
     if (!headerRow || !bodyRows) return;
+
     const days = [];
     const start = new Date(appState.calendarStartDate);
     for (let i = 0; i < 7; i++) { const d = new Date(start); d.setDate(start.getDate() + i); days.push(d); }
     const opt = { day:'numeric', month:'short' };
     rangeText.innerText = `${days[0].toLocaleDateString('fr-FR', opt)} → ${days[6].toLocaleDateString('fr-FR', opt)}`;
+
+    const todayStr = formatDateISO(new Date());
+
     headerRow.innerHTML = `
-        <th class="p-3 w-40 bg-white/60 text-palm-500 font-black sticky left-0 z-10 border-r border-slate-200/60 text-xs">
-            <i class="fa-solid fa-door-closed mr-1 text-slate-500" aria-hidden="true"></i> Ch.
+        <th class="room-col" style="min-width:125px;width:125px;padding:3px;">
+            <div class="text-palm-500 font-black text-[10px] uppercase tracking-wider" style="text-align:left;padding-left:10px;">
+                <i class="fa-solid fa-door-closed" aria-hidden="true"></i> Chambre
+            </div>
         </th>
         ${days.map(d => {
-            const isToday = formatDateISO(d) === formatDateISO(new Date());
-            return `<th class="p-3 text-center ${isToday ? 'bg-palm-50 text-palm-600 border-b-2 border-palm-500' : ''}">
-                <span class="block text-xs opacity-75 capitalize">${d.toLocaleDateString('fr-FR', { weekday:'short' })}.</span>
-                <span class="text-base font-black">${d.getDate()}</span>
+            const isToday = formatDateISO(d) === todayStr;
+            return `<th style="min-width:62px;padding:3px 2px;">
+                <div class="day-header ${isToday ? 'today' : ''}">
+                    <div class="wd">${d.toLocaleDateString('fr-FR', { weekday:'short' }).replace('.','')}</div>
+                    <div class="dd">${d.getDate()}</div>
+                </div>
             </th>`;
         }).join('')}`;
-    bodyRows.innerHTML = appState.rooms.map(room => `
-        <tr class="hover:bg-white/40 transition">
-            <td class="p-3 font-extrabold text-palm-500 sticky left-0 z-10 border-r border-slate-200/60 shadow-sm" style="background:rgba(255,255,255,0.9)">
-                <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full inline-block flex-shrink-0" style="background:${room.status === 'clean' ? '#0D5C3A' : room.status === 'to_clean' ? '#ef4444' : room.status === 'occupied' ? '#0284C7' : '#f59e0b'}"></span>
-                    <div class="min-w-0">
-                        <span class="block text-sm font-black leading-tight truncate">${room.name}</span>
-                        <span class="block text-xs text-slate-500 font-semibold truncate">${room.sectorName}</span>
-                    </div>
+
+    bodyRows.innerHTML = appState.rooms.map(room => {
+        const num = getRoomNumber(room.id);
+        const statusDot = room.status === 'clean' ? '#10b981' : room.status === 'to_clean' ? '#ef4444' : room.status === 'occupied' ? '#38bdf8' : '#f59e0b';
+        return `
+        <tr>
+            <td class="room-col" style="min-width:125px;width:125px;padding:3px;">
+                <div class="room-badge-planning" style="border-left:4px solid ${statusDot};">
+                    <span class="n">${num}</span>
+                    <span class="nm">${room.name}</span>
                 </div>
             </td>
             ${days.map(d => {
                 const dateStr = formatDateISO(d);
+                const isToday = dateStr === todayStr;
                 const res = appState.reservations.find(r => {
                     if (r.roomId !== room.id) return false;
                     if (r.type === 'day_use') return r.startDate === dateStr;
                     return dateStr >= r.startDate && dateStr < r.endDate;
                 });
                 if (res) {
-                    const badgeColor = res.type === 'day_use' ? 'bg-purple-700 text-white' : 'bg-palm-500 text-white';
-                    return `<td class="p-1.5 text-center">
-                        <div onclick="showReservationDetail('${res.id}')" class="${badgeColor} hover:opacity-90 active-scale text-xs font-bold rounded-xl p-2 cursor-pointer truncate transition flex items-center gap-1 justify-center" title="${res.clientName}">
-                            ${ICONS.type[res.type]} <span class="truncate">${res.clientName}</span>
-                        </div>
+                    const typeCls = res.type === 'day_use' ? 'day_use' : 'overnight';
+                    const ico = res.type === 'day_use' ? 'fa-bolt' : 'fa-moon';
+                    return `<td style="padding:3px 2px;">
+                        <button class="planning-cell ${typeCls} ${isToday ? 'today-cell' : ''}"
+                                onclick="showReservationDetail('${res.id}')"
+                                aria-label="Réservation ${res.clientName}"
+                                title="${res.clientName}">
+                            <i class="fa-solid ${ico}" aria-hidden="true"></i>
+                        </button>
                     </td>`;
                 }
-                return `<td class="p-1.5 text-center">
-                    <button onclick="openNewReservationModal('${room.id}', '${dateStr}')" aria-label="Réserver" class="w-full h-10 border border-dashed border-palm-200 hover:border-palm-500 active:bg-palm-50 rounded-xl text-palm-500 font-black text-xs transition flex items-center justify-center touch-44"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+                return `<td style="padding:3px 2px;">
+                    <button class="planning-cell free ${isToday ? 'today-cell' : ''}"
+                            onclick="openNewReservationModal('${room.id}', '${dateStr}')"
+                            aria-label="Réserver chambre ${num}">
+                        <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                    </button>
                 </td>`;
             }).join('')}
-        </tr>`).join('');
+        </tr>`;
+    }).join('');
 }
 
 function renderTodayRoomsView() {
@@ -2298,23 +2439,28 @@ function renderTodayRoomsView() {
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
                     ${sectorRooms.map(room => {
                         const meta = getStatusMeta(room.status);
+                        const num = getRoomNumber(room.id);
                         const currentRes = appState.reservations.find(res => {
                             if (res.roomId !== room.id) return false;
                             if (res.type === 'day_use') return res.startDate === todayStr;
                             return todayStr >= res.startDate && todayStr < res.endDate;
                         });
+                        const dot = room.status === 'clean' ? '#0D5C3A' : room.status === 'to_clean' ? '#dc2626' : room.status === 'occupied' ? '#0284C7' : '#d97706';
                         return `
                             <div class="liquid-glass rounded-[24px] p-4 space-y-3">
                                 <div class="flex justify-between items-start gap-2">
-                                    <div class="min-w-0">
-                                        <h4 class="text-lg font-diola font-black text-palm-500 truncate">${room.name}</h4>
-                                        <span class="text-xs text-slate-500 font-semibold flex items-center gap-1.5 mt-0.5">
-                                            <span class="w-2 h-2 rounded-full flex-shrink-0" style="background:${room.status === 'clean' ? '#0D5C3A' : room.status === 'to_clean' ? '#ef4444' : room.status === 'occupied' ? '#0284C7' : '#f59e0b'}"></span>
-                                            ${meta.label}
-                                        </span>
+                                    <div class="flex items-center gap-2 min-w-0">
+                                        <div class="w-11 h-11 rounded-2xl bg-slate-900/85 text-white flex items-center justify-center font-diola font-black text-lg flex-shrink-0">${num}</div>
+                                        <div class="min-w-0">
+                                            <h4 class="text-base font-diola font-black text-palm-500 truncate">${room.name}</h4>
+                                            <span class="text-xs text-slate-500 font-semibold flex items-center gap-1.5 mt-0.5">
+                                                <span class="w-2 h-2 rounded-full flex-shrink-0" style="background:${dot}"></span>
+                                                ${meta.label}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <button onclick="openNewReservationModal('${room.id}')" aria-label="Réserver" class="bg-white/80 hover:bg-white text-palm-500 font-extrabold px-3 py-2 rounded-xl text-xs transition border border-white/90 flex items-center gap-1 flex-shrink-0 active-scale touch-44">
-                                        <i class="fa-solid fa-plus" aria-hidden="true"></i> Réserver
+                                    <button onclick="openNewReservationModal('${room.id}')" aria-label="Réserver" class="bg-white/80 hover:bg-white text-palm-500 font-extrabold w-11 h-11 rounded-2xl text-base transition border border-white/90 flex items-center justify-center flex-shrink-0 active-scale touch-44">
+                                        <i class="fa-solid fa-plus" aria-hidden="true"></i>
                                     </button>
                                 </div>
                                 <div class="bg-white/60 rounded-xl p-3 border border-white/80">
@@ -2349,34 +2495,30 @@ function renderReservationsList() {
     const cardsHtml = appState.reservations.map(res => {
         const room = appState.rooms.find(r => r.id === res.roomId);
         const roomName = room ? room.name : res.roomId;
-        const sectorName = room ? room.sectorName : '';
+        const num = room ? getRoomNumber(room.id) : '?';
         return `
             <div class="bg-white/70 border border-white/80 rounded-2xl p-4 shadow-sm">
                 <div class="flex justify-between items-start gap-3 mb-3">
-                    <div class="min-w-0 flex-1">
-                        <p class="font-black text-slate-800 text-base truncate">${res.clientName}</p>
-                        ${res.phone ? `<div class="mt-1">${renderPhoneLinks(res.phone)}</div>` : ''}
+                    <div class="min-w-0 flex-1 flex items-center gap-2">
+                        <div class="w-11 h-11 rounded-2xl bg-slate-900/85 text-white flex items-center justify-center font-diola font-black text-lg flex-shrink-0">${num}</div>
+                        <div class="min-w-0">
+                            <p class="font-black text-slate-800 text-base truncate">${res.clientName}</p>
+                            <p class="text-xs text-slate-500 truncate">${roomName}</p>
+                            ${res.phone ? `<div class="mt-1">${renderPhoneLinks(res.phone)}</div>` : ''}
+                        </div>
                     </div>
                     <button onclick="confirmDeleteReservation('${res.id}')" aria-label="Supprimer la réservation" class="text-red-600 bg-red-50/80 p-3 rounded-xl text-sm font-bold border border-red-200 active-scale flex-shrink-0 transition touch-44">
                         <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
                     </button>
                 </div>
-                <div class="grid grid-cols-2 gap-3 text-sm">
-                    <div>
-                        <span class="text-xs font-black text-slate-400 uppercase tracking-widest block">Chambre</span>
-                        <span class="font-black text-palm-500 text-base">${roomName}</span>
-                        <span class="text-xs text-slate-500 block truncate">${sectorName}</span>
-                    </div>
-                    <div>
-                        <span class="text-xs font-black text-slate-400 uppercase tracking-widest block">Type</span>
-                        <span class="text-xs font-black px-2 py-1 rounded-lg inline-flex items-center gap-1 ${res.type === 'day_use' ? 'bg-purple-100 text-purple-900' : 'bg-palm-50 text-palm-500'}">
-                            ${ICONS.type[res.type]} ${res.type === 'day_use' ? 'Passage' : 'Nuitée'}
-                        </span>
-                    </div>
-                </div>
-                <div class="mt-3 pt-3 border-t border-slate-200/60 text-xs text-slate-600 font-semibold flex items-center gap-1.5">
-                    <i class="fa-regular fa-calendar text-lagoon-500" aria-hidden="true"></i>
-                    ${res.startDate} ${res.startDate !== res.endDate ? '<i class="fa-solid fa-arrow-right text-xs mx-1 text-lagoon-400" aria-hidden="true"></i> ' + res.endDate : ''}
+                <div class="flex items-center justify-between gap-2">
+                    <span class="text-xs font-black px-2 py-1 rounded-lg inline-flex items-center gap-1 ${res.type === 'day_use' ? 'bg-purple-100 text-purple-900' : 'bg-palm-50 text-palm-500'}">
+                        ${ICONS.type[res.type]} ${res.type === 'day_use' ? 'Passage' : 'Nuitée'}
+                    </span>
+                    <span class="text-xs text-slate-600 font-semibold flex items-center gap-1.5">
+                        <i class="fa-regular fa-calendar text-lagoon-500" aria-hidden="true"></i>
+                        ${res.startDate} ${res.startDate !== res.endDate ? '<i class="fa-solid fa-arrow-right text-xs mx-1 text-lagoon-400" aria-hidden="true"></i> ' + res.endDate : ''}
+                    </span>
                 </div>
             </div>
         `;
@@ -2387,23 +2529,23 @@ function renderReservationsList() {
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="bg-white/60 text-palm-500 text-xs uppercase font-black border-b border-slate-200/60">
-                        <th class="p-3.5">Client</th><th class="p-3.5">Chambre & Secteur</th><th class="p-3.5">Type</th><th class="p-3.5">Dates</th><th class="p-3.5 text-right">Actions</th>
+                        <th class="p-3.5">N°</th><th class="p-3.5">Client</th><th class="p-3.5">Chambre</th><th class="p-3.5">Type</th><th class="p-3.5">Dates</th><th class="p-3.5 text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="reservations-list-body" class="divide-y divide-slate-100 text-sm bg-white/40">
                     ${appState.reservations.map(res => {
                         const room = appState.rooms.find(r => r.id === res.roomId);
                         const roomName = room ? room.name : res.roomId;
-                        const sectorName = room ? room.sectorName : '';
+                        const num = room ? getRoomNumber(room.id) : '?';
                         return `
                             <tr class="hover:bg-white/60 transition">
+                                <td class="p-3.5"><div class="w-10 h-10 rounded-xl bg-slate-900/85 text-white flex items-center justify-center font-diola font-black text-base">${num}</div></td>
                                 <td class="p-3.5 font-bold text-slate-800">
                                     ${res.clientName}
                                     ${res.phone ? `<span class="block text-xs text-slate-400 font-normal mt-1">${renderPhoneLinks(res.phone)}</span>` : ''}
                                 </td>
                                 <td class="p-3.5">
                                     <span class="font-black text-palm-500 block">${roomName}</span>
-                                    <span class="text-xs text-slate-500 block">${sectorName}</span>
                                 </td>
                                 <td class="p-3.5">
                                     <span class="text-xs font-black px-2.5 py-1 rounded-lg inline-flex items-center gap-1.5 ${res.type === 'day_use' ? 'bg-purple-100 text-purple-900 border border-purple-200' : 'bg-palm-50 text-palm-500 border border-palm-100'}">
@@ -2453,7 +2595,7 @@ function getReservationDays(res) {
 function openNewReservationModal(defaultRoomId = null, defaultStartDate = null) {
     const modal = document.getElementById('modal-reservation');
     const roomSelect = document.getElementById('res-room-id');
-    roomSelect.innerHTML = appState.rooms.map(r => `<option value="${r.id}">${r.name} (${r.sectorName})</option>`).join('');
+    roomSelect.innerHTML = appState.rooms.map(r => `<option value="${r.id}">N°${getRoomNumber(r.id)} — ${r.name}</option>`).join('');
     if (defaultRoomId) roomSelect.value = defaultRoomId;
     const today = new Date();
     const tomorrow = new Date(today); tomorrow.setDate(today.getDate() + 1);
@@ -2562,15 +2704,16 @@ function showReservationDetail(id) {
     if (!res) return;
     const room = appState.rooms.find(r => r.id === res.roomId);
     const typeLabel = res.type === 'day_use' ? 'Passage' : 'Nuitée';
-    const msg = `Client : ${res.clientName}\nChambre : ${room ? room.name : ''}\nSecteur : ${room ? room.sectorName : ''}\nType : ${typeLabel}\nArrivée : ${res.startDate}\nDépart : ${res.endDate}\nTél : ${res.phone || '—'}\nNotes : ${res.notes || 'Aucune'}`;
+    const msg = `Client : ${res.clientName}\nChambre : ${room ? room.name : ''}\nType : ${typeLabel}\nArrivée : ${res.startDate}\nDépart : ${res.endDate}\nTél : ${res.phone || '—'}\nNotes : ${res.notes || 'Aucune'}`;
     showCustomAlert("Détails Réservation", msg);
 }
 
 function openRoomNotesModal(roomId) {
     const room = appState.rooms.find(r => r.id === roomId);
     if (!room) return;
+    const num = getRoomNumber(room.id);
     document.getElementById('notes-modal-room-id').value = room.id;
-    document.getElementById('notes-modal-room-title').innerHTML = `<i class="fa-solid fa-pen-to-square text-lagoon-500" aria-hidden="true"></i> ${room.name}`;
+    document.getElementById('notes-modal-room-title').innerHTML = `<i class="fa-solid fa-pen-to-square text-lagoon-500" aria-hidden="true"></i> N°${num} — ${room.name}`;
     document.getElementById('notes-modal-input').value = room.notes || '';
     document.getElementById('modal-room-notes').classList.remove('hidden');
 }
