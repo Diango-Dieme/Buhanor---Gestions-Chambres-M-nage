@@ -85,6 +85,22 @@
         .hk-photo { position: relative; aspect-ratio: 5/4; background: #ebd9c8; overflow: hidden; }
         .hk-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .hk-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.05) 42%, transparent 65%); pointer-events: none; }
+
+        .hk-badge-stack { position: absolute; top: 12px; left: 12px; z-index: 3; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+        .hk-badge {
+            display: flex; align-items: center; gap: 5px;
+            height: 30px; padding: 0 12px; border-radius: 999px;
+            color: #fff; font-size: 10px; font-weight: 900;
+            border: 1.5px solid rgba(255,255,255,0.55);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.28);
+            text-transform: uppercase; letter-spacing: 0.05em;
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        }
+        .hk-badge.occupancy { background: rgba(2,132,199,0.96); }
+        .hk-badge.cleaning   { background: rgba(220,38,38,0.96); }
+        .hk-badge.maint      { background: rgba(239,68,68,0.98); animation: pulseAlert 1.4s infinite; }
+        @keyframes pulseAlert { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.06); opacity: 0.85; } }
+
         .hk-status-pill {
             position: absolute; top: 12px; right: 12px; z-index: 2;
             display: flex; align-items: center; gap: 6px;
@@ -95,17 +111,6 @@
             text-transform: uppercase; letter-spacing: 0.03em;
         }
         .hk-status-pill i { font-size: 15px; }
-        .hk-occupied-chip {
-            position: absolute; top: 12px; left: 12px; z-index: 2;
-            display: flex; align-items: center; gap: 5px;
-            height: 32px; padding: 0 12px; border-radius: 999px;
-            background: rgba(2,132,199,0.95);
-            color: #fff; font-size: 10px; font-weight: 900;
-            border: 1.5px solid rgba(255,255,255,0.55);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            text-transform: uppercase; letter-spacing: 0.05em;
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-        }
         .hk-name { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 14px 16px; }
         .hk-name .n { font-family: "Bricolage Grotesque", sans-serif; font-weight: 900; font-size: 22px; color: #fff; line-height: 1.05; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
         .hk-name .s { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.85); text-transform: uppercase; letter-spacing: 0.06em; text-shadow: 0 1px 6px rgba(0,0,0,0.4); }
@@ -124,10 +129,9 @@
         .hk-main-btn.b-in_progress { background: #d97706; color: #fff; }
         .hk-main-btn.b-clean_pending { background: #7c3aed; color: #fff; }
         .hk-main-btn.b-clean       { background: #0D5C3A; color: #fff; }
-        .hk-main-btn.b-occupied    { background: #0284C7; color: #fff; }
         .hk-main-btn.b-midstay     { background: #0ea5e9; color: #fff; }
 
-        /* ─── Bloc de 4 boutons statut rapides ─── */
+        /* Bloc 4 boutons statut rapides */
         .hk-quick-actions {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -141,14 +145,16 @@
             border: 2px solid rgba(15,23,42,0.08);
             background: #ffffff;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 18px;
             color: var(--c, #64748b);
             cursor: pointer;
             transition: all 0.15s cubic-bezier(0.34,1.56,0.64,1);
             -webkit-tap-highlight-color: transparent;
             position: relative;
+            gap: 1px;
         }
         .hk-quick-btn:active { transform: scale(0.9); }
         .hk-quick-btn.active {
@@ -159,15 +165,11 @@
             transform: scale(1.04);
         }
         .hk-quick-btn .lbl {
-            position: absolute;
-            bottom: 2px;
-            left: 0; right: 0;
             font-size: 8px;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 0.04em;
-            opacity: 0.65;
-            text-align: center;
+            opacity: 0.7;
         }
         .hk-quick-btn.active .lbl { opacity: 0.95; }
 
@@ -206,27 +208,11 @@
         .service-banner.done    { background: linear-gradient(160deg, #7c3aed 0%, #6d28d9 100%); color: #fff; box-shadow: 0 10px 30px -8px rgba(124,58,237,0.5); }
         .service-banner.admin   { background: linear-gradient(160deg, #7c3aed 0%, #5b21b6 100%); color: #fff; box-shadow: 0 10px 30px -8px rgba(124,58,237,0.5); }
 
-        /* ═══════════════════════════════════════════════════════
-           CARTES DE RÔLE — Sélection très visible (Admin vert / Ménage bleu)
-           ═══════════════════════════════════════════════════════ */
-        .role-card {
-            position: relative;
-            border-width: 2px;
-            border-style: solid;
-            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-            overflow: hidden;
-        }
+        /* Cartes de rôle */
+        .role-card { position: relative; border-width: 2px; border-style: solid; transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); overflow: hidden; }
         .role-card:active { transform: scale(0.97); }
-
-        /* Admin - état par défaut */
-        .role-card[data-role="admin"] {
-            border-color: rgba(13, 92, 58, 0.2);
-            background: rgba(255, 255, 255, 0.75);
-        }
-        .role-card[data-role="admin"] .role-icon {
-            background: rgba(13, 92, 58, 0.1);
-            color: #0D5C3A;
-        }
+        .role-card[data-role="admin"] { border-color: rgba(13, 92, 58, 0.2); background: rgba(255, 255, 255, 0.75); }
+        .role-card[data-role="admin"] .role-icon { background: rgba(13, 92, 58, 0.1); color: #0D5C3A; }
         .role-card[data-role="admin"].selected {
             border-color: #0D5C3A;
             background: linear-gradient(160deg, #0f6d44 0%, #0a4a2e 100%);
@@ -236,21 +222,10 @@
         .role-card[data-role="admin"].selected .role-title,
         .role-card[data-role="admin"].selected .role-desc { color: #ffffff; }
         .role-card[data-role="admin"].selected .role-desc { color: rgba(255,255,255,0.85); }
-        .role-card[data-role="admin"].selected .role-icon {
-            background: rgba(255, 255, 255, 0.22);
-            color: #ffffff;
-            transform: scale(1.08);
-        }
+        .role-card[data-role="admin"].selected .role-icon { background: rgba(255, 255, 255, 0.22); color: #ffffff; transform: scale(1.08); }
 
-        /* Ménage - état par défaut */
-        .role-card[data-role="menage"] {
-            border-color: rgba(2, 132, 199, 0.2);
-            background: rgba(255, 255, 255, 0.75);
-        }
-        .role-card[data-role="menage"] .role-icon {
-            background: rgba(2, 132, 199, 0.1);
-            color: #0284C7;
-        }
+        .role-card[data-role="menage"] { border-color: rgba(2, 132, 199, 0.2); background: rgba(255, 255, 255, 0.75); }
+        .role-card[data-role="menage"] .role-icon { background: rgba(2, 132, 199, 0.1); color: #0284C7; }
         .role-card[data-role="menage"].selected {
             border-color: #0284C7;
             background: linear-gradient(160deg, #0596dd 0%, #026aa0 100%);
@@ -260,49 +235,23 @@
         .role-card[data-role="menage"].selected .role-title,
         .role-card[data-role="menage"].selected .role-desc { color: #ffffff; }
         .role-card[data-role="menage"].selected .role-desc { color: rgba(255,255,255,0.85); }
-        .role-card[data-role="menage"].selected .role-icon {
-            background: rgba(255, 255, 255, 0.22);
-            color: #ffffff;
-            transform: scale(1.08);
-        }
+        .role-card[data-role="menage"].selected .role-icon { background: rgba(255, 255, 255, 0.22); color: #ffffff; transform: scale(1.08); }
 
-        /* Coche de sélection */
         .role-check {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: #ffffff;
-            color: #0D5C3A;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            opacity: 0;
+            position: absolute; top: 12px; right: 12px;
+            width: 30px; height: 30px; border-radius: 50%;
+            background: #ffffff; color: #0D5C3A;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; opacity: 0;
             transform: scale(0.3) rotate(-90deg);
             transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             pointer-events: none;
         }
-        .role-card.selected .role-check {
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-        }
+        .role-card.selected .role-check { opacity: 1; transform: scale(1) rotate(0deg); }
         .role-card[data-role="menage"].selected .role-check { color: #0284C7; }
 
-        .role-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            margin-bottom: 10px;
-            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
+        .role-icon { width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 10px; transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .role-title { transition: color 0.25s ease; }
         .role-desc { transition: color 0.25s ease; }
 
@@ -342,6 +291,129 @@
             z-index: 20;
         }
         @keyframes fadeInBackdrop { from { opacity: 0; } to { opacity: 1; } }
+
+        /* ─── MAINTENANCE ─── */
+        .maint-carousel { display: flex; gap: 12px; overflow-x: auto; padding: 4px 2px 14px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+        .maint-carousel::-webkit-scrollbar { height: 0; }
+        .maint-carousel-card {
+            flex: 0 0 70%; max-width: 260px; scroll-snap-align: start;
+            border-radius: 22px; overflow: hidden; position: relative;
+            box-shadow: 0 12px 28px -12px rgba(15,23,42,0.25);
+            background: #ebd9c8; aspect-ratio: 5/4;
+            cursor: pointer; transition: transform 0.2s;
+            border: 3px solid transparent;
+        }
+        .maint-carousel-card:active { transform: scale(0.97); }
+        .maint-carousel-card.selected { border-color: #0D5C3A; box-shadow: 0 0 0 4px rgba(13,92,58,0.2), 0 12px 28px -12px rgba(15,23,42,0.35); }
+        .maint-carousel-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .maint-carousel-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.05) 50%, transparent 75%); pointer-events: none; }
+        .maint-carousel-card .card-label { position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 14px; z-index: 2; color: #fff; }
+        .maint-carousel-card .card-label .n { font-family: "Bricolage Grotesque", sans-serif; font-weight: 900; font-size: 18px; line-height: 1; text-shadow: 0 2px 6px rgba(0,0,0,0.5); }
+        .maint-carousel-card .card-label .s { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.85); text-shadow: 0 1px 4px rgba(0,0,0,0.4); }
+        .maint-carousel-card .card-dot { position: absolute; top: 12px; right: 12px; z-index: 2; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; color: #fff; border: 2px solid rgba(255,255,255,0.6); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+        .maint-carousel-card .card-dot.ok { background: #0D5C3A; }
+        .maint-carousel-card .card-dot.warn { background: #d97706; }
+        .maint-carousel-card .card-dot.broken { background: #dc2626; animation: pulseAlert 1.5s infinite; }
+        .maint-carousel-card .card-dot.alert { background: #dc2626; animation: pulseAlert 1s infinite; }
+
+        /* Grille équipements */
+        .maint-equip-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        @media (min-width: 480px) { .maint-equip-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 768px) { .maint-equip-grid { grid-template-columns: repeat(4, 1fr); } }
+        @media (min-width: 1024px) { .maint-equip-grid { grid-template-columns: repeat(7, 1fr); } }
+
+        .maint-equip-card {
+            border-radius: 20px; background: #fff; border: 2.5px solid #e2e8f0;
+            padding: 14px 10px 12px; display: flex; flex-direction: column; align-items: center;
+            gap: 8px; cursor: pointer; transition: all 0.2s; position: relative;
+            text-align: center;
+        }
+        .maint-equip-card:active { transform: scale(0.96); }
+        .maint-equip-card[data-status="ok"]     { border-color: #a7f3d0; background: linear-gradient(180deg, #ecfdf5 0%, #d1fae5 100%); }
+        .maint-equip-card[data-status="warn"]   { border-color: #fcd34d; background: linear-gradient(180deg, #fffbeb 0%, #fef3c7 100%); }
+        .maint-equip-card[data-status="broken"] { border-color: #fca5a5; background: linear-gradient(180deg, #fef2f2 0%, #fee2e2 100%); animation: pulseAlert 2s infinite; }
+        .maint-equip-card .ico { font-size: 34px; line-height: 1; }
+        .maint-equip-card .nm  { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em; color: #334155; }
+        .maint-equip-card .dot { position: absolute; top: 8px; right: 8px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fff; }
+        .maint-equip-card[data-status="ok"]     .dot { background: #0D5C3A; }
+        .maint-equip-card[data-status="warn"]   .dot { background: #d97706; }
+        .maint-equip-card[data-status="broken"] .dot { background: #dc2626; }
+
+        .maint-actions-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 14px; }
+        .maint-action-btn {
+            padding: 14px 10px; border-radius: 16px; border: 2px solid;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+            font-family: "Bricolage Grotesque", sans-serif; font-weight: 900;
+            font-size: 10px; text-transform: uppercase; letter-spacing: 0.03em;
+            cursor: pointer; transition: all 0.15s; background: #fff;
+        }
+        .maint-action-btn:active { transform: scale(0.95); }
+        .maint-action-btn i { font-size: 22px; }
+        .maint-action-btn[data-target="broken"] { color: #dc2626; border-color: #fca5a5; }
+        .maint-action-btn[data-target="warn"]   { color: #d97706; border-color: #fcd34d; }
+        .maint-action-btn[data-target="ok"]     { color: #0D5C3A; border-color: #a7f3d0; }
+        .maint-action-btn.active { color: #fff; }
+        .maint-action-btn.active[data-target="broken"] { background: #dc2626; border-color: #dc2626; }
+        .maint-action-btn.active[data-target="warn"]   { background: #d97706; border-color: #d97706; }
+        .maint-action-btn.active[data-target="ok"]     { background: #0D5C3A; border-color: #0D5C3A; }
+
+        /* Note micro */
+        .maint-media-bar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
+        .maint-media-btn {
+            padding: 14px; border-radius: 18px; border: none;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 4px; font-family: "Bricolage Grotesque", sans-serif; font-weight: 900;
+            font-size: 11px; text-transform: uppercase; letter-spacing: 0.03em;
+            cursor: pointer; transition: all 0.15s;
+        }
+        .maint-media-btn:active { transform: scale(0.95); }
+        .maint-media-btn.mic { background: #fef2f2; color: #b91c1c; border: 2px solid #fca5a5; }
+        .maint-media-btn.mic.recording { background: #dc2626; color: #fff; border-color: #dc2626; animation: pulseAlert 1s infinite; }
+        .maint-media-btn.cam { background: #eff6ff; color: #1d4ed8; border: 2px solid #bfdbfe; }
+
+        /* Timeline notes */
+        .maint-timeline { display: flex; flex-direction: column; gap: 10px; }
+        .maint-note {
+            background: #fff; border: 1px solid rgba(15,23,42,0.08); border-radius: 16px;
+            padding: 12px; display: flex; gap: 12px; align-items: flex-start;
+        }
+        .maint-note .note-icon {
+            width: 38px; height: 38px; border-radius: 12px; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; color: #fff;
+        }
+        .maint-note .note-icon.audio { background: #dc2626; }
+        .maint-note .note-icon.photo { background: #1d4ed8; }
+        .maint-note .note-icon.text  { background: #0D5C3A; }
+        .maint-note .note-body { flex: 1; min-width: 0; }
+        .maint-note .note-meta { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; color: #94a3b8; margin-bottom: 4px; }
+        .maint-note .note-content { font-size: 13px; font-weight: 600; color: #1e293b; word-break: break-word; }
+        .maint-note audio { width: 100%; margin-top: 6px; }
+        .maint-note img { max-width: 100%; border-radius: 10px; margin-top: 6px; }
+        .maint-note .del { color: #dc2626; background: transparent; border: none; padding: 6px; cursor: pointer; flex-shrink: 0; }
+
+        /* Bouton URGENCE */
+        .maint-urgency-btn {
+            background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
+            color: #fff; border: none; border-radius: 22px;
+            padding: 18px 20px; width: 100%;
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            font-family: "Bricolage Grotesque", sans-serif; font-weight: 900;
+            font-size: 16px; letter-spacing: 0.05em; text-transform: uppercase;
+            box-shadow: 0 12px 30px -8px rgba(220,38,38,0.7), inset 0 1px 0 rgba(255,255,255,0.2);
+            cursor: pointer; transition: all 0.2s;
+        }
+        .maint-urgency-btn:active { transform: scale(0.97); }
+        .maint-urgency-btn i { font-size: 26px; }
+
+        .maint-alert-banner {
+            background: linear-gradient(160deg, #dc2626 0%, #991b1b 100%);
+            color: #fff; border-radius: 20px; padding: 14px 16px;
+            display: flex; align-items: center; gap: 12px;
+            box-shadow: 0 12px 30px -10px rgba(220,38,38,0.7);
+            margin-bottom: 14px;
+            animation: pulseAlert 1.6s infinite;
+        }
     </style>
 </head>
 <body class="font-sans antialiased">
@@ -392,7 +464,6 @@
                     <span id="create-step-indicator" class="text-xs font-black text-palm-500 bg-white/70 border border-white/80 px-3 py-1 rounded-full uppercase tracking-widest whitespace-nowrap">Étape 1/4</span>
                 </div>
                 <div class="relative">
-                    <!-- ÉTAPE 1 : RÔLE -->
                     <div id="create-step-1" class="wizard-step space-y-5">
                         <div class="text-center space-y-1">
                             <h3 class="font-diola font-black text-lg text-palm-500">Quel est votre rôle ?</h3>
@@ -584,6 +655,10 @@
                         <button id="btn-menu-reception" onclick="closeUserMenu(); navigateTo('reception');" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/50 text-left border-b border-slate-200/60">
                             <span class="w-9 h-9 rounded-xl bg-lagoon-50 text-lagoon-500 flex items-center justify-center"><i class="fa-solid fa-bell-concierge"></i></span>
                             <div><p class="text-sm font-black text-slate-800">Accueil & Planning</p><p class="text-xs text-slate-500 font-semibold">Réservations</p></div>
+                        </button>
+                        <button onclick="closeUserMenu(); navigateTo('maintenance');" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/50 text-left border-b border-slate-200/60">
+                            <span class="w-9 h-9 rounded-xl bg-red-50 text-red-600 flex items-center justify-center"><i class="fa-solid fa-screwdriver-wrench"></i></span>
+                            <div><p class="text-sm font-black text-slate-800">Maintenance & Suivi</p><p class="text-xs text-slate-500 font-semibold">Équipements • Signalements</p></div>
                         </button>
                         <button onclick="closeUserMenu(); toggleNotifications();" class="w-full flex items-center gap-3 px-4 py-3 hover:bg-white/50 text-left border-b border-slate-200/60">
                             <span class="w-9 h-9 rounded-xl bg-lagoon-50 text-lagoon-500 flex items-center justify-center"><i id="notif-icon-menu" class="fa-solid fa-bell-slash"></i></span>
@@ -779,10 +854,54 @@
                 </div>
             </div>
         </section>
+
+        <!-- ══════════════════ MAINTENANCE ══════════════════ -->
+        <section id="view-maintenance" class="hidden space-y-5">
+
+            <div class="liquid-glass-strong rounded-[28px] p-5 space-y-3">
+                <div class="flex items-start gap-3">
+                    <button onclick="navigateTo('home')" class="w-11 h-11 liquid-glass active-scale rounded-2xl flex items-center justify-center text-palm-500 font-black flex-shrink-0 touch-44">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-center gap-2">
+                            <span class="w-11 h-11 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center text-lg flex-shrink-0">
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                            </span>
+                            <h2 class="text-xl sm:text-2xl md:text-3xl font-diola font-black text-palm-500 truncate">Maintenance</h2>
+                        </div>
+                        <p class="text-xs md:text-sm text-slate-600 font-semibold mt-1">Suivi technique des chambres • Équipements</p>
+                    </div>
+                </div>
+
+                <!-- Bouton URGENCE -->
+                <button onclick="openUrgencyModal()" class="maint-urgency-btn">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>URGENCE CHAMBRE</span>
+                </button>
+            </div>
+
+            <!-- Alerte active -->
+            <div id="maint-alerts-container"></div>
+
+            <!-- Carrousel des chambres -->
+            <div class="liquid-glass-strong rounded-[24px] p-4">
+                <div class="flex items-center justify-between mb-2 px-1">
+                    <span class="text-xs font-black uppercase tracking-widest text-slate-500">Choisir une chambre</span>
+                    <span class="text-xs font-black text-palm-500" id="maint-progress-label">—</span>
+                </div>
+                <div id="maint-carousel" class="maint-carousel"></div>
+            </div>
+
+            <!-- Vue détail de la chambre sélectionnée -->
+            <div id="maint-room-detail"></div>
+
+        </section>
     </main>
 </div>
 
 <!-- ==================== MODALES ==================== -->
+
 <div id="modal-reservation" class="hidden fixed inset-0 bg-slate-900/50 backdrop-blur-md z-50 flex items-end sm:items-center justify-center modal-overlay p-0 sm:p-4">
     <div class="liquid-glass-strong rounded-t-[28px] sm:rounded-[28px] max-w-lg w-full p-5 sm:p-8 space-y-5 max-h-[92dvh] overflow-y-auto modal-card safe-bottom">
         <div class="flex justify-between items-center border-b border-slate-200/60 pb-3 sticky top-0 z-10 -mx-5 sm:-mx-8 px-5 sm:px-8 backdrop-blur-xl">
@@ -860,6 +979,82 @@
         <div class="flex gap-2">
             <button onclick="closeRoomNotesModal()" class="flex-1 py-3 bg-white/70 text-slate-700 font-bold rounded-2xl text-sm touch-44">Annuler</button>
             <button onclick="saveRoomNotes()" class="flex-1 py-3 btn-liquid text-white font-bold rounded-2xl text-sm touch-44">Enregistrer</button>
+        </div>
+    </div>
+</div>
+
+<!-- MODALE MAINTENANCE : détail équipement -->
+<div id="modal-equipment" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 flex items-end sm:items-center justify-center modal-overlay p-0 sm:p-4">
+    <div class="liquid-glass-strong rounded-t-[28px] sm:rounded-[28px] max-w-lg w-full p-5 sm:p-6 space-y-4 modal-card safe-bottom max-h-[92dvh] overflow-y-auto">
+        <div class="flex justify-between items-center border-b border-slate-200/60 pb-3 sticky top-0 bg-white/40 -mx-5 sm:-mx-6 px-5 sm:px-6 backdrop-blur-xl z-10">
+            <div class="flex items-center gap-3 min-w-0">
+                <span id="equip-modal-ico" class="text-3xl">💡</span>
+                <div class="min-w-0">
+                    <h3 id="equip-modal-title" class="text-base sm:text-lg font-diola font-black text-palm-500 truncate">Ampoule</h3>
+                    <p id="equip-modal-room" class="text-xs text-slate-500 font-semibold truncate"></p>
+                </div>
+            </div>
+            <button onclick="closeEquipmentModal()" class="w-11 h-11 liquid-glass rounded-full flex items-center justify-center text-slate-500 font-bold flex-shrink-0 touch-44"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <!-- 3 gros boutons état -->
+        <div class="maint-actions-3">
+            <button onclick="setEquipmentStatus('broken')" id="equip-btn-broken" class="maint-action-btn" data-target="broken">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <span>À réparer</span>
+            </button>
+            <button onclick="setEquipmentStatus('warn')" id="equip-btn-warn" class="maint-action-btn" data-target="warn">
+                <i class="fa-solid fa-hourglass-half"></i>
+                <span>En cours</span>
+            </button>
+            <button onclick="setEquipmentStatus('ok')" id="equip-btn-ok" class="maint-action-btn" data-target="ok">
+                <i class="fa-solid fa-check-circle"></i>
+                <span>Fonctionnel</span>
+            </button>
+        </div>
+
+        <!-- Micro + Photo -->
+        <div class="maint-media-bar">
+            <button onclick="startVoiceNote()" id="btn-voice-note" class="maint-media-btn mic">
+                <i class="fa-solid fa-microphone text-2xl"></i>
+                <span id="voice-note-label">Vocal 5 sec</span>
+            </button>
+            <button onclick="startPhotoCapture()" class="maint-media-btn cam">
+                <i class="fa-solid fa-camera text-2xl"></i>
+                <span>Photo</span>
+            </button>
+        </div>
+        <input type="file" id="maint-photo-input" accept="image/*" capture="environment" class="hidden" onchange="handleMaintPhoto(event)">
+
+        <!-- Timeline notes -->
+        <div>
+            <p class="text-xs font-black uppercase tracking-widest text-slate-500 mb-2 mt-2">Signalements récents</p>
+            <div id="equip-notes-list" class="maint-timeline"></div>
+        </div>
+    </div>
+</div>
+
+<!-- MODALE URGENCE -->
+<div id="modal-urgency" class="hidden fixed inset-0 bg-slate-900/70 backdrop-blur-md z-50 flex items-end sm:items-center justify-center modal-overlay p-0 sm:p-4">
+    <div class="liquid-glass-strong rounded-t-[28px] sm:rounded-[28px] max-w-md w-full p-5 sm:p-6 space-y-4 modal-card safe-bottom">
+        <div class="text-center space-y-2">
+            <div class="w-16 h-16 mx-auto bg-red-100 rounded-2xl flex items-center justify-center text-3xl text-red-600"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <h3 class="font-diola font-black text-lg text-red-700">Signaler une URGENCE</h3>
+            <p class="text-xs text-slate-500 font-semibold">Problème bloquant empêchant la location immédiate</p>
+        </div>
+        <div>
+            <label for="urgency-room" class="block text-xs font-black uppercase text-slate-600 mb-1">Chambre</label>
+            <select id="urgency-room" class="w-full bg-white/70 border border-white/80 rounded-2xl px-3 py-3 text-base font-bold"></select>
+        </div>
+        <div>
+            <label for="urgency-message" class="block text-xs font-black uppercase text-slate-600 mb-1">Décrire (optionnel)</label>
+            <textarea id="urgency-message" rows="2" class="w-full bg-white/70 border border-white/80 rounded-2xl p-3 text-base font-medium" placeholder="Ex : Coupure d'eau globale"></textarea>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="closeUrgencyModal()" class="flex-1 py-3 bg-white/70 text-slate-700 font-bold rounded-2xl text-sm touch-44">Annuler</button>
+            <button onclick="submitUrgency()" class="flex-1 py-3 bg-red-600 hover:bg-red-700 text-white font-black rounded-2xl text-sm touch-44">
+                <i class="fa-solid fa-tower-broadcast"></i> Envoyer
+            </button>
         </div>
     </div>
 </div>
@@ -1104,16 +1299,33 @@ const STATUS_META = {
     to_clean:      { label:'À nettoyer', short:'À nettoyer', bg:'#dc2626', icon:'fa-broom',                chip:'bg-red-50 text-red-700 border-red-200',          dot:'#dc2626' },
     in_progress:   { label:'En cours',   short:'En cours',   bg:'#d97706', icon:'fa-spray-can-sparkles',   chip:'bg-amber-50 text-amber-800 border-amber-200',    dot:'#d97706' },
     clean_pending: { label:'À valider',  short:'À valider',  bg:'#7c3aed', icon:'fa-clipboard-check',      chip:'bg-purple-50 text-purple-700 border-purple-200', dot:'#7c3aed' },
-    clean:         { label:'Propre',     short:'Validé',     bg:'#0D5C3A', icon:'fa-wand-magic-sparkles',  chip:'bg-palm-50 text-palm-500 border-palm-100',       dot:'#0D5C3A' },
-    occupied:      { label:'Occupée',    short:'Occupée',    bg:'#0284C7', icon:'fa-key',                  chip:'bg-lagoon-50 text-lagoon-700 border-lagoon-200', dot:'#0284C7' }
+    clean:         { label:'Propre',     short:'Validé',     bg:'#0D5C3A', icon:'fa-wand-magic-sparkles',  chip:'bg-palm-50 text-palm-500 border-palm-100',       dot:'#0D5C3A' }
+};
+
+const EQUIPMENT = {
+    light:  { emoji:'💡', label:'Éclairage',  key:'light'  },
+    fan:    { emoji:'🌀', label:'Ventilateur', key:'fan'   },
+    tap:    { emoji:'🚰', label:'Robinet',    key:'tap'    },
+    shower: { emoji:'🚿', label:'Douchette',  key:'shower' },
+    toilet: { emoji:'🚽', label:'Toilettes',  key:'toilet' },
+    bed:    { emoji:'🛏️', label:'Lit',       key:'bed'    },
+    lock:   { emoji:'🔑', label:'Serrure',    key:'lock'   }
 };
 
 let appState = {
     rooms: [], reservations: [],
+    equipment: [],      // tableau de room_equipment
+    notes: [],          // maintenance_notes pour la chambre en cours
+    alerts: [],         // room_alerts actives
     currentView: 'home', receptionTab: 'calendar',
     housekeepingFilter: 'all',
     calendarStartDate: new Date(),
-    currentProfile: null, sessionToken: null
+    currentProfile: null, sessionToken: null,
+    maintSelectedRoomId: null,
+    maintSelectedEquipKey: null,
+    maintMediaRecorder: null,
+    maintAudioChunks: [],
+    maintRecTimer: null
 };
 
 let authState = {
@@ -1132,8 +1344,11 @@ function formatDateISO(date) {
     const y = date.getFullYear(), m = String(date.getMonth()+1).padStart(2,'0'), d = String(date.getDate()).padStart(2,'0');
     return `${y}-${m}-${d}`;
 }
-function mapRoomFromDB(r) { return { id:r.id, name:r.name, sectorId:r.sector_id, sectorName:r.sector_name, photo:r.photo, status:r.status, notes:r.notes||'' }; }
+function mapRoomFromDB(r) { return { id:r.id, name:r.name, sectorId:r.sector_id, sectorName:r.sector_name, photo:r.photo, status:r.status, notes:r.notes||'', isOccupied: r.is_occupied === true }; }
 function mapReservationFromDB(r) { return { id:r.id, roomId:r.room_id, clientName:r.client_name, phone:r.phone||'', startDate:r.start_date, endDate:r.end_date, type:r.type, notes:r.notes||'' }; }
+function mapEquipFromDB(e) { return { roomId:e.room_id, key:e.equipment_key, status:e.status, updatedAt:e.updated_at }; }
+function mapNoteFromDB(n) { return { id:n.id, roomId:n.room_id, equipKey:n.equipment_key, type:n.type, content:n.content, createdAt:n.created_at }; }
+function mapAlertFromDB(a) { return { id:a.id, roomId:a.room_id, message:a.message, resolved:a.resolved, createdAt:a.created_at }; }
 
 function isRoomOccupiedToday(room) {
     const todayStr = formatDateISO(new Date());
@@ -1143,6 +1358,11 @@ function isRoomOccupiedToday(room) {
         return todayStr >= r.startDate && todayStr < r.endDate;
     });
 }
+function isOccupied(room) {
+    // Priorité : is_occupied manuel / sinon calculé
+    if (typeof room.isOccupied === 'boolean') return room.isOccupied;
+    return isRoomOccupiedToday(room);
+}
 
 function getActiveReservationForRoom(room) {
     const todayStr = formatDateISO(new Date());
@@ -1151,6 +1371,23 @@ function getActiveReservationForRoom(room) {
         if (r.type === 'day_use') return r.startDate === todayStr;
         return todayStr >= r.startDate && todayStr < r.endDate;
     });
+}
+
+function getEquipmentForRoom(roomId) {
+    return appState.equipment.filter(e => e.roomId === roomId);
+}
+function getEquipmentStatus(roomId, key) {
+    const e = appState.equipment.find(x => x.roomId === roomId && x.key === key);
+    return e ? e.status : 'ok';
+}
+function getRoomWorstStatus(roomId) {
+    const eqs = getEquipmentForRoom(roomId);
+    if (eqs.some(e => e.status === 'broken')) return 'broken';
+    if (eqs.some(e => e.status === 'warn')) return 'warn';
+    return 'ok';
+}
+function hasActiveAlert(roomId) {
+    return appState.alerts.some(a => a.roomId === roomId && !a.resolved);
 }
 
 function renderPhoneLinks(phone) {
@@ -1171,9 +1408,7 @@ function toggleUserMenu(event) {
         menu.classList.remove('hidden');
         if (backdrop) backdrop.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
-    } else {
-        closeUserMenu();
-    }
+    } else closeUserMenu();
 }
 function closeUserMenu() {
     document.getElementById('user-menu-dropdown').classList.add('hidden');
@@ -1782,7 +2017,7 @@ async function enterApp() {
     await syncOccupations();
     renderHomeModules();
     const targetView = sessionStorage.getItem('buhanor_target_view');
-    if (targetView && (targetView === 'housekeeping' || targetView === 'reception')) {
+    if (targetView && ['housekeeping', 'reception', 'maintenance'].includes(targetView)) {
         sessionStorage.removeItem('buhanor_target_view');
         navigateTo(targetView);
     } else {
@@ -1833,12 +2068,34 @@ function renderHomeModules() {
             </div>
         </button>`;
 
+    const maintenanceCard = `
+        <button onclick="navigateTo('maintenance')" class="module-card group w-full text-left flex flex-col justify-between min-h-[400px] p-6" style="background: linear-gradient(160deg, #dc2626 0%, #7f1d1d 100%); box-shadow: 0 20px 50px -12px rgba(220,38,38,0.5), inset 0 1px 0 0 rgba(255,255,255,0.15); border-radius:28px; position:relative; overflow:hidden;">
+            <div class="relative flex justify-between items-start gap-3">
+                <div class="flex-1 flex justify-center">
+                    <div class="module-image w-52 h-52 sm:w-64 sm:h-64 flex items-center justify-center">
+                        <i class="fa-solid fa-screwdriver-wrench text-white" style="font-size:180px; filter: drop-shadow(0 12px 22px rgba(0,0,0,0.4));"></i>
+                    </div>
+                </div>
+                <span id="badge-maint-count" class="status-badge-xl bg-white text-red-700 font-black text-sm px-4 py-2.5 rounded-2xl whitespace-nowrap flex items-center gap-2 flex-shrink-0 relative z-10" style="box-shadow:0 4px 14px rgba(0,0,0,0.25)">
+                    <i class="fa-solid fa-triangle-exclamation"></i><span>0</span>
+                </span>
+            </div>
+            <div class="mt-5 space-y-2 text-center relative z-10">
+                <h3 class="text-2xl sm:text-3xl lg:text-4xl font-diola font-black text-white tracking-wide leading-tight">MAINTENANCE</h3>
+                <p class="text-red-100 text-sm font-semibold">Équipements • Signalements • Urgences</p>
+            </div>
+            <div class="mt-5 flex items-center justify-center gap-2 bg-white/10 border border-white/20 rounded-full py-3.5 group-hover:bg-white/20 transition">
+                <span class="font-diola font-black text-white text-base tracking-wider">OUVRIR</span>
+                <i class="fa-solid fa-arrow-right text-amber-200 text-lg"></i>
+            </div>
+        </button>`;
+
     if (role === 'menage') {
-        grid.className = 'grid grid-cols-1 gap-5 max-w-lg mx-auto pt-2';
-        grid.innerHTML = menageCard;
+        grid.className = 'grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto pt-2';
+        grid.innerHTML = menageCard + maintenanceCard;
     } else {
         grid.className = 'grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 lg:gap-8 max-w-6xl mx-auto pt-2';
-        grid.innerHTML = menageCard + receptionCard;
+        grid.innerHTML = menageCard + receptionCard + maintenanceCard;
     }
     sectorBlock.classList.remove('hidden');
 }
@@ -1847,15 +2104,20 @@ async function loadDataFromServer() {
     try {
         const token = appState.sessionToken;
         if (!token) throw new Error('Session expirée');
-        const [roomsRes, resRes] = await Promise.all([
+        const [roomsRes, resRes, eqRes, alRes] = await Promise.all([
             supabaseClient.rpc('list_rooms', { p_token: token }),
-            supabaseClient.rpc('list_reservations', { p_token: token })
+            supabaseClient.rpc('list_reservations', { p_token: token }),
+            supabaseClient.rpc('list_room_equipment', { p_token: token }),
+            supabaseClient.rpc('list_active_alerts', { p_token: token })
         ]);
         if (roomsRes.error) throw roomsRes.error;
         if (resRes.error) throw resRes.error;
+        if (eqRes.error) throw eqRes.error;
         appState.rooms = (roomsRes.data || []).map(mapRoomFromDB);
         appState.reservations = (resRes.data || []).map(mapReservationFromDB);
-        lastDataHash = JSON.stringify(roomsRes.data) + '|' + JSON.stringify(resRes.data);
+        appState.equipment = (eqRes.data || []).map(mapEquipFromDB);
+        appState.alerts = (alRes.data || []).map(mapAlertFromDB);
+        lastDataHash = JSON.stringify(roomsRes.data) + '|' + JSON.stringify(resRes.data) + '|' + JSON.stringify(eqRes.data);
         setConnectionStatus(true);
     } catch (err) {
         console.error(err);
@@ -1868,17 +2130,21 @@ async function silentRefresh() {
     if (!appState.currentProfile || !appState.sessionToken) return;
     const token = appState.sessionToken;
     try {
-        const [roomsRes, resRes] = await Promise.all([
+        const [roomsRes, resRes, eqRes, alRes] = await Promise.all([
             supabaseClient.rpc('list_rooms', { p_token: token }),
-            supabaseClient.rpc('list_reservations', { p_token: token })
+            supabaseClient.rpc('list_reservations', { p_token: token }),
+            supabaseClient.rpc('list_room_equipment', { p_token: token }),
+            supabaseClient.rpc('list_active_alerts', { p_token: token })
         ]);
-        if (roomsRes.error || resRes.error) return;
-        const newHash = JSON.stringify(roomsRes.data) + '|' + JSON.stringify(resRes.data);
+        if (roomsRes.error || resRes.error || eqRes.error) return;
+        const newHash = JSON.stringify(roomsRes.data) + '|' + JSON.stringify(resRes.data) + '|' + JSON.stringify(eqRes.data);
         if (newHash === lastDataHash) return;
         const prevRooms = appState.rooms.slice();
         lastDataHash = newHash;
         appState.rooms = (roomsRes.data || []).map(mapRoomFromDB);
         appState.reservations = (resRes.data || []).map(mapReservationFromDB);
+        appState.equipment = (eqRes.data || []).map(mapEquipFromDB);
+        appState.alerts = (alRes.data || []).map(mapAlertFromDB);
         setConnectionStatus(true);
         detectRoomChanges(prevRooms);
         renderCurrentView();
@@ -1888,7 +2154,6 @@ async function silentRefresh() {
 function detectRoomChanges(prevRooms) {
     if (!appState.currentProfile || !prevRooms || prevRooms.length === 0) return;
     const role = appState.currentProfile.role;
-
     if (role === 'admin') {
         const newPending = appState.rooms.filter(r =>
             r.status === 'clean_pending' &&
@@ -1906,7 +2171,6 @@ function detectRoomChanges(prevRooms) {
             }
         }
     }
-
     if (role === 'menage') {
         const newToClean = appState.rooms.filter(r =>
             r.status === 'to_clean' &&
@@ -1996,6 +2260,7 @@ function navigateTo(viewName) {
     document.getElementById('view-home').classList.add('hidden');
     document.getElementById('view-housekeeping').classList.add('hidden');
     document.getElementById('view-reception').classList.add('hidden');
+    document.getElementById('view-maintenance').classList.add('hidden');
     const btnHome = document.getElementById('btn-header-home');
     if (viewName === 'home') {
         document.getElementById('view-home').classList.remove('hidden');
@@ -2009,6 +2274,10 @@ function navigateTo(viewName) {
         document.getElementById('view-reception').classList.remove('hidden');
         btnHome.classList.remove('hidden');
         renderReceptionView();
+    } else if (viewName === 'maintenance') {
+        document.getElementById('view-maintenance').classList.remove('hidden');
+        btnHome.classList.remove('hidden');
+        renderMaintenanceView();
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -2017,9 +2286,10 @@ function renderCurrentView() {
     if (appState.currentView === 'home') renderHomeView();
     else if (appState.currentView === 'housekeeping') renderHousekeepingView();
     else if (appState.currentView === 'reception') renderReceptionView();
+    else if (appState.currentView === 'maintenance') renderMaintenanceView();
 }
 
-function getStatusMeta(status) { return STATUS_META[status] || STATUS_META.to_clean; }
+function getStatusMeta(status) { return STATUS_META[status] || STATUS_META.clean; }
 
 function updateHeaderCounters() {
     const toClean = appState.rooms.filter(r => r.status === 'to_clean').length;
@@ -2028,6 +2298,7 @@ function updateHeaderCounters() {
     const clean = appState.rooms.filter(r => r.status === 'clean').length;
     const badgeCleaning = document.getElementById('badge-cleaning-count');
     const badgeAvailable = document.getElementById('badge-available-count');
+    const badgeMaint = document.getElementById('badge-maint-count');
     if (badgeCleaning) {
         const total = toClean + inProgress + pending;
         badgeCleaning.innerHTML = `<i class="fa-solid fa-broom"></i><span>${total}</span>`;
@@ -2036,6 +2307,13 @@ function updateHeaderCounters() {
             : "status-badge-xl bg-red-500 text-white font-black text-sm px-4 py-2.5 rounded-2xl whitespace-nowrap flex items-center gap-2 flex-shrink-0 relative z-10";
     }
     if (badgeAvailable) badgeAvailable.innerHTML = `<i class="fa-solid fa-door-open"></i><span>${clean}</span>`;
+    if (badgeMaint) {
+        const issues = appState.rooms.filter(r => {
+            const w = getRoomWorstStatus(r.id);
+            return w === 'broken' || w === 'warn' || hasActiveAlert(r.id);
+        }).length;
+        badgeMaint.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i><span>${issues}</span>`;
+    }
 }
 
 function renderHomeView() {
@@ -2055,14 +2333,18 @@ function renderHomeView() {
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 ${sectorRooms.map(room => {
                     const meta = getStatusMeta(room.status);
-                    const occupiedToday = isRoomOccupiedToday(room);
+                    const occ = isOccupied(room);
+                    const worst = getRoomWorstStatus(room.id);
+                    const alert = hasActiveAlert(room.id);
                     return `<div onclick="navigateTo('housekeeping')" class="bg-white/70 p-3 rounded-xl border border-white/80 active-scale transition cursor-pointer flex justify-between items-center shadow-sm gap-2 touch-44">
                         <div class="min-w-0">
                             <span class="font-extrabold text-sm text-palm-500 block leading-tight truncate">${room.name}</span>
                             <span class="text-xs font-medium text-slate-500 truncate block">${room.sectorName}</span>
                         </div>
                         <div class="flex items-center gap-1.5 flex-shrink-0">
-                            ${occupiedToday && room.status !== 'occupied' ? `<span class="text-[9px] font-black text-lagoon-700 bg-lagoon-50 border border-lagoon-200 px-1.5 py-0.5 rounded-md"><i class="fa-solid fa-user"></i> OCC</span>` : ''}
+                            ${alert ? `<span class="text-[10px] font-black text-white bg-red-600 px-1.5 py-0.5 rounded-md"><i class="fa-solid fa-triangle-exclamation"></i></span>` : ''}
+                            ${occ ? `<span class="text-[9px] font-black text-lagoon-700 bg-lagoon-50 border border-lagoon-200 px-1.5 py-0.5 rounded-md"><i class="fa-solid fa-user"></i> OCC</span>` : ''}
+                            ${worst === 'broken' ? `<span class="text-[10px] font-black text-white bg-red-600 px-1.5 py-0.5 rounded-md">🔴</span>` : ''}
                             <span class="text-xs font-black px-2.5 py-1 rounded-lg border flex items-center gap-1.5 ${meta.chip}">
                                 <i class="fa-solid ${meta.icon}"></i><span class="hidden sm:inline">${meta.label}</span>
                             </span>
@@ -2223,7 +2505,7 @@ async function validateAllPending() {
     const pendingRooms = appState.rooms.filter(r => r.status === 'clean_pending');
     if (pendingRooms.length === 0) return;
     const confirmed = await new Promise(resolve => {
-        showCustomConfirm("Valider les chambres ?", `${pendingRooms.length} chambre(s) deviendront "Propre" ou "Occupée".`, () => resolve(true), () => resolve(false));
+        showCustomConfirm("Valider les chambres ?", `${pendingRooms.length} chambre(s) deviendront "Propre".`, () => resolve(true), () => resolve(false));
     });
     if (!confirmed) return;
     try {
@@ -2244,23 +2526,6 @@ async function validateSingleRoom(roomId) {
         renderHousekeepingView();
         showToast('Chambre validée ✓', 'success');
     } catch (err) { console.error(err); showToast('Erreur', 'error'); }
-}
-
-async function requestMidStayCleaning(roomId) {
-    const room = appState.rooms.find(r => r.id === roomId);
-    if (!room) return;
-    const activeRes = getActiveReservationForRoom(room);
-    if (!activeRes) { showToast('Aucun client dans cette chambre', 'error'); return; }
-    const confirmed = await new Promise(resolve => {
-        showCustomConfirm(
-            "Nettoyage en cours de séjour ?",
-            `${room.name} est occupée par ${activeRes.clientName}. La chambre passera en "À nettoyer" pendant que le client est présent.`,
-            () => resolve(true), () => resolve(false)
-        );
-    });
-    if (!confirmed) return;
-    await updateRoomStatus(roomId, 'to_clean');
-    showToast(`${room.name} ajoutée au nettoyage`, 'success');
 }
 
 function renderHousekeepingView() {
@@ -2308,17 +2573,18 @@ function renderHousekeepingView() {
 function renderHousekeepingCard(room, role) {
     const meta = getStatusMeta(room.status);
     const photoSrc = getRoomPhoto(room);
-    const occupied = isRoomOccupiedToday(room);
-    const activeRes = getActiveReservationForRoom(room);
+    const occ = isOccupied(room);
+    const worst = getRoomWorstStatus(room.id);
+    const alert = hasActiveAlert(room.id);
 
+    // Bouton principal
     let mainBtn = '';
     if (role === 'menage') {
         const actions = {
             to_clean:      { label:'COMMENCER',     cls:'b-to_clean',     icon:'fa-play',                next:'in_progress' },
             in_progress:   { label:"J'AI TERMINÉ",  cls:'b-in_progress',  icon:'fa-circle-check',        next:'clean_pending' },
             clean_pending: { label:'ATTENTE ADMIN', cls:'b-clean_pending',icon:'fa-hourglass-half',      next:null },
-            clean:         { label:'PROPRE ✓',      cls:'b-clean',        icon:'fa-wand-magic-sparkles', next:null },
-            occupied:      { label:'OCCUPÉE',       cls:'b-occupied',     icon:'fa-key',                 next:null }
+            clean:         { label:'PROPRE ✓',      cls:'b-clean',        icon:'fa-wand-magic-sparkles', next:null }
         };
         const a = actions[room.status] || actions.to_clean;
         if (a.next) {
@@ -2337,14 +2603,6 @@ function renderHousekeepingCard(room, role) {
             </button>`;
         } else if (room.status === 'clean') {
             mainBtn = `<button class="hk-main-btn b-clean" disabled><i class="fa-solid fa-wand-magic-sparkles"></i><span>PROPRE ✓</span></button>`;
-        } else if (room.status === 'occupied') {
-            if (occupied && activeRes) {
-                mainBtn = `<button onclick="requestMidStayCleaning('${room.id}')" class="hk-main-btn b-midstay">
-                    <i class="fa-solid fa-spray-can-sparkles"></i><span>NETTOYAGE SÉJOUR</span>
-                </button>`;
-            } else {
-                mainBtn = `<button class="hk-main-btn b-occupied" disabled><i class="fa-solid fa-key"></i><span>OCCUPÉE</span></button>`;
-            }
         } else if (room.status === 'to_clean') {
             mainBtn = `<button onclick="updateRoomStatus('${room.id}', 'in_progress')" class="hk-main-btn b-to_clean"><i class="fa-solid fa-play"></i><span>COMMENCER</span></button>`;
         } else if (room.status === 'in_progress') {
@@ -2352,11 +2610,15 @@ function renderHousekeepingCard(room, role) {
         }
     }
 
-    const showOccupiedChip = occupied && room.status !== 'occupied';
+    // Badges photo : occupation + à nettoyer + alerte
+    const badges = [];
+    if (alert) badges.push(`<div class="hk-badge maint"><i class="fa-solid fa-triangle-exclamation"></i> URGENCE</div>`);
+    if (occ) badges.push(`<div class="hk-badge occupancy"><i class="fa-solid fa-user"></i> OCCUPÉE</div>`);
+    if (room.status === 'to_clean') badges.push(`<div class="hk-badge cleaning"><i class="fa-solid fa-broom"></i> À NETTOYER</div>`);
 
-    // Bloc 4 boutons statut rapides (visibles pour TOUS : admin ET ménage)
+    // Bloc 5 boutons (4 statut nettoyage + toggle occupation)
     const quickActions = `
-        <div class="hk-quick-actions">
+        <div class="hk-quick-actions" style="grid-template-columns: repeat(5, 1fr);">
             <button onclick="updateRoomStatus('${room.id}', 'to_clean')" class="hk-quick-btn ${room.status === 'to_clean' ? 'active' : ''}" style="--c:#dc2626;" title="À nettoyer">
                 <i class="fa-solid fa-broom"></i>
                 <span class="lbl">Nettoyer</span>
@@ -2369,16 +2631,20 @@ function renderHousekeepingCard(room, role) {
                 <i class="fa-solid fa-wand-magic-sparkles"></i>
                 <span class="lbl">Propre</span>
             </button>
-            <button onclick="updateRoomStatus('${room.id}', 'occupied')" class="hk-quick-btn ${room.status === 'occupied' ? 'active' : ''}" style="--c:#0284C7;" title="Occupée">
+            <button onclick="toggleRoomOccupation('${room.id}', ${occ ? 'false' : 'true'})" class="hk-quick-btn ${occ ? 'active' : ''}" style="--c:#0284C7;" title="Occupation">
                 <i class="fa-solid fa-key"></i>
-                <span class="lbl">Occupée</span>
+                <span class="lbl">${occ ? 'Occupée' : 'Libre'}</span>
+            </button>
+            <button onclick="openMaintenanceForRoom('${room.id}')" class="hk-quick-btn" style="--c:#dc2626;" title="Maintenance">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <span class="lbl">Technique</span>
             </button>
         </div>`;
 
     return `<div class="hk-card">
         <div class="hk-photo">
             <img src="${photoSrc}" data-room-id="${room.id}" onerror="handleRoomImgError(this)" alt="${room.name}" loading="lazy">
-            ${showOccupiedChip ? `<div class="hk-occupied-chip"><i class="fa-solid fa-user"></i> OCCUPÉE</div>` : ''}
+            <div class="hk-badge-stack">${badges.join('')}</div>
             <div class="hk-status-pill" style="background:${meta.bg};">
                 <i class="fa-solid ${meta.icon}"></i>
                 <span>${meta.short}</span>
@@ -2412,6 +2678,36 @@ async function updateRoomStatus(roomId, newStatus) {
         return;
     }
     showToast(`${room.name} → ${STATUS_META[newStatus].label}`, 'success');
+}
+
+async function toggleRoomOccupation(roomId, newOccupied) {
+    const room = appState.rooms.find(r => r.id === roomId);
+    if (!room) return;
+    const oldVal = room.isOccupied;
+    const oldStatus = room.status;
+    room.isOccupied = newOccupied;
+    // Si on libère une chambre propre → à nettoyer
+    if (!newOccupied && room.status === 'clean') room.status = 'to_clean';
+    renderHousekeepingView();
+    const { error } = await supabaseClient.rpc('set_room_occupation', {
+        p_token: appState.sessionToken, p_room_id: roomId, p_is_occupied: newOccupied
+    });
+    if (error) {
+        console.error(error);
+        room.isOccupied = oldVal;
+        room.status = oldStatus;
+        renderHousekeepingView();
+        showToast("Erreur de mise à jour", "error");
+        return;
+    }
+    await loadDataFromServer();
+    renderHousekeepingView();
+    showToast(newOccupied ? `${room.name} occupée` : `${room.name} libérée`, 'success');
+}
+
+function openMaintenanceForRoom(roomId) {
+    appState.maintSelectedRoomId = roomId;
+    navigateTo('maintenance');
 }
 
 function switchReceptionTab(tabName) {
@@ -2520,6 +2816,7 @@ function renderTodayRoomsView() {
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 ${sectorRooms.map(room => {
                     const meta = getStatusMeta(room.status);
+                    const occ = isOccupied(room);
                     const currentRes = getActiveReservationForRoom(room);
                     const isCheckoutToday = appState.reservations.some(r =>
                         r.roomId === room.id && r.type === 'overnight' && r.endDate === todayStr
@@ -2528,9 +2825,12 @@ function renderTodayRoomsView() {
                         <div class="flex justify-between items-start gap-2">
                             <div class="min-w-0">
                                 <h4 class="text-base font-diola font-black text-palm-500 truncate">${room.name}</h4>
-                                <span class="text-xs text-slate-500 font-semibold flex items-center gap-1.5 mt-0.5">
-                                    <span class="w-2 h-2 rounded-full" style="background:${meta.dot}"></span>${meta.label}
-                                </span>
+                                <div class="flex items-center gap-1.5 mt-0.5 flex-wrap">
+                                    <span class="text-xs text-slate-500 font-semibold flex items-center gap-1">
+                                        <span class="w-2 h-2 rounded-full" style="background:${meta.dot}"></span>${meta.label}
+                                    </span>
+                                    ${occ ? `<span class="text-[10px] font-black text-lagoon-700 bg-lagoon-50 border border-lagoon-200 px-1.5 py-0.5 rounded-md">OCCUPÉE</span>` : ''}
+                                </div>
                             </div>
                             <button onclick="openNewReservationModal('${room.id}')" class="bg-white/80 text-palm-500 font-extrabold w-10 h-10 rounded-2xl text-base border border-white/90 flex items-center justify-center flex-shrink-0 active-scale touch-44"><i class="fa-solid fa-plus"></i></button>
                         </div>
@@ -2732,6 +3032,372 @@ async function saveRoomNotes() {
     showToast("Consigne enregistrée !", "success");
 }
 
+// ═══════════════════════════════════════════════════════════
+// MAINTENANCE
+// ═══════════════════════════════════════════════════════════
+function renderMaintenanceView() {
+    renderMaintAlerts();
+    renderMaintCarousel();
+    renderMaintRoomDetail();
+    updateHeaderCounters();
+}
+
+function renderMaintAlerts() {
+    const container = document.getElementById('maint-alerts-container');
+    if (!container) return;
+    const active = appState.alerts.filter(a => !a.resolved);
+    if (active.length === 0) { container.innerHTML = ''; return; }
+    container.innerHTML = active.map(a => {
+        const room = appState.rooms.find(r => r.id === a.roomId);
+        return `<div class="maint-alert-banner">
+            <div class="w-11 h-11 rounded-2xl bg-white/20 flex items-center justify-center text-xl flex-shrink-0"><i class="fa-solid fa-tower-broadcast"></i></div>
+            <div class="flex-1 min-w-0">
+                <p class="font-diola font-black text-base leading-tight truncate">URGENCE • ${room ? room.name : a.roomId}</p>
+                <p class="text-xs text-white/85 font-semibold truncate">${a.message || 'Problème bloquant'}</p>
+            </div>
+            <button onclick="resolveAlert('${a.id}')" class="bg-white text-red-700 px-3.5 py-2.5 rounded-xl font-black text-xs active-scale flex items-center gap-1.5 flex-shrink-0">
+                <i class="fa-solid fa-check"></i> OK
+            </button>
+        </div>`;
+    }).join('');
+}
+
+function renderMaintCarousel() {
+    const container = document.getElementById('maint-carousel');
+    const label = document.getElementById('maint-progress-label');
+    if (!container) return;
+    if (appState.rooms.length === 0) { container.innerHTML = ''; return; }
+    if (!appState.maintSelectedRoomId) {
+        // Sélectionner par défaut : 1re chambre en panne, sinon 1re
+        const brokenFirst = appState.rooms.find(r => getRoomWorstStatus(r.id) === 'broken' || hasActiveAlert(r.id));
+        appState.maintSelectedRoomId = brokenFirst ? brokenFirst.id : appState.rooms[0].id;
+    }
+    const okCount = appState.rooms.filter(r => getRoomWorstStatus(r.id) === 'ok' && !hasActiveAlert(r.id)).length;
+    if (label) label.innerText = `${okCount}/${appState.rooms.length} OK`;
+
+    container.innerHTML = appState.rooms.map(room => {
+        const photo = getRoomPhoto(room);
+        const worst = getRoomWorstStatus(room.id);
+        const alert = hasActiveAlert(room.id);
+        const dotClass = alert ? 'alert' : (worst === 'broken' ? 'broken' : (worst === 'warn' ? 'warn' : 'ok'));
+        const dotIcon = alert ? 'fa-triangle-exclamation' : (worst === 'broken' ? 'fa-screwdriver-wrench' : (worst === 'warn' ? 'fa-hourglass-half' : 'fa-check'));
+        const selected = appState.maintSelectedRoomId === room.id;
+        return `<div onclick="selectMaintRoom('${room.id}')" class="maint-carousel-card ${selected ? 'selected' : ''}">
+            <img src="${photo}" data-room-id="${room.id}" onerror="handleRoomImgError(this)" alt="${room.name}">
+            <div class="card-dot ${dotClass}"><i class="fa-solid ${dotIcon}"></i></div>
+            <div class="card-label">
+                <div class="n">${room.name}</div>
+                <div class="s">${room.sectorName}</div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function selectMaintRoom(roomId) {
+    appState.maintSelectedRoomId = roomId;
+    renderMaintCarousel();
+    renderMaintRoomDetail();
+}
+
+function renderMaintRoomDetail() {
+    const container = document.getElementById('maint-room-detail');
+    if (!container) return;
+    const room = appState.rooms.find(r => r.id === appState.maintSelectedRoomId);
+    if (!room) { container.innerHTML = ''; return; }
+
+    const eqList = Object.values(EQUIPMENT);
+    const worst = getRoomWorstStatus(room.id);
+    const alert = hasActiveAlert(room.id);
+
+    container.innerHTML = `
+        <div class="liquid-glass-strong rounded-[28px] p-5 space-y-4">
+            <div class="flex items-center justify-between gap-3 flex-wrap">
+                <div class="flex items-center gap-3 min-w-0">
+                    <span class="w-12 h-12 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center text-xl flex-shrink-0">
+                        <i class="fa-solid fa-list-check"></i>
+                    </span>
+                    <div class="min-w-0">
+                        <h3 class="font-diola font-black text-lg text-palm-500 truncate">${room.name}</h3>
+                        <p class="text-xs text-slate-500 font-semibold">${room.sectorName}</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 flex-shrink-0">
+                    ${alert ? `<span class="text-xs font-black text-white bg-red-600 px-3 py-1.5 rounded-full"><i class="fa-solid fa-triangle-exclamation"></i> URGENCE</span>` : ''}
+                    ${worst === 'ok' ? `<span class="text-xs font-black text-palm-500 bg-palm-50 border border-palm-200 px-3 py-1.5 rounded-full"><i class="fa-solid fa-check"></i> OK</span>` : ''}
+                </div>
+            </div>
+
+            <div class="maint-equip-grid" id="maint-equip-grid"></div>
+        </div>`;
+
+    renderEquipGrid(room);
+}
+
+function renderEquipGrid(room) {
+    const grid = document.getElementById('maint-equip-grid');
+    if (!grid) return;
+    grid.innerHTML = Object.values(EQUIPMENT).map(eq => {
+        const status = getEquipmentStatus(room.id, eq.key);
+        const notesCount = appState.notes.filter(n => n.roomId === room.id && n.equipKey === eq.key).length;
+        return `<button onclick="openEquipmentModal('${room.id}', '${eq.key}')" class="maint-equip-card" data-status="${status}">
+            <span class="dot"></span>
+            <span class="ico">${eq.emoji}</span>
+            <span class="nm">${eq.label}</span>
+            ${notesCount > 0 ? `<span class="text-[9px] font-black text-slate-500 mt-0.5">${notesCount} note${notesCount > 1 ? 's' : ''}</span>` : ''}
+        </button>`;
+    }).join('');
+}
+
+async function openEquipmentModal(roomId, equipKey) {
+    appState.maintSelectedEquipKey = equipKey;
+    const room = appState.rooms.find(r => r.id === roomId);
+    if (!room) return;
+    const eq = EQUIPMENT[equipKey];
+    document.getElementById('equip-modal-ico').textContent = eq.emoji;
+    document.getElementById('equip-modal-title').textContent = eq.label;
+    document.getElementById('equip-modal-room').textContent = room.name + ' • ' + room.sectorName;
+
+    // Mettre à jour l'état actif sur les 3 boutons
+    const status = getEquipmentStatus(roomId, equipKey);
+    ['broken','warn','ok'].forEach(s => {
+        const btn = document.getElementById(`equip-btn-${s}`);
+        if (btn) btn.classList.toggle('active', s === status);
+    });
+
+    document.getElementById('modal-equipment').classList.remove('hidden');
+    await loadMaintNotes(roomId);
+    renderEquipNotes();
+}
+function closeEquipmentModal() {
+    document.getElementById('modal-equipment').classList.add('hidden');
+    appState.maintSelectedEquipKey = null;
+}
+
+async function setEquipmentStatus(status) {
+    const roomId = appState.maintSelectedRoomId;
+    const key = appState.maintSelectedEquipKey;
+    if (!roomId || !key) return;
+    try {
+        const { error } = await supabaseClient.rpc('update_equipment_status', {
+            p_token: appState.sessionToken, p_room_id: roomId, p_key: key, p_status: status
+        });
+        if (error) throw error;
+
+        // Mise à jour locale
+        const existing = appState.equipment.find(e => e.roomId === roomId && e.key === key);
+        if (existing) existing.status = status;
+        else appState.equipment.push({ roomId, key, status });
+
+        ['broken','warn','ok'].forEach(s => {
+            const btn = document.getElementById(`equip-btn-${s}`);
+            if (btn) btn.classList.toggle('active', s === status);
+        });
+
+        // Rendu global
+        renderMaintCarousel();
+        renderMaintRoomDetail();
+        updateHeaderCounters();
+
+        const labels = { broken:'À réparer', warn:'En cours', ok:'Fonctionnel' };
+        showToast(`${EQUIPMENT[key].label} → ${labels[status]}`, status === 'ok' ? 'success' : 'info');
+    } catch (err) { console.error(err); showToast('Erreur', 'error'); }
+}
+
+async function loadMaintNotes(roomId) {
+    try {
+        const { data, error } = await supabaseClient.rpc('list_maintenance_notes', { p_token: appState.sessionToken, p_room_id: roomId });
+        if (error) throw error;
+        appState.notes = (data || []).map(mapNoteFromDB);
+    } catch (err) { console.error(err); }
+}
+
+function renderEquipNotes() {
+    const container = document.getElementById('equip-notes-list');
+    if (!container) return;
+    const roomId = appState.maintSelectedRoomId;
+    const key = appState.maintSelectedEquipKey;
+    const notes = appState.notes.filter(n => n.roomId === roomId && (n.equipKey === key || !n.equipKey));
+    if (notes.length === 0) {
+        container.innerHTML = `<p class="text-center text-xs text-slate-400 font-semibold py-4">Aucun signalement</p>`;
+        return;
+    }
+    container.innerHTML = notes.map(n => {
+        const d = new Date(n.createdAt);
+        const dateStr = d.toLocaleDateString('fr-FR', { day:'2-digit', month:'short' }) + ' ' + d.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+        let media = '';
+        if (n.type === 'text') media = `<p class="note-content">${n.content}</p>`;
+        else if (n.type === 'audio') media = `<audio controls preload="metadata" src="${n.content}"></audio>`;
+        else if (n.type === 'photo') media = `<img src="${n.content}" alt="Photo signalement" loading="lazy">`;
+        const icon = n.type === 'audio' ? 'fa-microphone' : (n.type === 'photo' ? 'fa-camera' : 'fa-comment');
+        return `<div class="maint-note">
+            <div class="note-icon ${n.type}"><i class="fa-solid ${icon}"></i></div>
+            <div class="note-body">
+                <div class="note-meta">${n.equipKey ? EQUIPMENT[n.equipKey].label + ' • ' : ''}${dateStr}</div>
+                ${media}
+            </div>
+            <button class="del" onclick="deleteMaintNote('${n.id}')" title="Supprimer"><i class="fa-solid fa-xmark"></i></button>
+        </div>`;
+    }).join('');
+}
+
+async function deleteMaintNote(noteId) {
+    try {
+        const { error } = await supabaseClient.rpc('delete_maintenance_note', { p_token: appState.sessionToken, p_note_id: noteId });
+        if (error) throw error;
+        appState.notes = appState.notes.filter(n => n.id !== noteId);
+        renderEquipNotes();
+        renderMaintRoomDetail();
+        showToast('Note supprimée', 'info');
+    } catch (err) { console.error(err); showToast('Erreur', 'error'); }
+}
+
+// ─── ENREGISTREMENT VOCAL 5 sec ───
+async function startVoiceNote() {
+    if (appState.maintMediaRecorder && appState.maintMediaRecorder.state === 'recording') return;
+    const btn = document.getElementById('btn-voice-note');
+    const label = document.getElementById('voice-note-label');
+
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const chunks = [];
+        const rec = new MediaRecorder(stream);
+        appState.maintMediaRecorder = rec;
+        appState.maintAudioChunks = chunks;
+
+        rec.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+        rec.onstop = async () => {
+            clearTimeout(appState.maintRecTimer);
+            stream.getTracks().forEach(t => t.stop());
+            btn.classList.remove('recording');
+            label.innerText = 'Vocal 5 sec';
+
+            const blob = new Blob(chunks, { type: 'audio/webm' });
+            if (blob.size < 1000) { showToast('Trop court', 'error'); return; }
+            await uploadVoiceNote(blob);
+        };
+
+        rec.start();
+        btn.classList.add('recording');
+
+        let sec = 5;
+        label.innerText = `● ${sec}s`;
+        appState.maintRecTimer = setInterval(() => {
+            sec--;
+            if (sec <= 0) {
+                clearInterval(appState.maintRecTimer);
+                if (rec.state === 'recording') rec.stop();
+            } else {
+                label.innerText = `● ${sec}s`;
+            }
+        }, 1000);
+    } catch (err) {
+        console.error(err);
+        showToast('Micro non autorisé', 'error');
+    }
+}
+
+async function uploadVoiceNote(blob) {
+    const roomId = appState.maintSelectedRoomId;
+    const key = appState.maintSelectedEquipKey;
+    const fileName = `maint_${roomId}_${key}_${Date.now()}.webm`;
+    showToast('Envoi vocal…', 'info');
+    const { error: uploadErr } = await supabaseClient.storage.from('maintenance').upload(fileName, blob, {
+        cacheControl: '3600', upsert: false, contentType: 'audio/webm'
+    });
+    if (uploadErr) { console.error(uploadErr); showToast('Erreur upload', 'error'); return; }
+    const { data } = supabaseClient.storage.from('maintenance').getPublicUrl(fileName);
+
+    const { data: note, error } = await supabaseClient.rpc('add_maintenance_note', {
+        p_token: appState.sessionToken, p_room_id: roomId, p_equipment_key: key,
+        p_type: 'audio', p_content: data.publicUrl
+    });
+    if (error) { console.error(error); showToast('Erreur enregistrement', 'error'); return; }
+    appState.notes.unshift(mapNoteFromDB(note));
+    renderEquipNotes();
+    renderMaintRoomDetail();
+    showToast('Vocal enregistré ✓', 'success');
+}
+
+// ─── PHOTO ───
+function startPhotoCapture() { document.getElementById('maint-photo-input').click(); }
+
+async function handleMaintPhoto(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    event.target.value = '';
+    if (file.size > 5 * 1024 * 1024) { showToast('Photo trop lourde (max 5 Mo)', 'error'); return; }
+    if (!file.type.startsWith('image/')) { showToast('Format non supporté', 'error'); return; }
+
+    showToast('Compression…', 'info');
+    const compressed = await compressImage(file, 1200, 0.85);
+    const roomId = appState.maintSelectedRoomId;
+    const key = appState.maintSelectedEquipKey;
+    const fileName = `maint_${roomId}_${key}_${Date.now()}.jpg`;
+
+    const { error: uploadErr } = await supabaseClient.storage.from('maintenance').upload(fileName, compressed, {
+        cacheControl: '3600', upsert: false, contentType: 'image/jpeg'
+    });
+    if (uploadErr) { console.error(uploadErr); showToast('Erreur upload', 'error'); return; }
+    const { data } = supabaseClient.storage.from('maintenance').getPublicUrl(fileName);
+
+    const { data: note, error } = await supabaseClient.rpc('add_maintenance_note', {
+        p_token: appState.sessionToken, p_room_id: roomId, p_equipment_key: key,
+        p_type: 'photo', p_content: data.publicUrl
+    });
+    if (error) { console.error(error); showToast('Erreur enregistrement', 'error'); return; }
+    appState.notes.unshift(mapNoteFromDB(note));
+    renderEquipNotes();
+    renderMaintRoomDetail();
+    showToast('Photo enregistrée ✓', 'success');
+}
+
+// ─── URGENCE ───
+function openUrgencyModal() {
+    const sel = document.getElementById('urgency-room');
+    sel.innerHTML = appState.rooms.map(r => `<option value="${r.id}" ${r.id === appState.maintSelectedRoomId ? 'selected' : ''}>${r.name}</option>`).join('');
+    document.getElementById('urgency-message').value = '';
+    document.getElementById('modal-urgency').classList.remove('hidden');
+}
+function closeUrgencyModal() { document.getElementById('modal-urgency').classList.add('hidden'); }
+
+async function submitUrgency() {
+    const roomId = document.getElementById('urgency-room').value;
+    const message = document.getElementById('urgency-message').value.trim();
+    if (!roomId) { showToast('Choisissez une chambre', 'error'); return; }
+    try {
+        const { data, error } = await supabaseClient.rpc('trigger_room_alert', {
+            p_token: appState.sessionToken, p_room_id: roomId, p_message: message
+        });
+        if (error) throw error;
+        closeUrgencyModal();
+        await loadDataFromServer();
+        renderMaintAlerts();
+        renderMaintCarousel();
+        renderMaintRoomDetail();
+        updateHeaderCounters();
+        showToast('Urgence envoyée 🚨', 'success');
+        if (Notification.permission === 'granted') {
+            const room = appState.rooms.find(r => r.id === roomId);
+            sendLocalNotification('🚨 URGENCE SIGNALÉE', `${room ? room.name : roomId} — ${message || 'Problème bloquant'}`, { tag: 'buhanor-urgent-' + Date.now(), requireInteraction: true });
+        }
+    } catch (err) { console.error(err); showToast('Erreur', 'error'); }
+}
+
+async function resolveAlert(alertId) {
+    try {
+        const { error } = await supabaseClient.rpc('resolve_room_alert', { p_token: appState.sessionToken, p_alert_id: alertId });
+        if (error) throw error;
+        appState.alerts = appState.alerts.filter(a => a.id !== alertId);
+        renderMaintAlerts();
+        renderMaintCarousel();
+        renderMaintRoomDetail();
+        updateHeaderCounters();
+        showToast('Urgence résolue ✓', 'success');
+    } catch (err) { console.error(err); showToast('Erreur', 'error'); }
+}
+
+// ═══════════════════════════════════════════════════════════
+
 function showCustomConfirm(title, message, onOk, onCancel) {
     document.getElementById('custom-confirm-title').innerText = title;
     document.getElementById('custom-confirm-message').innerText = message;
@@ -2862,6 +3528,30 @@ function subscribeToRealtime() {
             if (!appState.currentProfile) return;
             await syncOccupations();
             await silentRefresh();
+        })
+        .on('postgres_changes', { event:'*', schema:'public', table:'room_equipment' }, async () => {
+            if (!appState.currentProfile) return;
+            await silentRefresh();
+            if (appState.currentView === 'maintenance') {
+                renderMaintCarousel();
+                renderMaintRoomDetail();
+            }
+        })
+        .on('postgres_changes', { event:'*', schema:'public', table:'room_alerts' }, async () => {
+            if (!appState.currentProfile) return;
+            await silentRefresh();
+            if (appState.currentView === 'maintenance') {
+                renderMaintAlerts();
+                renderMaintCarousel();
+                renderMaintRoomDetail();
+            }
+        })
+        .on('postgres_changes', { event:'*', schema:'public', table:'maintenance_notes' }, async () => {
+            if (!appState.currentProfile) return;
+            if (appState.currentView === 'maintenance' && appState.maintSelectedRoomId) {
+                await loadMaintNotes(appState.maintSelectedRoomId);
+                renderEquipNotes();
+            }
         })
         .subscribe((status) => {
             console.log('[Realtime] statut :', status);
