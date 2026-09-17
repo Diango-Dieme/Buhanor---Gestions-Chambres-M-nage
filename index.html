@@ -127,18 +127,49 @@
         .hk-main-btn.b-occupied    { background: #0284C7; color: #fff; }
         .hk-main-btn.b-midstay     { background: #0ea5e9; color: #fff; }
 
-        .hk-admin-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 8px; border-top: 1px solid rgba(15,23,42,0.06); }
-        .hk-admin-btn {
-            height: 54px; border-radius: 16px; border: none; cursor: pointer;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
-            font-weight: 800; font-size: 9px; letter-spacing: 0.03em;
-            transition: all 0.15s; -webkit-tap-highlight-color: transparent;
+        /* ─── Bloc de 4 boutons statut rapides ─── */
+        .hk-quick-actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            padding: 8px;
+            border-top: 1px solid rgba(15,23,42,0.06);
         }
-        .hk-admin-btn i { font-size: 18px; }
-        .hk-admin-btn:active { transform: scale(0.92); }
-        .hk-admin-btn.a-to_clean    { background: #fee2e2; color: #991b1b; }
-        .hk-admin-btn.a-in_progress { background: #fef3c7; color: #92400e; }
-        .hk-admin-btn.a-clean       { background: #d1fae5; color: #065f46; }
+        .hk-quick-btn {
+            height: 56px;
+            border-radius: 16px;
+            border: 2px solid rgba(15,23,42,0.08);
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--c, #64748b);
+            cursor: pointer;
+            transition: all 0.15s cubic-bezier(0.34,1.56,0.64,1);
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+        }
+        .hk-quick-btn:active { transform: scale(0.9); }
+        .hk-quick-btn.active {
+            background: var(--c, #0D5C3A);
+            color: #ffffff;
+            border-color: var(--c, #0D5C3A);
+            box-shadow: 0 8px 18px -6px var(--c, rgba(13,92,58,0.6));
+            transform: scale(1.04);
+        }
+        .hk-quick-btn .lbl {
+            position: absolute;
+            bottom: 2px;
+            left: 0; right: 0;
+            font-size: 8px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            opacity: 0.65;
+            text-align: center;
+        }
+        .hk-quick-btn.active .lbl { opacity: 0.95; }
 
         .hk-note-btn { width: 100%; padding: 10px; font-size: 11px; font-weight: 700; color: #64748b; background: transparent; border: none; border-top: 1px solid rgba(15,23,42,0.06); display: flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: all 0.15s; }
         .hk-note-btn:active { background: rgba(15,23,42,0.04); color: #0D5C3A; }
@@ -162,7 +193,6 @@
         .planning-cell.overnight { background: linear-gradient(160deg, #0f6d44 0%, #0D5C3A 100%); color: #fff; }
         .planning-cell.day_use { background: linear-gradient(160deg, #8b5cf6 0%, #6d28d9 100%); color: #fff; }
         .planning-cell.today-cell { outline: 2.5px solid rgba(13,92,58,0.4); outline-offset: -2.5px; }
-
         .planning-cell.overnight.checkout { background: linear-gradient(160deg, #a7f3d0 0%, #6ee7b7 100%); color: #065f46; box-shadow: 0 5px 14px -4px rgba(13,92,58,0.35); }
         .planning-cell.day_use.checkout   { background: linear-gradient(160deg, #ddd6fe 0%, #c4b5fd 100%); color: #5b21b6; box-shadow: 0 5px 14px -4px rgba(109,40,217,0.35); }
 
@@ -175,6 +205,106 @@
         .service-banner.idle    { background: linear-gradient(160deg, #0D5C3A 0%, #073823 100%); color: #fff; box-shadow: 0 10px 30px -8px rgba(13,92,58,0.5); }
         .service-banner.done    { background: linear-gradient(160deg, #7c3aed 0%, #6d28d9 100%); color: #fff; box-shadow: 0 10px 30px -8px rgba(124,58,237,0.5); }
         .service-banner.admin   { background: linear-gradient(160deg, #7c3aed 0%, #5b21b6 100%); color: #fff; box-shadow: 0 10px 30px -8px rgba(124,58,237,0.5); }
+
+        /* ═══════════════════════════════════════════════════════
+           CARTES DE RÔLE — Sélection très visible (Admin vert / Ménage bleu)
+           ═══════════════════════════════════════════════════════ */
+        .role-card {
+            position: relative;
+            border-width: 2px;
+            border-style: solid;
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
+        }
+        .role-card:active { transform: scale(0.97); }
+
+        /* Admin - état par défaut */
+        .role-card[data-role="admin"] {
+            border-color: rgba(13, 92, 58, 0.2);
+            background: rgba(255, 255, 255, 0.75);
+        }
+        .role-card[data-role="admin"] .role-icon {
+            background: rgba(13, 92, 58, 0.1);
+            color: #0D5C3A;
+        }
+        .role-card[data-role="admin"].selected {
+            border-color: #0D5C3A;
+            background: linear-gradient(160deg, #0f6d44 0%, #0a4a2e 100%);
+            box-shadow: 0 16px 40px -12px rgba(13, 92, 58, 0.7), inset 0 1px 0 rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+        }
+        .role-card[data-role="admin"].selected .role-title,
+        .role-card[data-role="admin"].selected .role-desc { color: #ffffff; }
+        .role-card[data-role="admin"].selected .role-desc { color: rgba(255,255,255,0.85); }
+        .role-card[data-role="admin"].selected .role-icon {
+            background: rgba(255, 255, 255, 0.22);
+            color: #ffffff;
+            transform: scale(1.08);
+        }
+
+        /* Ménage - état par défaut */
+        .role-card[data-role="menage"] {
+            border-color: rgba(2, 132, 199, 0.2);
+            background: rgba(255, 255, 255, 0.75);
+        }
+        .role-card[data-role="menage"] .role-icon {
+            background: rgba(2, 132, 199, 0.1);
+            color: #0284C7;
+        }
+        .role-card[data-role="menage"].selected {
+            border-color: #0284C7;
+            background: linear-gradient(160deg, #0596dd 0%, #026aa0 100%);
+            box-shadow: 0 16px 40px -12px rgba(2, 132, 199, 0.7), inset 0 1px 0 rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+        }
+        .role-card[data-role="menage"].selected .role-title,
+        .role-card[data-role="menage"].selected .role-desc { color: #ffffff; }
+        .role-card[data-role="menage"].selected .role-desc { color: rgba(255,255,255,0.85); }
+        .role-card[data-role="menage"].selected .role-icon {
+            background: rgba(255, 255, 255, 0.22);
+            color: #ffffff;
+            transform: scale(1.08);
+        }
+
+        /* Coche de sélection */
+        .role-check {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ffffff;
+            color: #0D5C3A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            opacity: 0;
+            transform: scale(0.3) rotate(-90deg);
+            transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            pointer-events: none;
+        }
+        .role-card.selected .role-check {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+        .role-card[data-role="menage"].selected .role-check { color: #0284C7; }
+
+        .role-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 10px;
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .role-title { transition: color 0.25s ease; }
+        .role-desc { transition: color 0.25s ease; }
 
         .pin-dot { transition: background 0.15s ease, transform 0.15s ease; }
         .pin-dot.filled { background: #0D5C3A; border-color: #0D5C3A; transform: scale(1.08); }
@@ -204,7 +334,6 @@
         .module-card:active { transform: translateY(-2px) scale(0.99); }
         .module-image { filter: drop-shadow(0 12px 22px rgba(0,0,0,0.3)); }
 
-        /* Backdrop flouté du menu utilisateur — SOUS le header (z-20 < z-30) */
         #user-menu-backdrop {
             background: rgba(15,23,42,0.45);
             backdrop-filter: blur(14px) saturate(140%);
@@ -212,20 +341,7 @@
             animation: fadeInBackdrop 0.2s ease;
             z-index: 20;
         }
-        @keyframes fadeInBackdrop {
-            from { opacity: 0; }
-            to   { opacity: 1; }
-        }
-
-        /* Pastille de mise à jour silencieuse */
-        .refresh-pulse {
-            animation: refreshPulse 0.6s ease;
-        }
-        @keyframes refreshPulse {
-            0% { box-shadow: 0 0 0 0 rgba(13,92,58,0.5); }
-            70% { box-shadow: 0 0 0 8px rgba(13,92,58,0); }
-            100% { box-shadow: 0 0 0 0 rgba(13,92,58,0); }
-        }
+        @keyframes fadeInBackdrop { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body class="font-sans antialiased">
@@ -276,20 +392,24 @@
                     <span id="create-step-indicator" class="text-xs font-black text-palm-500 bg-white/70 border border-white/80 px-3 py-1 rounded-full uppercase tracking-widest whitespace-nowrap">Étape 1/4</span>
                 </div>
                 <div class="relative">
+                    <!-- ÉTAPE 1 : RÔLE -->
                     <div id="create-step-1" class="wizard-step space-y-5">
                         <div class="text-center space-y-1">
                             <h3 class="font-diola font-black text-lg text-palm-500">Quel est votre rôle ?</h3>
+                            <p class="text-xs text-slate-500 font-semibold">Touchez une carte pour la sélectionner.</p>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <button onclick="selectCreateRole('admin')" id="role-btn-admin" class="role-card bg-white/70 border border-white/80 rounded-2xl p-4 text-left transition">
-                                <div class="w-10 h-10 rounded-xl bg-palm-50 text-palm-500 flex items-center justify-center text-lg mb-2"><i class="fa-solid fa-user-tie"></i></div>
-                                <h4 class="font-diola font-black text-palm-500 text-sm sm:text-base">Réception / Admin</h4>
-                                <p class="text-xs text-slate-500 font-semibold mt-1">Accès complet.</p>
+                            <button type="button" onclick="selectCreateRole('admin')" id="role-btn-admin" data-role="admin" class="role-card rounded-2xl p-4 text-left">
+                                <div class="role-check"><i class="fa-solid fa-check"></i></div>
+                                <div class="role-icon"><i class="fa-solid fa-user-tie"></i></div>
+                                <h4 class="role-title font-diola font-black text-palm-500 text-sm sm:text-base">Réception / Admin</h4>
+                                <p class="role-desc text-xs text-slate-500 font-semibold mt-1">Accès complet : réservations, planning, ménage, profils.</p>
                             </button>
-                            <button onclick="selectCreateRole('menage')" id="role-btn-menage" class="role-card bg-white/70 border border-white/80 rounded-2xl p-4 text-left transition">
-                                <div class="w-10 h-10 rounded-xl bg-lagoon-50 text-lagoon-500 flex items-center justify-center text-lg mb-2"><i class="fa-solid fa-broom"></i></div>
-                                <h4 class="font-diola font-black text-lagoon-500 text-sm sm:text-base">Ménage</h4>
-                                <p class="text-xs text-slate-500 font-semibold mt-1">Statuts chambres et consignes.</p>
+                            <button type="button" onclick="selectCreateRole('menage')" id="role-btn-menage" data-role="menage" class="role-card rounded-2xl p-4 text-left">
+                                <div class="role-check"><i class="fa-solid fa-check"></i></div>
+                                <div class="role-icon"><i class="fa-solid fa-broom"></i></div>
+                                <h4 class="role-title font-diola font-black text-lagoon-500 text-sm sm:text-base">Ménage</h4>
+                                <p class="role-desc text-xs text-slate-500 font-semibold mt-1">Accès limité : statuts chambres et consignes.</p>
                             </button>
                         </div>
                         <button id="btn-step1-continue" onclick="goToStep2()" disabled class="w-full py-3.5 btn-liquid disabled:bg-slate-300 disabled:cursor-not-allowed text-white font-black rounded-2xl text-sm sm:text-base">
@@ -1076,25 +1196,13 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeUserMenu();
 });
 
-// ═══════════════════════════════════════════════════════════
-// AUTO-REFRESH : retour au premier plan + reconnexion
-// ═══════════════════════════════════════════════════════════
 document.addEventListener('visibilitychange', () => {
-    if (!document.hidden && appState.currentProfile) {
-        silentRefresh();
-    }
+    if (!document.hidden && appState.currentProfile) silentRefresh();
 });
-
 window.addEventListener('online', () => {
-    if (appState.currentProfile) {
-        setConnectionStatus(true);
-        silentRefresh();
-    }
+    if (appState.currentProfile) { setConnectionStatus(true); silentRefresh(); }
 });
-
-window.addEventListener('offline', () => {
-    setConnectionStatus(false);
-});
+window.addEventListener('offline', () => setConnectionStatus(false));
 
 function saveSession(user, token) {
     localStorage.setItem('buhanor_current_user', JSON.stringify(user));
@@ -1188,8 +1296,10 @@ function showWizardStep(step) {
 
 function selectCreateRole(role) {
     authState.createData.role = role;
-    document.getElementById('role-btn-admin').classList.toggle('selected', role === 'admin');
-    document.getElementById('role-btn-menage').classList.toggle('selected', role === 'menage');
+    const btnAdmin = document.getElementById('role-btn-admin');
+    const btnMenage = document.getElementById('role-btn-menage');
+    btnAdmin.classList.toggle('selected', role === 'admin');
+    btnMenage.classList.toggle('selected', role === 'menage');
     document.getElementById('btn-step1-continue').disabled = false;
 }
 
@@ -1754,9 +1864,6 @@ async function loadDataFromServer() {
     }
 }
 
-// ═══════════════════════════════════════════════════════════
-// AUTO-REFRESH SILENCIEUX
-// ═══════════════════════════════════════════════════════════
 async function silentRefresh() {
     if (!appState.currentProfile || !appState.sessionToken) return;
     const token = appState.sessionToken;
@@ -1766,16 +1873,13 @@ async function silentRefresh() {
             supabaseClient.rpc('list_reservations', { p_token: token })
         ]);
         if (roomsRes.error || resRes.error) return;
-
         const newHash = JSON.stringify(roomsRes.data) + '|' + JSON.stringify(resRes.data);
         if (newHash === lastDataHash) return;
-
         const prevRooms = appState.rooms.slice();
         lastDataHash = newHash;
         appState.rooms = (roomsRes.data || []).map(mapRoomFromDB);
         appState.reservations = (resRes.data || []).map(mapReservationFromDB);
         setConnectionStatus(true);
-
         detectRoomChanges(prevRooms);
         renderCurrentView();
     } catch (e) { /* silencieux */ }
@@ -1785,7 +1889,6 @@ function detectRoomChanges(prevRooms) {
     if (!appState.currentProfile || !prevRooms || prevRooms.length === 0) return;
     const role = appState.currentProfile.role;
 
-    // ADMIN : nouvelles chambres à valider
     if (role === 'admin') {
         const newPending = appState.rooms.filter(r =>
             r.status === 'clean_pending' &&
@@ -1804,7 +1907,6 @@ function detectRoomChanges(prevRooms) {
         }
     }
 
-    // MÉNAGE : nouvelles chambres à nettoyer
     if (role === 'menage') {
         const newToClean = appState.rooms.filter(r =>
             r.status === 'to_clean' &&
@@ -1814,11 +1916,7 @@ function detectRoomChanges(prevRooms) {
             const names = newToClean.map(r => r.name).join(', ');
             showToast(`${names} à nettoyer`, 'info');
             if (Notification.permission === 'granted') {
-                sendLocalNotification(
-                    "Nouvelles chambres à nettoyer",
-                    names,
-                    { tag: 'buhanor-toclean-' + Date.now() }
-                );
+                sendLocalNotification("Nouvelles chambres à nettoyer", names, { tag: 'buhanor-toclean-' + Date.now() });
             }
         }
     }
@@ -1829,12 +1927,8 @@ async function syncOccupations() {
         const token = appState.sessionToken;
         if (!token) return;
         const { data } = await supabaseClient.rpc('sync_room_occupation', { p_token: token });
-        if (data > 0) {
-            await loadDataFromServer();
-        }
-    } catch (err) {
-        console.warn('Sync occupation :', err);
-    }
+        if (data > 0) await loadDataFromServer();
+    } catch (err) { console.warn('Sync occupation :', err); }
 }
 
 function setConnectionStatus(online) {
@@ -2109,10 +2203,7 @@ async function startService() {
         await loadDataFromServer();
         renderHousekeepingView();
         showToast(`Service démarré • ${data} chambre(s)`, 'success');
-    } catch (err) {
-        console.error(err);
-        showToast("Erreur", 'error');
-    }
+    } catch (err) { console.error(err); showToast("Erreur", 'error'); }
 }
 
 async function endService() {
@@ -2263,20 +2354,26 @@ function renderHousekeepingCard(room, role) {
 
     const showOccupiedChip = occupied && room.status !== 'occupied';
 
-    let adminActions = '';
-    if (role === 'admin') {
-        adminActions = `<div class="hk-admin-actions">
-            <button onclick="updateRoomStatus('${room.id}', 'to_clean')" class="hk-admin-btn a-to_clean" ${room.status === 'to_clean' ? 'style="opacity:0.4"' : ''}>
-                <i class="fa-solid fa-broom"></i><span>À nettoyer</span>
+    // Bloc 4 boutons statut rapides (visibles pour TOUS : admin ET ménage)
+    const quickActions = `
+        <div class="hk-quick-actions">
+            <button onclick="updateRoomStatus('${room.id}', 'to_clean')" class="hk-quick-btn ${room.status === 'to_clean' ? 'active' : ''}" style="--c:#dc2626;" title="À nettoyer">
+                <i class="fa-solid fa-broom"></i>
+                <span class="lbl">Nettoyer</span>
             </button>
-            <button onclick="updateRoomStatus('${room.id}', 'in_progress')" class="hk-admin-btn a-in_progress" ${room.status === 'in_progress' ? 'style="opacity:0.4"' : ''}>
-                <i class="fa-solid fa-spray-can-sparkles"></i><span>En cours</span>
+            <button onclick="updateRoomStatus('${room.id}', 'in_progress')" class="hk-quick-btn ${room.status === 'in_progress' ? 'active' : ''}" style="--c:#d97706;" title="En cours">
+                <i class="fa-solid fa-spray-can-sparkles"></i>
+                <span class="lbl">En cours</span>
             </button>
-            <button onclick="updateRoomStatus('${room.id}', 'clean')" class="hk-admin-btn a-clean" ${room.status === 'clean' ? 'style="opacity:0.4"' : ''}>
-                <i class="fa-solid fa-wand-magic-sparkles"></i><span>Propre</span>
+            <button onclick="updateRoomStatus('${room.id}', 'clean')" class="hk-quick-btn ${room.status === 'clean' ? 'active' : ''}" style="--c:#0D5C3A;" title="Propre">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span class="lbl">Propre</span>
+            </button>
+            <button onclick="updateRoomStatus('${room.id}', 'occupied')" class="hk-quick-btn ${room.status === 'occupied' ? 'active' : ''}" style="--c:#0284C7;" title="Occupée">
+                <i class="fa-solid fa-key"></i>
+                <span class="lbl">Occupée</span>
             </button>
         </div>`;
-    }
 
     return `<div class="hk-card">
         <div class="hk-photo">
@@ -2292,7 +2389,7 @@ function renderHousekeepingCard(room, role) {
             </div>
         </div>
         ${mainBtn}
-        ${adminActions}
+        ${quickActions}
         <button onclick="openRoomNotesModal('${room.id}')" class="hk-note-btn">
             <i class="fa-solid fa-pen-to-square"></i> Consigne${room.notes ? ' • ' + room.notes.slice(0, 30) + (room.notes.length > 30 ? '…' : '') : ''}
         </button>
@@ -2377,7 +2474,6 @@ function renderCalendarGrid() {
             ${days.map(d => {
                 const dateStr = formatDateISO(d);
                 const isToday = dateStr === todayStr;
-
                 let resInfo = null;
                 for (const r of appState.reservations) {
                     if (r.roomId !== room.id) continue;
@@ -2388,28 +2484,20 @@ function renderCalendarGrid() {
                         if (dateStr === r.endDate) { resInfo = { res: r, isCheckout: true }; break; }
                     }
                 }
-
                 if (resInfo) {
                     const { res, isCheckout } = resInfo;
                     const typeCls = res.type === 'day_use' ? 'day_use' : 'overnight';
                     const cls = isCheckout ? `${typeCls} checkout` : typeCls;
-                    const ico = isCheckout
-                        ? 'fa-right-from-bracket'
-                        : (res.type === 'day_use' ? 'fa-bolt' : 'fa-moon');
-                    const title = isCheckout
-                        ? `${res.clientName} — Départ (chambre libre après)`
-                        : `${res.clientName} — ${res.type === 'day_use' ? 'Passage' : 'Nuitée'}`;
+                    const ico = isCheckout ? 'fa-right-from-bracket' : (res.type === 'day_use' ? 'fa-bolt' : 'fa-moon');
+                    const title = isCheckout ? `${res.clientName} — Départ (chambre libre après)` : `${res.clientName} — ${res.type === 'day_use' ? 'Passage' : 'Nuitée'}`;
                     return `<td style="padding:2px 1px;">
-                        <button class="planning-cell ${cls} ${isToday ? 'today-cell' : ''}"
-                                onclick="showReservationDetail('${res.id}')"
-                                title="${title}">
+                        <button class="planning-cell ${cls} ${isToday ? 'today-cell' : ''}" onclick="showReservationDetail('${res.id}')" title="${title}">
                             <i class="fa-solid ${ico}"></i>
                         </button>
                     </td>`;
                 }
                 return `<td style="padding:2px 1px;">
-                    <button class="planning-cell free ${isToday ? 'today-cell' : ''}"
-                            onclick="openNewReservationModal('${room.id}', '${dateStr}')">
+                    <button class="planning-cell free ${isToday ? 'today-cell' : ''}" onclick="openNewReservationModal('${room.id}', '${dateStr}')">
                         <i class="fa-solid fa-plus"></i>
                     </button>
                 </td>`;
@@ -2716,9 +2804,6 @@ function updateNotificationUI(enabled) {
     });
 }
 
-// ═══════════════════════════════════════════════════════════
-// NOTIFICATIONS — Compatible iOS 16.4+ et Android
-// ═══════════════════════════════════════════════════════════
 function sendLocalNotification(title, body, options = {}) {
     if (!('Notification' in window) || Notification.permission !== 'granted') return;
     const notifOptions = {
@@ -2767,9 +2852,6 @@ function updateClock() {
     updateScheduleDisplay();
 }
 
-// ═══════════════════════════════════════════════════════════
-// SUPABASE REALTIME
-// ═══════════════════════════════════════════════════════════
 function subscribeToRealtime() {
     supabaseClient.channel('buhanor-changes')
         .on('postgres_changes', { event:'*', schema:'public', table:'rooms' }, async () => {
@@ -2798,15 +2880,10 @@ window.onload = async function() {
     subscribeToRealtime();
     setInterval(checkAlertsAndNotify, 60000);
 
-    // ─── Polling actif : toutes les 8 secondes ───
-    // Fallback fiable si Realtime échoue (réseaux mobiles instables, etc.)
     setInterval(() => {
-        if (!document.hidden && appState.currentProfile) {
-            silentRefresh();
-        }
+        if (!document.hidden && appState.currentProfile) silentRefresh();
     }, 8000);
 
-    // ─── Sync occupation toutes les 5 min (sécurité) ───
     setInterval(async () => {
         if (appState.currentProfile && !document.hidden) {
             await syncOccupations();
