@@ -131,10 +131,9 @@
         .hk-main-btn.b-clean       { background: #0D5C3A; color: #fff; }
         .hk-main-btn.b-midstay     { background: #0ea5e9; color: #fff; }
 
-        /* Bloc 4 boutons statut rapides */
         .hk-quick-actions {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 6px;
             padding: 8px;
             border-top: 1px solid rgba(15,23,42,0.06);
@@ -148,7 +147,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 16px;
             color: var(--c, #64748b);
             cursor: pointer;
             transition: all 0.15s cubic-bezier(0.34,1.56,0.64,1);
@@ -165,11 +164,11 @@
             transform: scale(1.04);
         }
         .hk-quick-btn .lbl {
-            font-size: 8px;
+            font-size: 7.5px;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 0.04em;
-            opacity: 0.7;
+            letter-spacing: 0.03em;
+            opacity: 0.75;
         }
         .hk-quick-btn.active .lbl { opacity: 0.95; }
 
@@ -300,11 +299,27 @@
             border-radius: 22px; overflow: hidden; position: relative;
             box-shadow: 0 12px 28px -12px rgba(15,23,42,0.25);
             background: #ebd9c8; aspect-ratio: 5/4;
-            cursor: pointer; transition: transform 0.2s;
+            cursor: pointer;
             border: 3px solid transparent;
+            opacity: 0.65;
+            transform: scale(0.94);
+            transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s, opacity 0.3s, border-color 0.3s;
         }
-        .maint-carousel-card:active { transform: scale(0.97); }
-        .maint-carousel-card.selected { border-color: #0D5C3A; box-shadow: 0 0 0 4px rgba(13,92,58,0.2), 0 12px 28px -12px rgba(15,23,42,0.35); }
+        .maint-carousel-card:active { transform: scale(0.9); }
+        .maint-carousel-card.selected {
+            opacity: 1;
+            transform: scale(1.03);
+            border-color: #0D5C3A;
+            box-shadow: 0 0 0 4px rgba(13,92,58,0.28), 0 20px 40px -14px rgba(13,92,58,0.55);
+        }
+        .maint-carousel-card.selected::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(13,92,58,0.55) 0%, transparent 55%);
+            z-index: 1;
+            pointer-events: none;
+        }
         .maint-carousel-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .maint-carousel-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.05) 50%, transparent 75%); pointer-events: none; }
         .maint-carousel-card .card-label { position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 14px; z-index: 2; color: #fff; }
@@ -316,6 +331,48 @@
         .maint-carousel-card .card-dot.broken { background: #dc2626; animation: pulseAlert 1.5s infinite; }
         .maint-carousel-card .card-dot.alert { background: #dc2626; animation: pulseAlert 1s infinite; }
 
+        .maint-carousel-card .check-badge {
+            position: absolute;
+            bottom: 14px; right: 14px;
+            z-index: 3;
+            width: 40px; height: 40px; border-radius: 50%;
+            background: #0D5C3A;
+            border: 3px solid #fff;
+            color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            opacity: 0;
+            transform: scale(0.3) rotate(-90deg);
+            transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .maint-carousel-card.selected .check-badge {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+        .maint-carousel-card .sel-label {
+            position: absolute;
+            top: 14px; left: 14px;
+            z-index: 3;
+            background: #0D5C3A;
+            color: #fff;
+            font-size: 9px;
+            font-weight: 900;
+            padding: 5px 10px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            border: 2px solid #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(-8px);
+            transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        .maint-carousel-card.selected .sel-label {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Grille équipements */
         .maint-equip-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
         @media (min-width: 480px) { .maint-equip-grid { grid-template-columns: repeat(3, 1fr); } }
@@ -325,15 +382,30 @@
         .maint-equip-card {
             border-radius: 20px; background: #fff; border: 2.5px solid #e2e8f0;
             padding: 14px 10px 12px; display: flex; flex-direction: column; align-items: center;
-            gap: 8px; cursor: pointer; transition: all 0.2s; position: relative;
-            text-align: center;
+            gap: 6px; cursor: pointer;
+            transition: all 0.22s cubic-bezier(0.34,1.56,0.64,1);
+            position: relative; text-align: center;
+            box-shadow: 0 6px 18px -8px rgba(15,23,42,0.15);
         }
+        .maint-equip-card:hover { transform: translateY(-2px); box-shadow: 0 12px 26px -10px rgba(15,23,42,0.25); }
         .maint-equip-card:active { transform: scale(0.96); }
         .maint-equip-card[data-status="ok"]     { border-color: #a7f3d0; background: linear-gradient(180deg, #ecfdf5 0%, #d1fae5 100%); }
         .maint-equip-card[data-status="warn"]   { border-color: #fcd34d; background: linear-gradient(180deg, #fffbeb 0%, #fef3c7 100%); }
         .maint-equip-card[data-status="broken"] { border-color: #fca5a5; background: linear-gradient(180deg, #fef2f2 0%, #fee2e2 100%); animation: pulseAlert 2s infinite; }
-        .maint-equip-card .ico { font-size: 34px; line-height: 1; }
-        .maint-equip-card .nm  { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.04em; color: #334155; }
+
+        .maint-equip-card .ico {
+            width: 72px; height: 72px;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.22s cubic-bezier(0.34,1.56,0.64,1);
+            background: transparent;
+        }
+        .maint-equip-card .ico svg { width: 100%; height: 100%; display: block; }
+        .maint-equip-card:hover .ico { transform: scale(1.08); }
+        .maint-equip-card[data-status="warn"] .ico svg { filter: drop-shadow(0 4px 10px rgba(217,119,6,0.4)); }
+        .maint-equip-card[data-status="broken"] .ico svg { filter: drop-shadow(0 4px 10px rgba(220,38,38,0.5)) saturate(0.8); }
+        .maint-equip-card[data-status="ok"] .ico svg { filter: drop-shadow(0 4px 10px rgba(13,92,58,0.3)); }
+
+        .maint-equip-card .nm { font-size: 11px; margin-top: 4px; font-weight: 900; color: #334155; }
         .maint-equip-card .dot { position: absolute; top: 8px; right: 8px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fff; }
         .maint-equip-card[data-status="ok"]     .dot { background: #0D5C3A; }
         .maint-equip-card[data-status="warn"]   .dot { background: #d97706; }
@@ -357,7 +429,6 @@
         .maint-action-btn.active[data-target="warn"]   { background: #d97706; border-color: #d97706; }
         .maint-action-btn.active[data-target="ok"]     { background: #0D5C3A; border-color: #0D5C3A; }
 
-        /* Note micro */
         .maint-media-bar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 12px; }
         .maint-media-btn {
             padding: 14px; border-radius: 18px; border: none;
@@ -371,7 +442,6 @@
         .maint-media-btn.mic.recording { background: #dc2626; color: #fff; border-color: #dc2626; animation: pulseAlert 1s infinite; }
         .maint-media-btn.cam { background: #eff6ff; color: #1d4ed8; border: 2px solid #bfdbfe; }
 
-        /* Timeline notes */
         .maint-timeline { display: flex; flex-direction: column; gap: 10px; }
         .maint-note {
             background: #fff; border: 1px solid rgba(15,23,42,0.08); border-radius: 16px;
@@ -392,7 +462,6 @@
         .maint-note img { max-width: 100%; border-radius: 10px; margin-top: 6px; }
         .maint-note .del { color: #dc2626; background: transparent; border: none; padding: 6px; cursor: pointer; flex-shrink: 0; }
 
-        /* Bouton URGENCE */
         .maint-urgency-btn {
             background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
             color: #fff; border: none; border-radius: 22px;
@@ -874,17 +943,14 @@
                     </div>
                 </div>
 
-                <!-- Bouton URGENCE -->
                 <button onclick="openUrgencyModal()" class="maint-urgency-btn">
                     <i class="fa-solid fa-triangle-exclamation"></i>
                     <span>URGENCE CHAMBRE</span>
                 </button>
             </div>
 
-            <!-- Alerte active -->
             <div id="maint-alerts-container"></div>
 
-            <!-- Carrousel des chambres -->
             <div class="liquid-glass-strong rounded-[24px] p-4">
                 <div class="flex items-center justify-between mb-2 px-1">
                     <span class="text-xs font-black uppercase tracking-widest text-slate-500">Choisir une chambre</span>
@@ -893,9 +959,7 @@
                 <div id="maint-carousel" class="maint-carousel"></div>
             </div>
 
-            <!-- Vue détail de la chambre sélectionnée -->
             <div id="maint-room-detail"></div>
-
         </section>
     </main>
 </div>
@@ -983,12 +1047,11 @@
     </div>
 </div>
 
-<!-- MODALE MAINTENANCE : détail équipement -->
 <div id="modal-equipment" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 flex items-end sm:items-center justify-center modal-overlay p-0 sm:p-4">
     <div class="liquid-glass-strong rounded-t-[28px] sm:rounded-[28px] max-w-lg w-full p-5 sm:p-6 space-y-4 modal-card safe-bottom max-h-[92dvh] overflow-y-auto">
         <div class="flex justify-between items-center border-b border-slate-200/60 pb-3 sticky top-0 bg-white/40 -mx-5 sm:-mx-6 px-5 sm:px-6 backdrop-blur-xl z-10">
             <div class="flex items-center gap-3 min-w-0">
-                <span id="equip-modal-ico" class="text-3xl">💡</span>
+                <span id="equip-modal-ico" class="w-16 h-16 rounded-2xl bg-white/70 flex items-center justify-center border border-white/90 shadow-sm flex-shrink-0"></span>
                 <div class="min-w-0">
                     <h3 id="equip-modal-title" class="text-base sm:text-lg font-diola font-black text-palm-500 truncate">Ampoule</h3>
                     <p id="equip-modal-room" class="text-xs text-slate-500 font-semibold truncate"></p>
@@ -997,7 +1060,6 @@
             <button onclick="closeEquipmentModal()" class="w-11 h-11 liquid-glass rounded-full flex items-center justify-center text-slate-500 font-bold flex-shrink-0 touch-44"><i class="fa-solid fa-xmark"></i></button>
         </div>
 
-        <!-- 3 gros boutons état -->
         <div class="maint-actions-3">
             <button onclick="setEquipmentStatus('broken')" id="equip-btn-broken" class="maint-action-btn" data-target="broken">
                 <i class="fa-solid fa-screwdriver-wrench"></i>
@@ -1013,7 +1075,6 @@
             </button>
         </div>
 
-        <!-- Micro + Photo -->
         <div class="maint-media-bar">
             <button onclick="startVoiceNote()" id="btn-voice-note" class="maint-media-btn mic">
                 <i class="fa-solid fa-microphone text-2xl"></i>
@@ -1026,7 +1087,6 @@
         </div>
         <input type="file" id="maint-photo-input" accept="image/*" capture="environment" class="hidden" onchange="handleMaintPhoto(event)">
 
-        <!-- Timeline notes -->
         <div>
             <p class="text-xs font-black uppercase tracking-widest text-slate-500 mb-2 mt-2">Signalements récents</p>
             <div id="equip-notes-list" class="maint-timeline"></div>
@@ -1034,7 +1094,6 @@
     </div>
 </div>
 
-<!-- MODALE URGENCE -->
 <div id="modal-urgency" class="hidden fixed inset-0 bg-slate-900/70 backdrop-blur-md z-50 flex items-end sm:items-center justify-center modal-overlay p-0 sm:p-4">
     <div class="liquid-glass-strong rounded-t-[28px] sm:rounded-[28px] max-w-md w-full p-5 sm:p-6 space-y-4 modal-card safe-bottom">
         <div class="text-center space-y-2">
@@ -1303,20 +1362,122 @@ const STATUS_META = {
 };
 
 const EQUIPMENT = {
-    light:  { emoji:'💡', label:'Éclairage',  key:'light'  },
-    fan:    { emoji:'🌀', label:'Ventilateur', key:'fan'   },
-    tap:    { emoji:'🚰', label:'Robinet',    key:'tap'    },
-    shower: { emoji:'🚿', label:'Douchette',  key:'shower' },
-    toilet: { emoji:'🚽', label:'Toilettes',  key:'toilet' },
-    bed:    { emoji:'🛏️', label:'Lit',       key:'bed'    },
-    lock:   { emoji:'🔑', label:'Serrure',    key:'lock'   }
+    light:  { label:'Éclairage',   key:'light',  accent:'#f59e0b' },
+    fan:    { label:'Ventilateur', key:'fan',    accent:'#0ea5e9' },
+    tap:    { label:'Robinet',     key:'tap',    accent:'#06b6d4' },
+    shower: { label:'Douchette',   key:'shower', accent:'#3b82f6' },
+    toilet: { label:'Toilettes',   key:'toilet', accent:'#8b5cf6' },
+    bed:    { label:'Lit',         key:'bed',    accent:'#a855f7' },
+    lock:   { label:'Serrure',     key:'lock',   accent:'#0D5C3A' }
 };
+
+function getEquipSVG(key) {
+    const svgs = {
+        light: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <radialGradient id="bulbGrad" cx="0.5" cy="0.4" r="0.65">
+                    <stop offset="0%" stop-color="#fefce8"/>
+                    <stop offset="60%" stop-color="#fde047"/>
+                    <stop offset="100%" stop-color="#f59e0b"/>
+                </radialGradient>
+            </defs>
+            <g stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round">
+                <line x1="32" y1="1" x2="32" y2="7"/>
+                <line x1="50" y1="8" x2="45" y2="13"/>
+                <line x1="14" y1="8" x2="19" y2="13"/>
+                <line x1="58" y1="26" x2="52" y2="26"/>
+                <line x1="6" y1="26" x2="12" y2="26"/>
+                <line x1="50" y1="44" x2="45" y2="39"/>
+                <line x1="14" y1="44" x2="19" y2="39"/>
+            </g>
+            <circle cx="32" cy="26" r="17" fill="url(#bulbGrad)" stroke="#d97706" stroke-width="1.8"/>
+            <path d="M25 40 L27 46 L37 46 L39 40 Z" fill="#94a3b8" stroke="#64748b" stroke-width="1"/>
+            <rect x="27" y="46" width="10" height="3" fill="#64748b"/>
+            <rect x="28" y="49" width="8" height="3" fill="#475569"/>
+            <rect x="29" y="52" width="6" height="4" rx="1" fill="#334155"/>
+            <path d="M28 18 Q32 14 36 18 Q38 22 35 24 Q33 26 32 26 Q31 26 29 24 Q26 22 28 18 Z" fill="#fff" opacity="0.7"/>
+        </svg>`,
+        fan: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <radialGradient id="fanBg" cx="0.5" cy="0.5" r="0.5">
+                    <stop offset="0%" stop-color="#f0f9ff"/>
+                    <stop offset="100%" stop-color="#bae6fd"/>
+                </radialGradient>
+            </defs>
+            <circle cx="32" cy="26" r="21" fill="url(#fanBg)" stroke="#0284c7" stroke-width="2"/>
+            <g stroke="#0369a1" stroke-width="0.8" fill="none" opacity="0.35">
+                <circle cx="32" cy="26" r="17"/>
+                <circle cx="32" cy="26" r="14"/>
+                <circle cx="32" cy="26" r="11"/>
+            </g>
+            <g fill="#0284c7" stroke="#0369a1" stroke-width="0.8">
+                <path d="M32 26 Q30 14 34 11 Q37 12 37 15 Q36 21 32 26 Z"/>
+                <path d="M32 26 Q41 30 43 35 Q41 38 38 37 Q33 33 32 26 Z" transform="rotate(120 32 26)"/>
+                <path d="M32 26 Q41 30 43 35 Q41 38 38 37 Q33 33 32 26 Z" transform="rotate(240 32 26)"/>
+            </g>
+            <circle cx="32" cy="26" r="6" fill="#fff" stroke="#0284c7" stroke-width="1.5"/>
+            <circle cx="32" cy="26" r="2.5" fill="#0369a1"/>
+            <rect x="30.5" y="47" width="3" height="7" fill="#64748b"/>
+            <rect x="20" y="54" width="24" height="4" rx="2" fill="#334155"/>
+        </svg>`,
+        tap: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="20" width="22" height="9" rx="2" fill="#0891b2" stroke="#0e7490" stroke-width="1"/>
+            <rect x="24" y="12" width="10" height="17" rx="2" fill="#06b6d4" stroke="#0e7490" stroke-width="1"/>
+            <ellipse cx="29" cy="10" rx="6" ry="3" fill="#22d3ee" stroke="#0e7490" stroke-width="1"/>
+            <circle cx="12" cy="24.5" r="2" fill="#0e7490"/>
+            <path d="M34 32 Q34 36 34 40 Q36 40 36 36 Q36 32 34 32 Z" fill="#22d3ee" stroke="#0891b2" stroke-width="0.8"/>
+            <ellipse cx="34" cy="48" rx="2.5" ry="3.5" fill="#22d3ee" opacity="0.85"/>
+            <ellipse cx="34" cy="58" rx="2" ry="2.5" fill="#22d3ee" opacity="0.55"/>
+        </svg>`,
+        shower: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 8 L30 8 L30 15 L22 15 L22 22 L16 22 L16 15 L6 15 Z" fill="#3b82f6" stroke="#1e40af" stroke-width="1"/>
+            <rect x="18" y="22" width="22" height="7" rx="3" fill="#2563eb" stroke="#1e40af" stroke-width="1"/>
+            <g stroke="#60a5fa" stroke-width="2.2" stroke-linecap="round">
+                <line x1="20" y1="32" x2="18" y2="46"/>
+                <line x1="24" y1="32" x2="23" y2="50"/>
+                <line x1="29" y1="32" x2="28" y2="52"/>
+                <line x1="34" y1="32" x2="34" y2="54"/>
+                <line x1="38" y1="32" x2="40" y2="50"/>
+            </g>
+            <ellipse cx="32" cy="58" rx="18" ry="3" fill="#93c5fd" opacity="0.55"/>
+        </svg>`,
+        toilet: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <rect x="18" y="6" width="24" height="18" rx="2" fill="#a78bfa" stroke="#7c3aed" stroke-width="1.5"/>
+            <rect x="22" y="10" width="16" height="3" rx="1" fill="#ede9fe"/>
+            <rect x="22" y="15" width="16" height="2" rx="1" fill="#c4b5fd" opacity="0.7"/>
+            <circle cx="50" cy="14" r="3" fill="#7c3aed"/>
+            <path d="M14 26 Q14 24 18 24 L42 24 Q50 24 52 32 Q55 44 47 54 Q42 60 32 60 Q22 60 17 54 Q9 44 14 26 Z" fill="#c4b5fd" stroke="#7c3aed" stroke-width="1.5"/>
+            <ellipse cx="32" cy="34" rx="15" ry="6" fill="#8b5cf6" stroke="#5b21b6" stroke-width="1"/>
+            <ellipse cx="32" cy="34" rx="9" ry="3" fill="#4c1d95"/>
+            <rect x="24" y="58" width="16" height="3" rx="1.5" fill="#5b21b6"/>
+        </svg>`,
+        bed: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <rect x="4" y="20" width="7" height="36" rx="1.5" fill="#7c3aed" stroke="#5b21b6" stroke-width="1"/>
+            <rect x="4" y="32" width="56" height="18" rx="4" fill="#8b5cf6"/>
+            <rect x="4" y="32" width="56" height="8" rx="3" fill="#c4b5fd"/>
+            <rect x="11" y="24" width="20" height="12" rx="4" fill="#faf5ff" stroke="#a78bfa" stroke-width="1.2"/>
+            <path d="M14 26 Q21 27 28 26" stroke="#c4b5fd" stroke-width="0.8" fill="none"/>
+            <rect x="35" y="28" width="24" height="7" rx="2.5" fill="#a855f7"/>
+            <rect x="55" y="44" width="5" height="12" rx="1.5" fill="#5b21b6"/>
+            <rect x="4" y="50" width="6" height="6" fill="#5b21b6"/>
+        </svg>`,
+        lock: `<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 26 L22 17 Q22 7 32 7 Q42 7 42 17 L42 26" fill="none" stroke="#475569" stroke-width="5.5" stroke-linecap="round"/>
+            <rect x="13" y="26" width="38" height="32" rx="6" fill="#0D5C3A" stroke="#052818" stroke-width="1.5"/>
+            <rect x="13" y="26" width="38" height="10" rx="6" fill="#0f6d44" opacity="0.65"/>
+            <circle cx="32" cy="41" r="4.5" fill="#052818"/>
+            <rect x="30" y="43" width="4" height="9" rx="1" fill="#052818"/>
+            <circle cx="32" cy="41" r="1.8" fill="#fde047"/>
+        </svg>`
+    };
+    return svgs[key] || '';
+}
 
 let appState = {
     rooms: [], reservations: [],
-    equipment: [],      // tableau de room_equipment
-    notes: [],          // maintenance_notes pour la chambre en cours
-    alerts: [],         // room_alerts actives
+    equipment: [],
+    notes: [],
+    alerts: [],
     currentView: 'home', receptionTab: 'calendar',
     housekeepingFilter: 'all',
     calendarStartDate: new Date(),
@@ -1359,7 +1520,6 @@ function isRoomOccupiedToday(room) {
     });
 }
 function isOccupied(room) {
-    // Priorité : is_occupied manuel / sinon calculé
     if (typeof room.isOccupied === 'boolean') return room.isOccupied;
     return isRoomOccupiedToday(room);
 }
@@ -2577,7 +2737,6 @@ function renderHousekeepingCard(room, role) {
     const worst = getRoomWorstStatus(room.id);
     const alert = hasActiveAlert(room.id);
 
-    // Bouton principal
     let mainBtn = '';
     if (role === 'menage') {
         const actions = {
@@ -2610,15 +2769,13 @@ function renderHousekeepingCard(room, role) {
         }
     }
 
-    // Badges photo : occupation + à nettoyer + alerte
     const badges = [];
     if (alert) badges.push(`<div class="hk-badge maint"><i class="fa-solid fa-triangle-exclamation"></i> URGENCE</div>`);
     if (occ) badges.push(`<div class="hk-badge occupancy"><i class="fa-solid fa-user"></i> OCCUPÉE</div>`);
     if (room.status === 'to_clean') badges.push(`<div class="hk-badge cleaning"><i class="fa-solid fa-broom"></i> À NETTOYER</div>`);
 
-    // Bloc 5 boutons (4 statut nettoyage + toggle occupation)
     const quickActions = `
-        <div class="hk-quick-actions" style="grid-template-columns: repeat(5, 1fr);">
+        <div class="hk-quick-actions">
             <button onclick="updateRoomStatus('${room.id}', 'to_clean')" class="hk-quick-btn ${room.status === 'to_clean' ? 'active' : ''}" style="--c:#dc2626;" title="À nettoyer">
                 <i class="fa-solid fa-broom"></i>
                 <span class="lbl">Nettoyer</span>
@@ -2633,7 +2790,7 @@ function renderHousekeepingCard(room, role) {
             </button>
             <button onclick="toggleRoomOccupation('${room.id}', ${occ ? 'false' : 'true'})" class="hk-quick-btn ${occ ? 'active' : ''}" style="--c:#0284C7;" title="Occupation">
                 <i class="fa-solid fa-key"></i>
-                <span class="lbl">${occ ? 'Occupée' : 'Libre'}</span>
+                <span class="lbl">${occ ? 'Libérer' : 'Occuper'}</span>
             </button>
             <button onclick="openMaintenanceForRoom('${room.id}')" class="hk-quick-btn" style="--c:#dc2626;" title="Maintenance">
                 <i class="fa-solid fa-screwdriver-wrench"></i>
@@ -2686,7 +2843,6 @@ async function toggleRoomOccupation(roomId, newOccupied) {
     const oldVal = room.isOccupied;
     const oldStatus = room.status;
     room.isOccupied = newOccupied;
-    // Si on libère une chambre propre → à nettoyer
     if (!newOccupied && room.status === 'clean') room.status = 'to_clean';
     renderHousekeepingView();
     const { error } = await supabaseClient.rpc('set_room_occupation', {
@@ -3068,7 +3224,6 @@ function renderMaintCarousel() {
     if (!container) return;
     if (appState.rooms.length === 0) { container.innerHTML = ''; return; }
     if (!appState.maintSelectedRoomId) {
-        // Sélectionner par défaut : 1re chambre en panne, sinon 1re
         const brokenFirst = appState.rooms.find(r => getRoomWorstStatus(r.id) === 'broken' || hasActiveAlert(r.id));
         appState.maintSelectedRoomId = brokenFirst ? brokenFirst.id : appState.rooms[0].id;
     }
@@ -3082,9 +3237,11 @@ function renderMaintCarousel() {
         const dotClass = alert ? 'alert' : (worst === 'broken' ? 'broken' : (worst === 'warn' ? 'warn' : 'ok'));
         const dotIcon = alert ? 'fa-triangle-exclamation' : (worst === 'broken' ? 'fa-screwdriver-wrench' : (worst === 'warn' ? 'fa-hourglass-half' : 'fa-check'));
         const selected = appState.maintSelectedRoomId === room.id;
-        return `<div onclick="selectMaintRoom('${room.id}')" class="maint-carousel-card ${selected ? 'selected' : ''}">
+        return `<div onclick="selectMaintRoom('${room.id}')" data-room-id="${room.id}" class="maint-carousel-card ${selected ? 'selected' : ''}">
             <img src="${photo}" data-room-id="${room.id}" onerror="handleRoomImgError(this)" alt="${room.name}">
             <div class="card-dot ${dotClass}"><i class="fa-solid ${dotIcon}"></i></div>
+            ${selected ? `<div class="sel-label"><i class="fa-solid fa-check"></i> SÉLECTIONNÉE</div>` : ''}
+            <div class="check-badge"><i class="fa-solid fa-check"></i></div>
             <div class="card-label">
                 <div class="n">${room.name}</div>
                 <div class="s">${room.sectorName}</div>
@@ -3097,6 +3254,22 @@ function selectMaintRoom(roomId) {
     appState.maintSelectedRoomId = roomId;
     renderMaintCarousel();
     renderMaintRoomDetail();
+
+    setTimeout(() => {
+        const card = document.querySelector(`.maint-carousel-card[data-room-id="${roomId}"]`);
+        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }, 50);
+
+    setTimeout(() => {
+        const detail = document.getElementById('maint-room-detail');
+        if (detail) {
+            const y = detail.getBoundingClientRect().top + window.pageYOffset - 80;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+    }, 200);
+
+    const room = appState.rooms.find(r => r.id === roomId);
+    if (room) showToast(`✓ ${room.name} sélectionnée`, 'success');
 }
 
 function renderMaintRoomDetail() {
@@ -3105,7 +3278,6 @@ function renderMaintRoomDetail() {
     const room = appState.rooms.find(r => r.id === appState.maintSelectedRoomId);
     if (!room) { container.innerHTML = ''; return; }
 
-    const eqList = Object.values(EQUIPMENT);
     const worst = getRoomWorstStatus(room.id);
     const alert = hasActiveAlert(room.id);
 
@@ -3139,9 +3311,9 @@ function renderEquipGrid(room) {
     grid.innerHTML = Object.values(EQUIPMENT).map(eq => {
         const status = getEquipmentStatus(room.id, eq.key);
         const notesCount = appState.notes.filter(n => n.roomId === room.id && n.equipKey === eq.key).length;
-        return `<button onclick="openEquipmentModal('${room.id}', '${eq.key}')" class="maint-equip-card" data-status="${status}">
+        return `<button onclick="openEquipmentModal('${room.id}', '${eq.key}')" class="maint-equip-card" data-status="${status}" style="--accent:${eq.accent};">
             <span class="dot"></span>
-            <span class="ico">${eq.emoji}</span>
+            <span class="ico">${getEquipSVG(eq.key)}</span>
             <span class="nm">${eq.label}</span>
             ${notesCount > 0 ? `<span class="text-[9px] font-black text-slate-500 mt-0.5">${notesCount} note${notesCount > 1 ? 's' : ''}</span>` : ''}
         </button>`;
@@ -3153,11 +3325,11 @@ async function openEquipmentModal(roomId, equipKey) {
     const room = appState.rooms.find(r => r.id === roomId);
     if (!room) return;
     const eq = EQUIPMENT[equipKey];
-    document.getElementById('equip-modal-ico').textContent = eq.emoji;
+    const icoEl = document.getElementById('equip-modal-ico');
+    icoEl.innerHTML = `<div style="width:52px;height:52px;">${getEquipSVG(equipKey)}</div>`;
     document.getElementById('equip-modal-title').textContent = eq.label;
     document.getElementById('equip-modal-room').textContent = room.name + ' • ' + room.sectorName;
 
-    // Mettre à jour l'état actif sur les 3 boutons
     const status = getEquipmentStatus(roomId, equipKey);
     ['broken','warn','ok'].forEach(s => {
         const btn = document.getElementById(`equip-btn-${s}`);
@@ -3183,7 +3355,6 @@ async function setEquipmentStatus(status) {
         });
         if (error) throw error;
 
-        // Mise à jour locale
         const existing = appState.equipment.find(e => e.roomId === roomId && e.key === key);
         if (existing) existing.status = status;
         else appState.equipment.push({ roomId, key, status });
@@ -3193,7 +3364,6 @@ async function setEquipmentStatus(status) {
             if (btn) btn.classList.toggle('active', s === status);
         });
 
-        // Rendu global
         renderMaintCarousel();
         renderMaintRoomDetail();
         updateHeaderCounters();
@@ -3251,7 +3421,6 @@ async function deleteMaintNote(noteId) {
     } catch (err) { console.error(err); showToast('Erreur', 'error'); }
 }
 
-// ─── ENREGISTREMENT VOCAL 5 sec ───
 async function startVoiceNote() {
     if (appState.maintMediaRecorder && appState.maintMediaRecorder.state === 'recording') return;
     const btn = document.getElementById('btn-voice-note');
@@ -3318,7 +3487,6 @@ async function uploadVoiceNote(blob) {
     showToast('Vocal enregistré ✓', 'success');
 }
 
-// ─── PHOTO ───
 function startPhotoCapture() { document.getElementById('maint-photo-input').click(); }
 
 async function handleMaintPhoto(event) {
@@ -3351,7 +3519,6 @@ async function handleMaintPhoto(event) {
     showToast('Photo enregistrée ✓', 'success');
 }
 
-// ─── URGENCE ───
 function openUrgencyModal() {
     const sel = document.getElementById('urgency-room');
     sel.innerHTML = appState.rooms.map(r => `<option value="${r.id}" ${r.id === appState.maintSelectedRoomId ? 'selected' : ''}>${r.name}</option>`).join('');
@@ -3395,8 +3562,6 @@ async function resolveAlert(alertId) {
         showToast('Urgence résolue ✓', 'success');
     } catch (err) { console.error(err); showToast('Erreur', 'error'); }
 }
-
-// ═══════════════════════════════════════════════════════════
 
 function showCustomConfirm(title, message, onOk, onCancel) {
     document.getElementById('custom-confirm-title').innerText = title;
