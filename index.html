@@ -1370,14 +1370,14 @@ const EQUIPMENT = {
 
 function getEquipSVG(key) {
     const svgs = {
-        // ═══ ÉCLAIRAGE : ampoule silhouette ═══
+        // ═══ ÉCLAIRAGE : ampoule ═══
         light: `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none">
             <path d="M24 5c-7.2 0-13 5.8-13 13 0 4.5 2.3 8.5 5.8 10.8.8.5 1.2 1.3 1.2 2.2v3c0 1.2 1 2 2 2h8c1 0 2-.8 2-2v-3c0-.9.5-1.7 1.2-2.2C34.7 26.5 37 22.5 37 18c0-7.2-5.8-13-13-13Z"
                   fill="currentColor" fill-opacity="0.14" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
             <path d="M20 40h8M22 44h4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
         </svg>`,
 
-        // ═══ VENTILATEUR : 3 pales + moyeu ═══
+        // ═══ VENTILATEUR : 3 pales ═══
         fan: `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none">
             <circle cx="24" cy="22" r="3.2" fill="currentColor"/>
             <path d="M24 18.8c-.8-6.2 1.4-12 5.8-13.8 3.2-1.3 6 .8 6 3.8 0 4-3.8 7.8-11.8 10Z"
@@ -1390,46 +1390,59 @@ function getEquipSVG(key) {
             <path d="M18 44h12" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
         </svg>`,
 
-        // ═══ ROBINET : coude + gouttes ═══
+        // ═══ ROBINET : vue de profil, mitigeur classique ═══
         tap: `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none">
-            <path d="M8 14h20v10H8z" fill="currentColor" fill-opacity="0.14" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
-            <path d="M28 6h8v18h-8z" fill="currentColor" fill-opacity="0.14" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
-            <path d="M36 10h6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-            <path d="M36 24v4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-            <path d="M36 30c-2.5 0-4-1.8-4-4 0-2.8 4-7.5 4-7.5s4 4.7 4 7.5c0 2.2-1.5 4-4 4Z"
-                  fill="currentColor" fill-opacity="0.35"/>
-            <path d="M36 42c-1.8 0-3-1.4-3-3 0-2 3-5.5 3-5.5s3 3.5 3 5.5c0 1.6-1.2 3-3 3Z"
-                  fill="currentColor" fill-opacity="0.2"/>
+            <path d="M10 20 H32 V26 H10 Z"
+                  fill="currentColor" fill-opacity="0.14" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
+            <path d="M32 6 V26"
+                  stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M24 6 H40 V12 H24 Z"
+                  fill="currentColor" fill-opacity="0.14" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
+            <circle cx="42" cy="9" r="2" fill="currentColor"/>
+            <path d="M16 30 v4 M16 38 v3" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            <ellipse cx="16" cy="45" rx="3.5" ry="1.2" fill="currentColor" fill-opacity="0.25"/>
+            <path d="M10 20 V12 H16 V20" fill="currentColor" fill-opacity="0.14" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
         </svg>`,
 
-        // ═══ DOUCHETTE : tuyau + pommeau + jets ═══
+        // ═══ DOUCHETTE : pommeau mural avec jets ═══
         shower: `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none">
-            <path d="M6 8h8v14h8" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M18 22h22l-3 8H20z" fill="currentColor" fill-opacity="0.14" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
-            <path d="M22 34v6M27 34v8M32 34v6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-            <ellipse cx="27" cy="44" rx="10" ry="1.5" fill="currentColor" fill-opacity="0.15"/>
+            <path d="M8 8 h4 v10 h8"
+                  stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 14 c0-3 3-5 8-5 s8 2 8 5 l2 4 H14 Z"
+                  fill="currentColor" fill-opacity="0.14" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
+            <ellipse cx="24" cy="20" rx="11" ry="2.5" fill="currentColor" fill-opacity="0.3" stroke="currentColor" stroke-width="2"/>
+            <path d="M16 24 v5 M20 24 v7 M24 24 v8 M28 24 v7 M32 24 v5"
+                  stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            <ellipse cx="24" cy="42" rx="9" ry="1.5" fill="currentColor" fill-opacity="0.2"/>
         </svg>`,
 
-        // ═══ WC : réservoir + cuvette ═══
+        // ═══ WC : vue de profil ═══
         toilet: `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none">
-            <rect x="14" y="6" width="20" height="16" rx="3"
+            <path d="M8 10 H20 V24 H8 Z"
                   fill="currentColor" fill-opacity="0.14" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
-            <path d="M10 22h28c0 12-6.3 20-14 20s-14-8-14-20Z"
+            <path d="M12 14 H16 M12 18 H16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity="0.5"/>
+            <path d="M18 24 h12 c4 0 6 2 6 5 v3 c0 5-4 8-10 8 h-6 c-2 0-3-1-3-3 v-8 Z"
                   fill="currentColor" fill-opacity="0.14" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
-            <circle cx="38" cy="12" r="2.2" fill="currentColor"/>
+            <ellipse cx="27" cy="30" rx="6" ry="2" fill="currentColor" fill-opacity="0.35" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M14 40 v4 M36 40 v4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
         </svg>`,
 
-        // ═══ LIT : tête + matelas + oreiller ═══
+        // ═══ LIT : vue de profil avec tête et oreiller ═══
         bed: `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none">
-            <path d="M6 10v30" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-            <path d="M6 26h36v14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M42 40V28" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-            <path d="M6 26c0-3.3 2.7-6 6-6h26c2.2 0 4 1.8 4 4v2H6Z"
+            <path d="M6 12 V40"
+                  stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M6 22 H42 V36"
+                  stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M42 40 V34"
+                  stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            <path d="M6 22 c0-2.2 1.8-4 4-4 h10 c2 0 3 1 3 3 v3 Z"
                   fill="currentColor" fill-opacity="0.14" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
-            <rect x="11" y="20.5" width="11" height="5.5" rx="1.5" fill="currentColor" fill-opacity="0.35"/>
+            <rect x="9" y="19.5" width="8" height="4" rx="1.5" fill="currentColor" fill-opacity="0.4"/>
+            <path d="M23 22 h19 v8 c0 1.5-1.5 2.5-3 2.5 H26 c-1.7 0-3-1.3-3-3 Z"
+                  fill="currentColor" fill-opacity="0.14" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
         </svg>`,
 
-        // ═══ SERRURE : anse + corps + trou ═══
+        // ═══ SERRURE : cadenas ═══
         lock: `<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="none">
             <path d="M16 22v-6a8 8 0 0 1 16 0v6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
             <rect x="11" y="22" width="26" height="20" rx="5"
@@ -1440,6 +1453,259 @@ function getEquipSVG(key) {
     };
     return svgs[key] || '';
 }
+
+// ═══════════════════════════════════════════════════════════
+// NOTIFICATIONS — Système complet Android + iOS
+// ═══════════════════════════════════════════════════════════
+const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const IS_ANDROID = /Android/.test(navigator.userAgent);
+const IS_STANDALONE = window.matchMedia('(display-mode: standalone)').matches ||
+    window.navigator.standalone === true;
+
+let notifPermission = 'default';
+let lastNotificationTimes = {};       // anti-spam par tag
+const NOTIF_SPAM_DELAY = 2500;        // ms avant de renvoyer le même tag
+let notifPrefEnabled = false;
+
+// ─── Init : vérifier l'état actuel au démarrage ───
+function initNotificationState() {
+    if (!('Notification' in window)) { notifPermission = 'unsupported'; return; }
+    notifPermission = Notification.permission;
+    notifPrefEnabled = (notifPermission === 'granted');
+    updateNotificationUI(notifPrefEnabled);
+    // Restaurer la préférence stockée
+    const saved = localStorage.getItem('buhanor_notif_enabled');
+    if (saved === '1' && notifPermission === 'granted') notifPrefEnabled = true;
+}
+
+// ─── Demande de permission (avec gestion iOS) ───
+async function requestNotificationPermission() {
+    if (!('Notification' in window)) {
+        showCustomAlert(
+            "Notifications non supportées",
+            "Votre navigateur ne supporte pas les notifications.\n\nEssayez avec Chrome, Edge, Firefox ou Safari (iOS 16.4+)."
+        );
+        return false;
+    }
+
+    // iOS : PWA obligatoire
+    if (IS_IOS && !IS_STANDALONE) {
+        showCustomAlert(
+            "Installation requise (iPhone)",
+            "Sur iPhone, les notifications ne marchent QUE si l'app est installée :\n\n1. Touchez le bouton Partager (carré avec flèche ↑)\n2. Choisissez « Sur l'écran d'accueil »\n3. Touchez Ajouter\n4. Ouvrez l'app depuis l'écran d'accueil\n5. Revenez activer les notifications ici\n\nC'est Apple qui impose cette règle pour iOS 16.4+."
+        );
+        return false;
+    }
+
+    if (Notification.permission === 'granted') {
+        notifPermission = 'granted';
+        updateNotificationUI(true);
+        localStorage.setItem('buhanor_notif_enabled', '1');
+        return true;
+    }
+
+    if (Notification.permission === 'denied') {
+        showCustomAlert(
+            "Notifications bloquées",
+            (IS_IOS
+                ? "Pour les réactiver sur iPhone :\n\n1. Réglages > Notifications > BUHANOR\n2. Autorisez les notifications\n\nSi BUHANOR n'apparaît pas, désinstallez et réinstallez l'app."
+                : "Pour les réactiver :\n\n1. Touchez l'icône 🔒 dans la barre d'adresse\n2. Autorisations > Notifications > Autoriser\n3. Rechargez la page"
+            )
+        );
+        return false;
+    }
+
+    try {
+        const permission = await Notification.requestPermission();
+        notifPermission = permission;
+        if (permission === 'granted') {
+            notifPrefEnabled = true;
+            localStorage.setItem('buhanor_notif_enabled', '1');
+            updateNotificationUI(true);
+            // Notification d'accueil
+            setTimeout(() => {
+                sendNotification("✅ Notifications activées", {
+                    body: IS_IOS
+                        ? "Vous recevrez les alertes du lodge sur cet iPhone"
+                        : "Vous recevrez les alertes du lodge",
+                    tag: 'buhanor-welcome',
+                    vibrate: [200, 80, 200]
+                });
+            }, 500);
+            return true;
+        }
+        return false;
+    } catch (e) {
+        console.error('Permission request failed:', e);
+        return false;
+    }
+}
+
+// ─── Envoi de notification (avec fallback et anti-spam) ───
+async function sendNotification(title, options = {}) {
+    if (!('Notification' in window) || Notification.permission !== 'granted') return false;
+
+    // Anti-spam
+    const tag = options.tag || 'buhanor-generic';
+    const now = Date.now();
+    if (lastNotificationTimes[tag] && now - lastNotificationTimes[tag] < NOTIF_SPAM_DELAY) {
+        return false;
+    }
+    lastNotificationTimes[tag] = now;
+
+    // Configuration multiplateforme
+    const config = {
+        body: options.body || '',
+        icon: options.icon || './web-app-manifest-192x192.png',
+        badge: options.badge || './web-app-manifest-192x192.png',
+        vibrate: options.vibrate || [250, 100, 250, 100, 250],
+        tag: tag,
+        renotify: options.renotify !== false,
+        requireInteraction: options.requireInteraction === true,
+        silent: options.silent === true,
+        timestamp: now,
+        data: options.data || {},
+        ...options
+    };
+
+    // Android : vibration native (supportée)
+    if (IS_ANDROID && navigator.vibrate && !config.silent) {
+        try { navigator.vibrate(config.vibrate); } catch(e) {}
+    }
+
+    // IOS : passer par le Service Worker (obligatoire)
+    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+        try {
+            const reg = await navigator.serviceWorker.ready;
+            await reg.showNotification(title, config);
+            return true;
+        } catch (e) {
+            console.warn('SW notification failed, fallback:', e);
+        }
+    }
+
+    // Fallback direct
+    try {
+        const n = new Notification(title, config);
+        if (options.onClick) n.onclick = options.onClick;
+        return true;
+    } catch (e) {
+        console.error('Notification error:', e);
+        return false;
+    }
+}
+
+// ─── Vérification périodique ───
+function checkAlertsAndNotify() {
+    if (!notifPrefEnabled || Notification.permission !== 'granted') return;
+    if (!appState.rooms || !appState.rooms.length) return;
+
+    const role = appState.currentProfile ? appState.currentProfile.role : null;
+    if (role !== 'admin') return;
+
+    const pending = appState.rooms.filter(r => r.status === 'clean_pending').length;
+    const currentState = `pending:${pending}`;
+    if (currentState === lastNotifiedState) return;
+
+    if (pending > 0) {
+        const pendingRooms = appState.rooms.filter(r => r.status === 'clean_pending');
+        const names = pendingRooms.map(r => r.name).join(', ');
+        sendNotification(
+            pending > 1 ? `🧹 ${pending} chambres à valider` : `🧹 Chambre à valider`,
+            {
+                body: `${names} attend${pending > 1 ? 'ent' : ''} votre vérification`,
+                tag: 'buhanor-validate-cycle',
+                requireInteraction: true,
+                vibrate: [300, 100, 300, 100, 300]
+            }
+        );
+    }
+    lastNotifiedState = currentState;
+}
+
+// ─── Toggle : activation/désactivation ───
+async function toggleNotifications() {
+    if (notifPrefEnabled && Notification.permission === 'granted') {
+        // Afficher un petit récap + bouton test
+        showCustomConfirm(
+            "Notifications actives ✓",
+            "Vous recevez déjà les alertes.\n\nVoulez-vous envoyer une notification de test ?",
+            async () => {
+                const sent = await sendNotification("🎉 Test BUHANOR", {
+                    body: "Si vous voyez ceci, vos notifications marchent parfaitement !",
+                    tag: 'buhanor-test-' + Date.now(),
+                    vibrate: [300, 100, 300, 100, 300],
+                    requireInteraction: true
+                });
+                if (sent) {
+                    showToast('Notification test envoyée ✓', 'success');
+                } else {
+                    showToast('Envoi impossible — vérifiez les réglages', 'error');
+                }
+            }
+        );
+        return;
+    }
+    // Activer
+    const granted = await requestNotificationPermission();
+    if (granted) {
+        showToast('Notifications activées ✓', 'success');
+    } else if (Notification.permission === 'default') {
+        showToast('Notifications non autorisées', 'error');
+    }
+}
+
+function updateNotificationUI(enabled) {
+    ['notif-icon-desktop', 'notif-icon-menu'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.className = enabled ? 'fa-solid fa-bell' : 'fa-solid fa-bell-slash';
+    });
+    ['notif-text-desktop', 'notif-text-menu'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerText = enabled ? 'Actives' : 'Activer les alertes';
+    });
+}
+
+// ─── Triggers spécifiques ───
+function notifyNewReservation(res) {
+    const room = appState.rooms.find(r => r.id === res.roomId);
+    const typeLabel = res.type === 'day_use' ? 'Passage' : 'Nuitée';
+    sendNotification("📅 Nouvelle réservation", {
+        body: `${res.clientName} • ${room ? room.name : ''} • ${typeLabel}`,
+        tag: 'buhanor-resa-' + res.id,
+        vibrate: [200, 100, 200]
+    });
+}
+
+function notifyCleaningDone(roomNames) {
+    sendNotification("✨ Nettoyage terminé", {
+        body: `${roomNames} — prêt${roomNames.includes(',') ? 'es' : ''} pour validation`,
+        tag: 'buhanor-clean-done-' + Date.now(),
+        requireInteraction: true,
+        vibrate: [300, 100, 300]
+    });
+}
+
+function notifyUrgency(room, message) {
+    sendNotification("🚨 URGENCE SIGNALÉE", {
+        body: `${room ? room.name : 'Chambre'} — ${message || 'Problème bloquant'}`,
+        tag: 'buhanor-urgent-' + Date.now(),
+        requireInteraction: true,
+        vibrate: [500, 100, 500, 100, 500, 100, 500],
+        silent: false
+    });
+}
+
+function notifyMaintBroken(equipLabel, roomName) {
+    sendNotification("🔧 Équipement en panne", {
+        body: `${equipLabel} • ${roomName}`,
+        tag: 'buhanor-maint-' + Date.now(),
+        vibrate: [200, 100, 200]
+    });
+}
+
+// ═══════════════════════════════════════════════════════════
 
 let appState = {
     rooms: [], reservations: [],
@@ -2268,6 +2534,8 @@ async function silentRefresh() {
         const newHash = JSON.stringify(roomsRes.data) + '|' + JSON.stringify(resRes.data) + '|' + JSON.stringify(eqRes.data);
         if (newHash === lastDataHash) return;
         const prevRooms = appState.rooms.slice();
+        const prevReservations = appState.reservations.slice();
+        const prevAlerts = appState.alerts.slice();
         lastDataHash = newHash;
         appState.rooms = (roomsRes.data || []).map(mapRoomFromDB);
         appState.reservations = (resRes.data || []).map(mapReservationFromDB);
@@ -2275,6 +2543,8 @@ async function silentRefresh() {
         appState.alerts = (alRes.data || []).map(mapAlertFromDB);
         setConnectionStatus(true);
         detectRoomChanges(prevRooms);
+        detectReservationChanges(prevReservations);
+        detectAlertChanges(prevAlerts);
         renderCurrentView();
     } catch (e) { /* silencieux */ }
 }
@@ -2290,13 +2560,7 @@ function detectRoomChanges(prevRooms) {
         if (newPending.length > 0) {
             const names = newPending.map(r => r.name).join(', ');
             showToast(`✓ ${names} à vérifier`, 'success');
-            if (Notification.permission === 'granted') {
-                sendLocalNotification(
-                    newPending.length > 1 ? `${newPending.length} chambres à valider` : "Chambre à valider",
-                    `${names} attend${newPending.length > 1 ? 'ent' : ''} votre validation`,
-                    { tag: 'buhanor-validate-' + Date.now(), requireInteraction: true }
-                );
-            }
+            if (notifPrefEnabled) notifyCleaningDone(names);
         }
     }
     if (role === 'menage') {
@@ -2307,10 +2571,33 @@ function detectRoomChanges(prevRooms) {
         if (newToClean.length > 0) {
             const names = newToClean.map(r => r.name).join(', ');
             showToast(`${names} à nettoyer`, 'info');
-            if (Notification.permission === 'granted') {
-                sendLocalNotification("Nouvelles chambres à nettoyer", names, { tag: 'buhanor-toclean-' + Date.now() });
+            if (notifPrefEnabled) {
+                sendNotification("🧹 Chambres à nettoyer", {
+                    body: names,
+                    tag: 'buhanor-toclean-' + Date.now(),
+                    vibrate: [200, 100, 200]
+                });
             }
         }
+    }
+}
+
+function detectReservationChanges(prevRes) {
+    if (!appState.currentProfile || !prevRes) return;
+    const newOnes = appState.reservations.filter(r => !prevRes.some(p => p.id === r.id));
+    if (newOnes.length > 0 && notifPrefEnabled) {
+        newOnes.forEach(r => notifyNewReservation(r));
+    }
+}
+
+function detectAlertChanges(prevAlerts) {
+    if (!appState.currentProfile || !prevAlerts) return;
+    const newOnes = appState.alerts.filter(a => !prevAlerts.some(p => p.id === a.id));
+    if (newOnes.length > 0 && notifPrefEnabled) {
+        newOnes.forEach(a => {
+            const room = appState.rooms.find(r => r.id === a.roomId);
+            notifyUrgency(room, a.message);
+        });
     }
 }
 
@@ -2625,7 +2912,11 @@ async function endService() {
     });
     if (!confirmed) return;
     showToast('Service terminé ! Admin notifié ✓', 'success');
-    if (Notification.permission === 'granted') sendLocalNotification("Service terminé", `${pending} chambre(s) à valider`);
+    if (notifPrefEnabled) {
+        const pendingRooms = appState.rooms.filter(r => r.status === 'clean_pending');
+        const names = pendingRooms.map(r => r.name).join(', ');
+        notifyCleaningDone(names);
+    }
     renderServiceBanner();
 }
 
@@ -3105,12 +3396,15 @@ async function handleReservationSubmit(event) {
         } else showToast("Erreur d'enregistrement", "error");
         return;
     }
-    appState.reservations.push(mapReservationFromDB(data));
+    const newRes = mapReservationFromDB(data);
+    appState.reservations.push(newRes);
     await loadDataFromServer();
     await syncOccupations();
     closeNewReservationModal();
     renderReceptionView();
     showToast(`Réservé : ${clientName}`, "success");
+    // Notification de la nouvelle réservation
+    if (notifPrefEnabled) notifyNewReservation(newRes);
 }
 
 function confirmDeleteReservation(id) {
@@ -3317,6 +3611,7 @@ async function setEquipmentStatus(status) {
     const roomId = appState.maintSelectedRoomId;
     const key = appState.maintSelectedEquipKey;
     if (!roomId || !key) return;
+    const previousStatus = getEquipmentStatus(roomId, key);
     try {
         const { error } = await supabaseClient.rpc('update_equipment_status', {
             p_token: appState.sessionToken, p_room_id: roomId, p_key: key, p_status: status
@@ -3338,6 +3633,12 @@ async function setEquipmentStatus(status) {
 
         const labels = { broken:'À réparer', warn:'En cours', ok:'Fonctionnel' };
         showToast(`${EQUIPMENT[key].label} → ${labels[status]}`, status === 'ok' ? 'success' : 'info');
+
+        // Notifier si passage en "à réparer"
+        if (status === 'broken' && previousStatus !== 'broken' && notifPrefEnabled) {
+            const room = appState.rooms.find(r => r.id === roomId);
+            notifyMaintBroken(EQUIPMENT[key].label, room ? room.name : '');
+        }
     } catch (err) { console.error(err); showToast('Erreur', 'error'); }
 }
 
@@ -3511,9 +3812,9 @@ async function submitUrgency() {
         renderMaintRoomDetail();
         updateHeaderCounters();
         showToast('Urgence envoyée 🚨', 'success');
-        if (Notification.permission === 'granted') {
+        if (notifPrefEnabled) {
             const room = appState.rooms.find(r => r.id === roomId);
-            sendLocalNotification('🚨 URGENCE SIGNALÉE', `${room ? room.name : roomId} — ${message || 'Problème bloquant'}`, { tag: 'buhanor-urgent-' + Date.now(), requireInteraction: true });
+            notifyUrgency(room, message);
         }
     } catch (err) { console.error(err); showToast('Erreur', 'error'); }
 }
@@ -3574,7 +3875,14 @@ window.addEventListener('appinstalled', () => {
 });
 
 async function installPWA() {
-    if (!deferredPrompt) { showCustomAlert("Installer Buhanor", "iPhone/iPad :\n1. Safari → Partager\n2. Sur l'écran d'accueil\n\nAndroid :\nMenu Chrome → Installer"); return; }
+    if (!deferredPrompt) {
+        showCustomAlert("Installer Buhanor",
+            IS_IOS
+                ? "Sur iPhone/iPad :\n\n1. Touchez l'icône Partager (carré avec flèche ↑)\n2. Faites défiler et touchez « Sur l'écran d'accueil »\n3. Touchez Ajouter\n\nL'app apparaîtra sur votre écran d'accueil."
+                : "Sur Android :\n\n1. Touchez le menu ⋮ du navigateur\n2. Choisissez « Installer l'application » ou « Ajouter à l'écran d'accueil »"
+        );
+        return;
+    }
     deferredPrompt.prompt();
     const choice = await deferredPrompt.userChoice;
     if (choice.outcome === 'accepted') showToast('Installée !', 'success');
@@ -3582,64 +3890,14 @@ async function installPWA() {
     document.getElementById('btn-install-pwa-desktop')?.classList.add('hidden');
 }
 
-async function toggleNotifications() {
-    if (!('Notification' in window)) { showToast('Non supportées', 'error'); return; }
-    if (Notification.permission === 'granted') { sendLocalNotification("Test BUHANOR", "Ça marche !"); return; }
-    if (Notification.permission === 'denied') { showCustomAlert("Bloquées", "Réactivez-les dans le navigateur."); return; }
-    const permission = await Notification.requestPermission();
-    if (permission === 'granted') {
-        updateNotificationUI(true);
-        showToast('Notifications activées !', 'success');
-        setTimeout(() => sendLocalNotification("BUHANOR", "Vous recevrez les alertes ici."), 800);
-    } else showToast('Refusées', 'error');
-}
-
-function updateNotificationUI(enabled) {
-    ['notif-icon-desktop', 'notif-icon-menu'].forEach(id => {
-        const el = document.getElementById(id); if (el) el.className = enabled ? 'fa-solid fa-bell' : 'fa-solid fa-bell-slash';
-    });
-    ['notif-text-desktop', 'notif-text-menu'].forEach(id => {
-        const el = document.getElementById(id); if (el) el.innerText = enabled ? 'Actives' : 'Activer les alertes';
-    });
-}
-
-function sendLocalNotification(title, body, options = {}) {
-    if (!('Notification' in window) || Notification.permission !== 'granted') return;
-    const notifOptions = {
-        body,
-        icon: './web-app-manifest-192x192.png',
-        badge: './web-app-manifest-192x192.png',
-        vibrate: [300, 100, 300],
-        tag: 'buhanor-' + Date.now(),
-        renotify: true,
-        silent: false,
-        ...options
-    };
-    if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-        navigator.serviceWorker.ready
-            .then(reg => reg.showNotification(title, notifOptions))
-            .catch(() => { try { new Notification(title, notifOptions); } catch(e) {} });
-    } else {
-        try { new Notification(title, notifOptions); } catch(e) {}
-    }
-}
-
-function checkAlertsAndNotify() {
-    if (Notification.permission !== 'granted') return;
-    if (!appState.rooms || !appState.rooms.length) return;
-    const role = appState.currentProfile ? appState.currentProfile.role : null;
-    const pending = appState.rooms.filter(r => r.status === 'clean_pending').length;
-    const currentState = `pending:${pending}`;
-    if (currentState === lastNotifiedState) return;
-    if (role === 'admin' && pending > 0) {
-        sendLocalNotification("Chambres à valider", `${pending} chambre(s) vérifiée(s) par la ménagère.`, { tag: 'buhanor-validate-' + Date.now() });
-    }
-    lastNotifiedState = currentState;
-}
-
 async function registerServiceWorker() {
     if (!('serviceWorker' in navigator)) return;
-    try { await navigator.serviceWorker.register('./sw.js'); } catch (err) { console.error(err); }
+    try {
+        const reg = await navigator.serviceWorker.register('./sw.js');
+        console.log('[SW] enregistré :', reg.scope);
+        // Vérifier les mises à jour périodiquement
+        setInterval(() => reg.update().catch(() => {}), 60 * 60 * 1000);
+    } catch (err) { console.error('[SW] failed:', err); }
 }
 
 function updateClock() {
@@ -3695,6 +3953,7 @@ function subscribeToRealtime() {
 
 window.onload = async function() {
     registerServiceWorker();
+    initNotificationState();
     const urlParams = new URLSearchParams(window.location.search);
     const targetView = urlParams.get('view');
     if (targetView) sessionStorage.setItem('buhanor_target_view', targetView);
