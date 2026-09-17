@@ -216,6 +216,16 @@
             from { opacity: 0; }
             to   { opacity: 1; }
         }
+
+        /* Pastille de mise à jour silencieuse */
+        .refresh-pulse {
+            animation: refreshPulse 0.6s ease;
+        }
+        @keyframes refreshPulse {
+            0% { box-shadow: 0 0 0 0 rgba(13,92,58,0.5); }
+            70% { box-shadow: 0 0 0 8px rgba(13,92,58,0); }
+            100% { box-shadow: 0 0 0 0 rgba(13,92,58,0); }
+        }
     </style>
 </head>
 <body class="font-sans antialiased">
@@ -399,7 +409,6 @@
 <!-- ==================== APP ROOT ==================== -->
 <div id="app-root" class="hidden flex flex-col">
 
-    <!-- Backdrop flouté SOUS le header (z-20) -->
     <div id="user-menu-backdrop" class="hidden fixed inset-0"></div>
 
     <header class="liquid-glass-header sticky top-0 z-30 safe-top">
@@ -502,7 +511,6 @@
 
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 overflow-y-auto" style="padding-bottom: 3rem;">
 
-        <!-- HOME -->
         <section id="view-home" class="space-y-6 sm:space-y-8 py-2">
             <div class="text-center max-w-2xl mx-auto space-y-2">
                 <span class="liquid-glass text-palm-500 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full inline-block">
@@ -526,7 +534,6 @@
             </div>
         </section>
 
-        <!-- HOUSEKEEPING -->
         <section id="view-housekeeping" class="hidden space-y-5">
             <div class="liquid-glass-strong rounded-[28px] p-5 flex flex-col gap-4">
                 <div class="flex items-start gap-3">
@@ -573,7 +580,6 @@
             <div id="housekeeping-groups-container" class="space-y-8"></div>
         </section>
 
-        <!-- RECEPTION -->
         <section id="view-reception" class="hidden space-y-5">
             <div class="liquid-glass-strong rounded-[28px] p-5 space-y-3">
                 <div class="flex items-start gap-3">
@@ -1000,6 +1006,7 @@ let deleteSelfBuffer = '', adminDeleteBuffer = '';
 let adminDeleteTarget = null, adminResetTarget = null;
 let forcePinStep = 'new', forcePinFirst = '', forcePinBuffer = '', forcePinProfileId = null;
 let deferredPrompt = null, lastNotifiedState = '';
+let lastDataHash = '';
 
 function formatDateISO(date) {
     const y = date.getFullYear(), m = String(date.getMonth()+1).padStart(2,'0'), d = String(date.getDate()).padStart(2,'0');
@@ -1067,6 +1074,26 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeUserMenu();
+});
+
+// ═══════════════════════════════════════════════════════════
+// AUTO-REFRESH : retour au premier plan + reconnexion
+// ═══════════════════════════════════════════════════════════
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && appState.currentProfile) {
+        silentRefresh();
+    }
+});
+
+window.addEventListener('online', () => {
+    if (appState.currentProfile) {
+        setConnectionStatus(true);
+        silentRefresh();
+    }
+});
+
+window.addEventListener('offline', () => {
+    setConnectionStatus(false);
 });
 
 function saveSession(user, token) {
@@ -1718,11 +1745,82 @@ async function loadDataFromServer() {
         if (resRes.error) throw resRes.error;
         appState.rooms = (roomsRes.data || []).map(mapRoomFromDB);
         appState.reservations = (resRes.data || []).map(mapReservationFromDB);
+        lastDataHash = JSON.stringify(roomsRes.data) + '|' + JSON.stringify(resRes.data);
         setConnectionStatus(true);
     } catch (err) {
         console.error(err);
         setConnectionStatus(false);
         showToast('Impossible de contacter le serveur', 'error');
+    }
+}
+
+// ═══════════════════════════════════════════════════════════
+// AUTO-REFRESH SILENCIEUX
+// ═══════════════════════════════════════════════════════════
+async function silentRefresh() {
+    if (!appState.currentProfile || !appState.sessionToken) return;
+    const token = appState.sessionToken;
+    try {
+        const [roomsRes, resRes] = await Promise.all([
+            supabaseClient.rpc('list_rooms', { p_token: token }),
+            supabaseClient.rpc('list_reservations', { p_token: token })
+        ]);
+        if (roomsRes.error || resRes.error) return;
+
+        const newHash = JSON.stringify(roomsRes.data) + '|' + JSON.stringify(resRes.data);
+        if (newHash === lastDataHash) return;
+
+        const prevRooms = appState.rooms.slice();
+        lastDataHash = newHash;
+        appState.rooms = (roomsRes.data || []).map(mapRoomFromDB);
+        appState.reservations = (resRes.data || []).map(mapReservationFromDB);
+        setConnectionStatus(true);
+
+        detectRoomChanges(prevRooms);
+        renderCurrentView();
+    } catch (e) { /* silencieux */ }
+}
+
+function detectRoomChanges(prevRooms) {
+    if (!appState.currentProfile || !prevRooms || prevRooms.length === 0) return;
+    const role = appState.currentProfile.role;
+
+    // ADMIN : nouvelles chambres à valider
+    if (role === 'admin') {
+        const newPending = appState.rooms.filter(r =>
+            r.status === 'clean_pending' &&
+            !prevRooms.some(p => p.id === r.id && p.status === 'clean_pending')
+        );
+        if (newPending.length > 0) {
+            const names = newPending.map(r => r.name).join(', ');
+            showToast(`✓ ${names} à vérifier`, 'success');
+            if (Notification.permission === 'granted') {
+                sendLocalNotification(
+                    newPending.length > 1 ? `${newPending.length} chambres à valider` : "Chambre à valider",
+                    `${names} attend${newPending.length > 1 ? 'ent' : ''} votre validation`,
+                    { tag: 'buhanor-validate-' + Date.now(), requireInteraction: true }
+                );
+            }
+        }
+    }
+
+    // MÉNAGE : nouvelles chambres à nettoyer
+    if (role === 'menage') {
+        const newToClean = appState.rooms.filter(r =>
+            r.status === 'to_clean' &&
+            !prevRooms.some(p => p.id === r.id && p.status === 'to_clean')
+        );
+        if (newToClean.length > 0) {
+            const names = newToClean.map(r => r.name).join(', ');
+            showToast(`${names} à nettoyer`, 'info');
+            if (Notification.permission === 'granted') {
+                sendLocalNotification(
+                    "Nouvelles chambres à nettoyer",
+                    names,
+                    { tag: 'buhanor-toclean-' + Date.now() }
+                );
+            }
+        }
     }
 }
 
@@ -1742,7 +1840,9 @@ async function syncOccupations() {
 function setConnectionStatus(online) {
     const dot = document.getElementById('connection-dot');
     if (!dot) return;
-    dot.className = online ? 'w-2 h-2 rounded-full bg-lagoon-500 inline-block flex-shrink-0' : 'w-2 h-2 rounded-full bg-red-500 inline-block flex-shrink-0';
+    dot.className = online
+        ? 'w-2 h-2 rounded-full bg-lagoon-500 inline-block flex-shrink-0'
+        : 'w-2 h-2 rounded-full bg-red-500 inline-block flex-shrink-0';
 }
 
 const FR_DAYS = ['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
@@ -2616,12 +2716,28 @@ function updateNotificationUI(enabled) {
     });
 }
 
+// ═══════════════════════════════════════════════════════════
+// NOTIFICATIONS — Compatible iOS 16.4+ et Android
+// ═══════════════════════════════════════════════════════════
 function sendLocalNotification(title, body, options = {}) {
-    if (Notification.permission !== 'granted') return;
-    const notifOptions = { body, icon: './web-app-manifest-192x192.png', badge: './web-app-manifest-192x192.png', vibrate: [200, 100, 200], tag: 'buhanor-' + Date.now(), renotify: true, ...options };
+    if (!('Notification' in window) || Notification.permission !== 'granted') return;
+    const notifOptions = {
+        body,
+        icon: './web-app-manifest-192x192.png',
+        badge: './web-app-manifest-192x192.png',
+        vibrate: [300, 100, 300],
+        tag: 'buhanor-' + Date.now(),
+        renotify: true,
+        silent: false,
+        ...options
+    };
     if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
-        navigator.serviceWorker.ready.then(reg => reg.showNotification(title, notifOptions));
-    } else new Notification(title, notifOptions);
+        navigator.serviceWorker.ready
+            .then(reg => reg.showNotification(title, notifOptions))
+            .catch(() => { try { new Notification(title, notifOptions); } catch(e) {} });
+    } else {
+        try { new Notification(title, notifOptions); } catch(e) {}
+    }
 }
 
 function checkAlertsAndNotify() {
@@ -2632,7 +2748,7 @@ function checkAlertsAndNotify() {
     const currentState = `pending:${pending}`;
     if (currentState === lastNotifiedState) return;
     if (role === 'admin' && pending > 0) {
-        sendLocalNotification("Chambres à valider", `${pending} chambre(s) vérifiée(s) par la ménagère.`, { tag: 'buhanor-validate' });
+        sendLocalNotification("Chambres à valider", `${pending} chambre(s) vérifiée(s) par la ménagère.`, { tag: 'buhanor-validate-' + Date.now() });
     }
     lastNotifiedState = currentState;
 }
@@ -2651,26 +2767,25 @@ function updateClock() {
     updateScheduleDisplay();
 }
 
+// ═══════════════════════════════════════════════════════════
+// SUPABASE REALTIME
+// ═══════════════════════════════════════════════════════════
 function subscribeToRealtime() {
     supabaseClient.channel('buhanor-changes')
         .on('postgres_changes', { event:'*', schema:'public', table:'rooms' }, async () => {
             if (!appState.currentProfile) return;
-            const prevPending = appState.rooms.filter(r => r.status === 'clean_pending').length;
-            await loadDataFromServer();
-            const newPending = appState.rooms.filter(r => r.status === 'clean_pending').length;
-            const role = appState.currentProfile.role;
-            if (role === 'admin' && newPending > prevPending && Notification.permission === 'granted') {
-                sendLocalNotification("Chambres à valider", `${newPending} chambre(s) attendent votre validation.`, { tag: 'buhanor-validate' });
-            }
-            renderCurrentView();
+            await silentRefresh();
         })
         .on('postgres_changes', { event:'*', schema:'public', table:'reservations' }, async () => {
             if (!appState.currentProfile) return;
-            await loadDataFromServer();
             await syncOccupations();
-            renderCurrentView();
+            await silentRefresh();
         })
-        .subscribe();
+        .subscribe((status) => {
+            console.log('[Realtime] statut :', status);
+            if (status === 'SUBSCRIBED') setConnectionStatus(true);
+            if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT') setConnectionStatus(false);
+        });
 }
 
 window.onload = async function() {
@@ -2682,9 +2797,23 @@ window.onload = async function() {
     setInterval(updateClock, 10000);
     subscribeToRealtime();
     setInterval(checkAlertsAndNotify, 60000);
+
+    // ─── Polling actif : toutes les 8 secondes ───
+    // Fallback fiable si Realtime échoue (réseaux mobiles instables, etc.)
+    setInterval(() => {
+        if (!document.hidden && appState.currentProfile) {
+            silentRefresh();
+        }
+    }, 8000);
+
+    // ─── Sync occupation toutes les 5 min (sécurité) ───
     setInterval(async () => {
-        if (appState.currentProfile) { await syncOccupations(); renderCurrentView(); }
+        if (appState.currentProfile && !document.hidden) {
+            await syncOccupations();
+            await silentRefresh();
+        }
     }, 5 * 60 * 1000);
+
     await loadProfils();
 
     if (loadSession()) {
